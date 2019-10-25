@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+  	*{padding:0;margin:0}
+	a{text-decoration:none;color:#fff}
+	ul,li{list-style:none}
+	body{background:rgb(89, 89, 161);font-size:12px;font-family:"微软雅黑"}
+	.box{width:120px;height:120px;background:red;position:absolute;top:0;left:0;border-radius:50%}
+	.box:hover{background:green}
+    </style>
+</head>
+<body>
+    <!-- <div id="box">
+
+    </div> -->
+    <script>
+    /*
+        
+    */
+    window.onload = function() {
+            // var speed = 30;
+            //数组可以装很多值，将循环的div的值放入arr中
+            var arr = [];
+            for(var i=0;i<10;i++){
+                //createElement()创建HTML对象和元素
+                //对象自己的方法
+                var boxDom = document.createElement("div");
+                boxDom.className = "box";
+                boxDom.innerHTML = i;
+                //创建对象缓存非js的属性
+                boxDom.x = 0;
+                boxDom.y = 0;
+
+                boxDom.xtep = i+2;
+                boxDom.ytep = i+2;
+                document.body.appendChild(boxDom);
+                arr.push(boxDom);
+                console.log(arr);
+                //删除一个元素 点击小球进行数组的元素的删除
+                boxDom.onclick = function() {
+                    // var items = arr.indexOf(this);
+					// for(var i=0;i<arr.length;i++){
+					// 	if(arr[i]==this){
+					// 		document.body.removeChild(arr[i]);
+					// 	}
+					// }
+                    //对于多个元素的删除
+                    // var ritems = arr.splice(items,1);
+                    //点击 索引值
+                    // var items = arr.indexOf(this);
+                    // alert(items)
+                    // document.body.removeChild(items);
+
+                    
+					//第2种写法：
+					//if(arr.indexOf(this)!=-1){
+					//	document.body.removeChild(this);
+					//}
+
+					//第三种写法 splice截取 和slice复制返回是一个新的数组
+                    // var index = arr.indexOf(this);
+                    // var ar = arr.splice(index,1);
+                    // document.body.removeChild(ar[0]);
+             }   
+            }
+            //获取浏览器的宽度和高度
+            //速度不一样，起始时间也不一样
+            function draw() {
+                //进行循环  循环创建的div的个数去运行动画
+                // 将数组元素进行动画元素（将10个元素放入数组中进行动画执行）
+                for(var i=0;i<arr.length;i++) {
+                    console.log(1);
+                    var boxDom = arr[i];
+                    var maxwidth = window.innerWidth - boxDom.offsetWidth;//boxDom.offsetWidth盒子的宽度
+                    var maxheight = window.innerHeight - boxDom.offsetHeight;//获取浏览器的高度减去盒子的高度
+                    //每一帧会重新获取盒子的高度
+                    boxDom.x += boxDom.xtep;
+                    boxDom.y += boxDom.ytep;
+                    //x
+                    if(boxDom.x >= maxwidth) {
+                        boxDom.xtep = -boxDom.xtep;//改变方向
+                        boxDom.x = maxwidth;
+                        boxDom.bgcolor = "pink";
+                    }
+                    console.log(1);
+                    if(boxDom.x <=0) {
+                        boxDom.x = 0;
+                        boxDom.xtep = -boxDom.xtep;//负号改变方向  --为+
+
+                        boxDom.bgcolor = "red";
+                    }
+                    //如果大于浏览器高度的时候
+                    if(boxDom.y >= maxheight) {
+                        boxDom.ytep = -boxDom.ytep;
+                        boxDom.y = maxheight;
+                        boxDom.bgcolor = "black";
+                    }
+                    if(boxDom.y <=0) {
+                        boxDom.ytep = -boxDom.ytep;
+                        boxDom.y = 0;
+                        boxDom.bgcolor = "green";
+                    }
+
+                    //匀速移动的位置
+                    boxDom.style.left = boxDom.x + "px";
+                    boxDom.style.top = boxDom.y + "px";  
+                    boxDom.style.background = boxDom.bgcolor;                  
+                }
+
+            };
+            var timer = setInterval(draw,30);
+        }
+    </script>
+</body>
+</html>

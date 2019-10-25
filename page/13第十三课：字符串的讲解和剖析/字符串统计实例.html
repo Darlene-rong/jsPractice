@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";padding:10px;}
+    a{text-decoration:none;color:#3333}
+    textarea{width:640px;height:160px;overflow:auto;}
+    </style>
+</head>
+<body>
+        <textarea id="text" onkeyup="tongji()"></textarea>
+        <h3 id="console"></h3>
+        <script>
+            
+            function tongji(){
+                //统计字符中数字有多少个，中文多少个，标点符号有多少，字母有多少个。
+                var str = document.getElementById("text").value;
+    
+                //统计各种情况的计数器
+                var numcount = 0, //数字计数器
+                    chinsescount = 0,//中文计数器
+                    biaocount = 0,//标点计数器
+                    ccount = 0;//标点计数器
+                //字符串的长度
+                var len = str.length;
+                for(var i=0;i<len;i++){
+                    var code = str.charCodeAt(i);//拿到每个字符的ascii值
+                    var s = str.charAt(i);//对应的值
+                    if(code>=48 && code <=57){//数字
+                        numcount++;
+                    }else if((code >=97 && code <=122)||(code >=65 && code <=90)){//字母
+                        ccount++;
+                    }else if(/^[\u2E80-\u9FFF]+$/.test(s)){//中文
+                        chinsescount++;
+                    }else{//标点符号
+                        biaocount++;	
+                    }
+                    //匹配空格，匹配换行呀，有
+                }
+                
+                document.getElementById("console").innerHTML="当前字符中：总长度是:【"+len+"】数字有【"+numcount+"】个，字母有：【"+ccount+"】个，标符号有:【"+biaocount+"】，中文有【"+chinsescount+"】个";
+            }
+        </script> 
+</body>
+</html>

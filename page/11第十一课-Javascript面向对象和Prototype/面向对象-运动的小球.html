@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1500" height="460" style="background:#333;"></canvas>
+    <script>
+        window.onload = function() {
+            //获取画布的对象
+            var canvas = document.getElementById("canvas");
+            //获取画布应用上下文
+            var context = canvas.getContext("2d");
+            //画布的宽度和高度
+            var cwidth = canvas.width;
+            var cheight = canvas.height;
+
+            //创建两百个小球 循环
+            //初始化小球的数量
+            var ballNums = 200;
+            //装载小球的盒子
+            var balls = [];
+            //改变小球的方向
+            var r = 0.2;
+
+            //创建200个小球
+            for(var i=0;i<ballNums;i++) {
+                //创建小球，初始化参数
+                var ball = new Ball(10);
+                
+
+                //小球初始化的位置
+                ball.x = cwidth/2;//画布的一半
+                ball.y = cheight;//画布的宽度
+                ball.radius = rangeRandom(1,6);//半径随机
+                ball.color = getRandomColor();//小球颜色
+
+                ball.vy = Math.random()*-10-10;//初始化每个小球的速度，既然是随机的那么可能每个小球的开始的位置都不一样
+				ball.vx = Math.random()*2-1; //同理
+
+                balls.push(ball);//放入小球盒子里面
+            };
+
+            function drawCanvas(ball){
+                cwidth = window.innerWidth;
+				cheight =  window.innerHeight;
+				//每个小球方向的改变
+				ball.vy+=r;
+				//每个小球的位置
+				ball.x += ball.vx;
+				ball.y += ball.vy;
+                // ball.vy = Math.random()*-10;
+                ball.color = getRandomColor();
+
+                //边界的控制
+				if(ball.y-ball.radius > cheight ||
+					ball.y+ball.radius<0 || 
+					ball.x-ball.radius > cwidth ||
+					ball.x+ball.radius<0
+				){
+					//从新初始化
+					ball.x = cwidth/2;
+					ball.y = cheight;
+					ball.vy = Math.random()*-10-10; 
+					ball.vx = Math.random()*2-1; 
+				}
+
+                //调用小球对象通过prototypr扩展的方法
+                ball.draw(context);
+            };
+            //一次性    setIntervar   去改变
+            setInterval(function(){
+                context.clearRect(0,0,cwidth,cheight);//檫黑板
+                //一次性绘制200个小球，并且每个小球都调用drawCanvas
+                // balls.forEach(function(obj) {
+                //     drawCanvas(obj)
+                // });  
+                for(var i= 0;i<balls.length;i++) {
+                    drawCanvas(balls[i]);
+                }             
+            },100/30);
+
+        };
+        
+        function Ball(radius) {
+            this.radius = radius;//半径
+            this.x = 0;
+            this.y = 0;
+            this.color = "#ff0000";
+        };
+        //绘制小球
+        Ball.prototype.draw = function(context) {
+            context.beginPath();
+            context.fillStyle = this.color;
+            context.arc(this.x,this.y,this.radius,0,Math.PI*2);
+            context.fill();
+        };
+        //随机颜色
+        function getRandomColor(){
+            var r = Math.floor(Math.random()*256);
+            var g = Math.floor(Math.random()*256);
+            var b = Math.floor(Math.random()*256);
+            return "rgb("+r+","+g+","+b+")"
+        }
+        //小球随机半径
+        function rangeRandom(start,end){
+            return Math.floor(Math.random()*(end-start+1)+start);
+        }
+    </script>
+</body>
+</html>

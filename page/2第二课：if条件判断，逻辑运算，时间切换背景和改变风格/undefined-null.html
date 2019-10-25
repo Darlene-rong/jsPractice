@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>undefined \ null 例子</title>
+</head>
+<body>
+     <div id="box">
+
+     </div>
+    <script>
+        var dom = document.getElementById("box2");//获取了一个dom一个对象
+        // var dom1 = document.getElementById("boc2").value;
+        var dom2 ;//只有在没有赋值为undefined
+        console.log(dom) //null （找到一个不存在的对象报空指针异常）
+        // console.log(dom1)
+//undefined 和 null 的区别
+        /*
+            1.数据类型层面
+            undefined：是一个undefined数据类型
+            null：它是一个object对象数据类型
+            2.内存分配层面
+                undefined如果一个变量没有赋值操作就是undefined；
+                    var str ;//str是undefined数据类型
+                null :代表的是对象的默认值，可以清空对象
+                    想要清空对象就赋值为null
+                    var obj = null;//boj是一个object数据类型，
+            3.运算中
+                var n = 1 + undefined；//NaN
+                Var nn = 1 + null; //1（null相当于false里面的0）
+        */
+        f = 100; //全局变量 相当于省略了var
+        //内存分配层面
+        var obj =  {};
+        obj.name = "tom";
+        console.log (obj.name);
+        obj = null; //对象的清空；
+        console.log(obj);
+        //运算中
+        var n = 1 + undefined;
+        console.log(n) //NaN
+        var nn = 1 + null;//null相当于false里面的0
+        console.log(nn);    
+    </script>
+</body>
+</html>

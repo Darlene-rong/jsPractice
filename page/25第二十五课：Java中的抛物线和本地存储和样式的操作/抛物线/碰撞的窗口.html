@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";background-color: black;}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #box{background:rgb(145, 31, 31);width:100px;height:100px;position:absolute;border-radius: 50px;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+	<script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var boxDom = $("box");
+            var timer = null;
+            var speedy = 0;
+            var speedx = 10;//匀速
+            var dy = 0;
+            var dx = 0;
+            boxDom.onmousedown = function(e){
+                clearInterval(timer);
+                var pos = getXY(e);
+                var x = pos.x;
+                var y = pos.y;
+                var l = this.offsetLeft;
+                var t = this.offsetTop;
+                dy = y;
+                dx = x;
+                document.onmousemove = function(e){
+                    var pos = getXY(e);
+                    var nl = pos.x - x + l;
+                    var nt = pos.y - y + t;
+                    boxDom.style.left = nl+"px";
+                    boxDom.style.top = nt+"px";
+                    //拿到出手的速度
+                    speedy =  pos.y -dy;
+                    speedx = pos.x -dx;
+                    //最后一次你鼠标的位置
+                    dy = pos.y;
+                    dx = pos.x;
+                };
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                    move();
+                };
+            };
+            //窗口改变的时候继续弹动
+            window.onresize = move;
+            function move(){
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    speedy +=10;
+                    var y = boxDom.offsetTop + speedy;
+                    var x = boxDom.offsetLeft + speedx;
+                    var mah = window.innerHeight - boxDom.offsetHeight;
+                    var maw = window.innerWidth - boxDom.offsetWidth;
+                    if(y>mah){
+                        y = mah;
+                        speedy*=-1;
+                        speedy*=0.825;
+                        speedx*=0.625;
+                    }else if(y < 0){
+                        y = 0;
+                        speedy*=-1;
+                        speedy*=0.825;
+                    }
+
+                    if(x>maw){
+                        x = maw;
+                        speedx*=-1;
+                        speedx*=0.625;
+                        
+                    }else if(x <0){
+                        x = 0;
+                        speedx*=-1;
+                        speedx*=0.625;
+                    }
+
+                    if(Math.abs(speedx.toFixed(2))<=0.01){
+                        speedy = 0;
+                        speedx = 10;
+                        clearInterval(timer);
+                    }else{
+                        boxDom.style.top = y+"px";
+                        boxDom.style.left = x+"px";
+                    }
+                    
+                },30);
+            }
+        };
+        //获取鼠标的位置。兼容ie678
+        function getXY(e){
+            var ev = e || window.event;
+            var x=0,y=0;
+            if(ev.pageX){
+                x = ev.pageX;
+                y = ev.pageY;
+            }else{
+                //拿到scrollTop 和scrollLeft
+                var sleft = 0,stop = 0;
+                //ie678---
+                if(document.documentElement){
+                    stop =document.documentElement.scrollTop;
+                    sleft = document.documentElement.scrollLeft;
+                }else{
+                //ie9+ 谷歌 
+                    stop = document.body.scrollTop;
+                    sleft = document.body.scrollLeft;
+                }	
+                x = ev.clientX + sleft;
+                y = ev.clientY + stop;
+            }
+            return {x:x,y:y};
+        };
+    </script>
+</body>
+</html>

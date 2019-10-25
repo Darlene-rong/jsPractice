@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方格定义</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        body{font-size: 14px;font-family: "微软雅黑"}
+        a{text-decoration: none;color: #fff;}
+        #box{height: 500px;width: 1000px;margin: 50px auto;background-color: brown;}
+        #box li{background-color: burlywood;float: left;border: 1px solid rebeccapurple;}
+        ul li{list-style: none;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="ullist"></ul>
+    </div>
+    <script>
+        window.onload = function(){
+            var ulDom = $("ullist");
+            var boxDom = $("box");
+            var bitw = 50;
+            var bith = 50;
+            //列
+            var cells = Math.floor(boxDom.offsetHeight / bith);
+            var rows = Math.floor(boxDom.offsetWidth / bitw);
+            for(var i=0;i<rows;i++){
+               for(var j=0;j<cells;j++){
+                   var liDom = document.createElement("li");
+                   liDom.style.height = bith-2 + "px";
+                   liDom.style.width = bitw-2 + "px";
+                   ulDom.appendChild(liDom);
+               } 
+            }
+        }
+        function $(id){
+            return document.getElementById(id);
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据类型回顾</title>
+</head>
+<body>
+    <script>
+    /*
+        有大括号的里面都存在作用域的问题
+        {
+            //代码片段就存在作用域
+            有Var用本身的 没有就进行变量提升
+        }
+    
+    */
+    //题目一
+    var a = 100;
+    function test(){
+        alert(a);
+        var a = 200;
+        /*
+            变量的提升：
+                变量定义之后，赋值之前就执行了；
+                如果有代码执行在变量定义之前就定义的，那么它首先去拿undefined去给予
+            定义在函数内部的变量，在任意位置，它首先做的第一件事：查询做查询LHS,看有没有定义，如果没有定义，变量为undefined，直到赋值为止
+
+            变量是先提升再赋值的；
+        
+        */
+    };
+    test();//a = undefined
+
+    //题目二
+    var a = 100;
+    delete a ;//delete只能删除数组中某一个元素和对象属性，不能删除变量   delete arr[1]; delete json.name
+    alert(a);//100
+
+    //题目三
+    let arr = [];
+    let arr2 = arr;
+    arr2.push(1);
+    console.log(arr,arr2);
+    
+    //面向对象
+    var tt = {
+        username: "haha",
+        age: 20,
+        say: function() {
+            console.log("11")
+        }
+    };
+    tt.sex = "男";
+    delete tt.sex;
+    tt = null;
+
+    /*
+        类=====JS是没有类的概念用function
+        在面向对象中function去执行时没有任何意义的
+        在JS中科院动态添加属性和扩展方法
+    
+    */
+        //例题：游戏角色：名称，性别，级别，颜色，技能
+        function Role(username) {//构造函数
+            //相当于role类   面向对象的js   首字母必须大写   
+            //当做一个类 Role()就是一个构造函数  ======> 类+构造函数继承体
+            //构造函数的作用就是取申请内存空间的
+            //申请： new
+            this.username = username;
+            this.sex = "男";
+            this.level = 10;
+            this.color = 'red';
+            this.jump = function() {
+                console.log("角色是："+this.username+"性别是："+this.sex+"级别是："+this.level+"color是："+this.color+"技能会跳跳")
+            }
+            /*
+                this没有指向对象的时候  它是个全局变量，相当于window
+            
+            
+            */
+        };
+        //执行  属性共享 方法共用
+        var tangtang = new Role("tangtang");
+        tangtang.jump();//角色是：tangtang性别是：男级别是：10color是：red技能会跳跳
+
+        var kongkong = new Role("kongkong");
+        kongkong.sex = "女";
+        kongkong.level = 30;
+        kongkong.jump();//角色是：kongkong性别是：女级别是：30color是：red技能会跳跳
+
+    /*
+        构造函数 constructor;
+        
+        in: hasOwnPrototype instanceof区别
+            in 是判断一个属性是否在某个对象中，包括原始对象的属性；
+            hasOwnPrototype 判断一个属性是否在某个对象中，不包括原始对象的属性（只能判断对象的自有属性，不包括原始对象属性）
+            instanceof 判断一个对象是不是当前某个类的对象
+
+        原始对象属性：object
+            constructor： Object()   ----判断对象的构造函数是什么
+            hasOwnProperty:hasOwnProperty()---判断自有属性
+            isPrototypeOf: isPrototypeOf()----来自哪个原型链
+            propertyIsEnumerable: propertyIsEnumerable()
+            toLocaleString: toLocaleString()
+            toString: toString()//把构造函数以字符串的方式打印出来
+            valueOf:valueOf()//参数对象的代理引用
+    */
+        console.log(tangtang.constructor ===  Role);
+        //instanceof 判断一个对象是不是当前某个类的对象
+        console.log(k instanceof Role)//判断k对象是不是Role创造出来的
+
+        //valueOf:valueOf()//参数对象的代理引用
+        var json = {username: "k"};
+        console.log("sex" in json);//flase
+        console.log("username" in json);//true
+        
+        console.log(json.hasOwnProperty("username"))//true
+        console.log(json.hasOwnProperty("toString"))//false
+
+    </script>
+</body>
+</html>

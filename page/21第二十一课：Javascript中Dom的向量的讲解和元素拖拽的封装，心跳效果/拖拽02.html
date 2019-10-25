@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#3333}
+    .box{position:absolute;top:0;left:0;width:100px;height:100px;background:red;font-size:12px;color:#fff;line-height:100px;text-align:center;user-select: none;cursor: move}
+    </style>
+</head>
+<body>
+        <div id="box"  class="box">1随意拖拽</div>
+        <div id="box1" class="box" style="background:green">2横向拖</div>
+        <div id="box2" class="box" style="background:pink">3纵向拖</div>
+        <div id="box3" class="box" style="background:black">4拖拽之后进行回调函数</div>
+        <script type="text/javascript" src="dom.js"></script>
+    <script>
+    function $(id){
+        return document.getElementById(id);
+    }
+    window.onload = function(){
+        var drag = new Drag();
+        drag.init({id:"box"});
+
+        var drag1 = new Drag();
+        drag1.init({id:"box1",arrow:"left"})
+
+        var drag2 = new Drag();
+        drag2.init({id:"box2",arrow:"top"})
+
+        var drag3 = new Drag();
+        drag3.init({id:"box3",callback:function(){
+            this.style.background = "yellow"
+        }})
+
+    }
+            //拖拽的构造函数
+            function Drag(){
+
+            }
+            Drag.prototype.init = function(options){
+                console.log(this)
+                //参数混入 jquery $.extend
+                var opts = mix({},{arrow:""},options);
+                var boxDom = $(opts.id);        
+                var mark = false;
+                boxDom.onmousedown = function(e){
+                /*
+                    1.获取鼠标的位置  e.pageX;e.pagey|| e.clientX;e.clientY
+                    2.
+                
+                */
+                //拿到元素的位置
+                var sleft = this.offsetLeft;
+                var stop = this.offsetTop;
+                //获取边界值 获取最大的距离
+                var maxLeft = window.innerWidth - boxDom.offsetWidth;
+                var maxTop = window.innerHeight - boxDom.offsetHeight;
+                //拿到鼠标点击下来的位置
+                var pos = getXY(e);
+                mark = true;
+                document.onmousemove = function(e){
+                    if(mark){
+                        var pos2 = getXY(e);
+                        var nleft = pos2.x - pos.x + sleft;
+                        var ntop = pos2.y - pos.y + stop;
+                        if(nleft<=0) nleft = 0;
+                        if(ntop<=0) ntop = 0;
+                        if(nleft>maxLeft) nleft = maxLeft;
+                        if(ntop>maxTop) ntop = maxTop;
+                        if(opts.arrow == "left"){
+                            boxDom.style.left = nleft+"px";
+                        }else if(opts.arrow == "top"){
+                            boxDom.style.top = ntop+"px";
+                        }else{
+                            boxDom.style.top = ntop+"px";
+                            boxDom.style.left = nleft+"px";
+                        }
+                    }
+            };
+            //鼠标松开的时候，释放拖动
+            document.onmouseup = function(e){
+                    this.onmousemove = null;
+                    this.onmouseup = null;
+                    mark = false;
+                    if(opts.callback)opts.callback.call(boxDom)
+            }
+            }
+
+            }
+
+		//获取鼠标的位置。兼容ie678
+		function getXY(e){
+			var ev = e || window.event;
+			var x=0,y=0;
+			if(ev.pageX){
+				x = ev.pageX;
+				y = ev.pageY;
+			}else{
+				//拿到scrollTop 和scrollLeft
+				var sleft = 0,stop = 0;
+				//ie678---
+				if(document.documentElement){
+					stop =document.documentElement.scrollTop;
+					sleft = document.documentElement.scrollLeft;
+				}else{
+				//ie9+ 谷歌 
+					stop = document.body.scrollTop;
+					sleft = document.body.scrollLeft;
+				}	
+				x = ev.clientX + sleft;
+				y = ev.clientY + stop;
+			}
+			return {x:x,y:y};
+		};
+    </script>
+</body>
+</html>

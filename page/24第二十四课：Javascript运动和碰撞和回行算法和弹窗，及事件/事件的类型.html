@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    	body,ul,ol{margin:0;padding:0;font-family:"微软雅黑"}
+	    li{ list-style:none;}
+        #box{
+            height: 100px;
+            width: 100px;
+            background-color: blueviolet;
+
+        }
+    </style>  
+</head>
+<body>
+    <div id="box" onclick="clickme()"></div>
+    <script>
+        /*
+            属性事件是会被覆盖的
+            dom元素绑定有两种：
+                1.属性事件      属性事件会被覆盖的  后面的会覆盖前面的
+                2.动态事件
+        */
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var boxDom = $("box");
+
+            boxDom.onclick = function(){
+                alert("我是动态事件");//覆盖了属性事件   弹框为动态绑定事件的内容
+            }
+            /*
+                addEventListener(type,fn,false)
+                removeEventListener(type,fn)
+                    其中false表示冒泡行为 true表示事件捕捉  默认不写就是false
+            */
+        }
+        function clickme(){
+            alert("我是属性事件")
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /*
+        transform: 动画样式
+          transform: none|transform-functions
+          rotate()  1turn = 360deg;
+
+          transform-function:
+            缩放：
+              scale 
+              scaleX
+              scaleY
+
+            旋转：
+              rotate
+              rotateY
+              rotateX
+              rotate3d
+
+            转换：
+              translate  
+              translateX
+              translateY
+              translateZ
+
+            倾斜：
+              skew
+              skewX
+              skewY
+              skewZ
+
+            定义2D转换：
+              matrix
+            定义3D转换：
+              matrix3d
+            景深
+              perspective
+          
+          动画中关键帧：@keyframes
+
+        transtion: 过渡(动画)样式
+          transition: 过渡css属性名称 完成过渡需要的时间 过渡效果 过渡何时开始延迟多久；
+    */
+      #box{background: green; width: 100px; height: 100px;}
+      /* #box:hover {transition: width 1s ease; width: 200px;} */
+
+
+    /* 先宽度后高度 */
+      /* #box:hover {
+        transition: width 1s ease, height 1s ease 1s; width: 400px; height: 400px;
+      } */
+
+
+    /* 动画和过度一起用 css格式 */
+      /* #box{
+        background: green; 
+        width: 100px; 
+        height: 100px;
+        transform: rotate(0deg);
+        transition: transform 1s ease-in-out;
+      }
+      #box:hover {
+        transform: rotate(360deg)
+      } */
+
+  </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+      function $(id) {
+        return document.getElementById(id);
+      }
+      window.onload = function() {
+      /* 动画和过度一起用 js格式 */
+          $("box").onmouseover = function() {
+            this.style.transform = "rotate(20deg)";
+            this.style.transition = "transform 1s";
+          };
+          $("box").onmouseout = function() {
+            this.style.transform = "rotate(0deg)"
+          }
+        }
+    </script>
+</body>
+</html>

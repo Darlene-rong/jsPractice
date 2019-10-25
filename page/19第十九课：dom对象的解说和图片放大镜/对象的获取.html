@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body{font-size: 14px;font-family: "微软雅黑"}
+    a{text-decoration: none;color: #333;}
+    </style>
+</head>
+<body>
+    <ul class="list" id="listUl">
+        <li id="one">1</li>
+        <li id="two">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+    <div class="listtest">qweqwe</div>
+    <div class="listtest">qweqwe</div>
+    <div class="listtest">sadas</div>
+    <div class="listtest">qwewqeasda</div>
+    <div class="listtest">fvc</div>
+    <div class="listtest">aggad</div>
+
+    <script>
+        /*
+            对象：在内存中已经开辟好的空间，空间里面存放的是属性和方法
+
+            JS对象： 动态化（可以动态扩展属性和方法，进行删除）
+
+            dom是JS对象的一种延伸：是一种获取元素对象的一种形态，专门用来处理给标签元素进行动态绑定事件，添加样式，添加动画
+            
+            获取dom对象的方式有几种？
+                //对于所有的浏览器ie6+
+                    1.document.getElementById (获取id)
+                        注意点：
+                    2.document.getElementByTagName (获取元素名 div table span等元素标签)
+                    3.获取所有的子元素： children  属性 不是方法
+
+
+                //ie9+支持 es5扩展了对元素对象获取的方式
+                    1.document.getElementsClassName      (获取Class的值)
+                    2.document.querySelector("#id")
+                    3.document.querySelectorAll(".className")
+        */
+       var divDom = document.getElementsByTagName("div"); //得出一个类数组
+       console.log(divDom)
+       var len = divDom.length;
+       for(var i=0;i<len;i++){
+           console.log("2")
+           divDom[i].style.background = "blue";
+           divDom[i].style.color = "#fff";
+           divDom[i].style.marginTop = "10px"
+       }
+       //获取页面中所有dom标签元素
+       var allDom = document.getElementsByTagName("*");
+       var len = allDom.length;
+       for(var i=0;i<len;i++){
+           allDom[i].style.marginLeft = "10px"
+       }
+       
+       /*
+            1.在开发中：能够用id的尽量用id   确保id的唯一
+            2.如果是操作多个元素，尽量形成父子结构，通过父元素定义id，通过children获取子元素的方式，这样就能将性能进行提升
+            3.
+       */
+
+       var testDom = document.getElementsByClassName("listtest");
+       console.log(testDom);
+       //两种获取id的写法
+       var id1 = document.getElementById("one");
+       var id2 = document.querySelector("#one");
+       id2.style.background = "pink";
+       console.log(id1 === id2)// true
+
+       //两种获取class的写法
+       var clas1 = document.getElementsByClassName("listtest");
+       var clas2 = document.querySelectorAll(".listtest");
+       
+       /*
+            JS和jquery两者在某种是独立个体
+            jquery是对JS的封装
+            JS：不能调用jquery中的属性和方法
+            jqeury：不能使用js中的方法和属性
+       */
+       /*
+            在开发过程中推荐使用 getElementById 和父子的children
+            如果不考虑ie678  推荐使用 getElementsByClassName querySelector querySelectorAll
+       */
+    </script>
+</body>
+</html>

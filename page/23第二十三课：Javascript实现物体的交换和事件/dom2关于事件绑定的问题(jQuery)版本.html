@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    ul li {list-style: none;}
+    ul{padding: 0 40px;}
+    #box li{background-color: brown;color: #fff;width: 400px;margin-bottom: 2px;text-align: center;cursor:pointer;height: 40px;line-height: 40px;}
+    #btn{height: 40px;width: 100px;background-color: darkcyan;text-align: center;line-height: 40px;margin-bottom: 5px;border: none;color: #fff;margin-top: 20px;margin-left: 40px;}
+    </style>
+</head>
+<body>
+    <button id="btn" onclick="addElement()">添加li</button>
+    <ul id="box">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        function test(doms,callback){
+            var domChildren = doms.children;
+            var len = domChildren.length;
+            for(var i=0;i<len;i++){
+                if(callback) callback.call(domChildren[i],i);
+            }
+        }
+        function addElement(){
+            $("box").innerHTML += "<li>"+Math.random()+"</li>"
+            test($("box"),function(){
+                this.onclick = function(e){
+                    this.onclick = clickme;
+                }
+            })
+        }
+        window.onload = function(){
+            test($("box"),function(){
+               this.onclick = clickme;
+            })
+        }
+        //全局事件
+        function clickme(){
+            console.log(this.innerHTML)
+        }
+    </script>        
+</body>
+</html>

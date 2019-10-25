@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";user-select: none;}
+        a{text-decoration:none;color:#3333}
+        .box{position:absolute;top:0;left:0;width:200px;height:200px;background:red;font-size:12px;color:#fff;text-align:center;cursor:move}
+        .box h1{background:#111;font-size:14px;height:45px;line-height:45px;text-align:left;padding-left:5px;cursor:move;}
+        #wrap{width:960px;height:560px;background:green;margin:100px auto;}
+      </style>
+</head>
+<body>
+    <div id="wrap">
+		<div id="box" class="box">
+			<h1>我是标题1</h1>
+			1随意拖拽
+		</div>
+		<div id="box1" class="box" style="background:gray">5执行回调函数改变yellow</div>	
+	</div>
+
+    <script type="text/javascript" src="dom.js"></script>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+        console.log("!1")
+        window.onload = function(){
+            console.log("!1")
+            var drag = new Drag();
+			drag.init({id:"box",handler:1,parent:"wrap"});
+            console.log("!1")
+            var drag1 = new Drag();
+            drag1.init({id:"box1",callback:function(){
+                this.style.background = "yellow";
+            }})
+            console.log("!1")
+            //拖拽的构造函数
+
+		};
+        function Drag(){
+
+        }
+        var dragZindex = 0;
+Drag.prototype.init = function(options){
+    //参数混入 jquery $.extend
+    var opts = mix({},{arrow:"",handler:"",parent:"",position:"relative"},options);
+    var boxDom = $(opts.id);       
+    //父元素
+    var parentDom = $(opts.id);
+    if(opts.handler){
+        boxDom = boxDom.children[opts.handler*1-1];
+    } 
+    //获取父盒子
+    console.log("!1")
+    var pboxDom = $(opts.parent);
+    if(pboxDom) pboxDom.style.position = opts.position;
+
+    var mark = false;
+    boxDom.onmousedown = function(e){
+    /*
+        1.获取鼠标的位置  e.pageX;e.pagey|| e.clientX;e.clientY
+        2.
+    
+    */
+    parentDom.style.zIndex = ++dragZindex
+    //拿到元素的位置
+    var sleft = parentDom.offsetLeft;
+    var stop = parentDom.offsetTop;
+    //获取边界值 获取最大的距离
+    var maxLeft =( pboxDom?pboxDom.offsetWidth:window.innerWidth) - parentDom.offsetWidth;
+    var maxTop = (pboxDom?pboxDom.offsetHeight:window.innerHeight) - parentDom.offsetHeight;
+    //拿到鼠标点击下来的位置
+    var pos = getXY(e);
+    mark = true;
+    document.onmousemove = function(e){
+        if(mark){
+            var pos2 = getXY(e);
+            var nleft = pos2.x - pos.x + sleft;
+            var ntop = pos2.y - pos.y + stop;
+            if(nleft<=0) nleft = 0;
+            if(ntop<=0) ntop = 0;
+            if(nleft>maxLeft) nleft = maxLeft;
+            if(ntop>maxTop) ntop = maxTop;
+            if(opts.arrow == "left"){
+                parentDom.style.left = nleft+"px";
+            }else if(opts.arrow == "top"){
+                parentDom.style.top = ntop+"px";
+            }else{
+                parentDom.style.top = ntop+"px";
+                parentDom.style.left = nleft+"px";
+            }
+        }
+};
+        //鼠标松开的时候，释放拖动
+        document.onmouseup = function(e){
+                this.onmousemove = null;
+                this.onmouseup = null;
+                mark = false;
+                if(opts.callback)opts.callback.call(boxDom)
+        }
+        }
+
+        }
+
+        //获取鼠标的位置。兼容ie678
+        function getXY(e){
+            var ev = e || window.event;
+            var x=0,y=0;
+            if(ev.pageX){
+                x = ev.pageX;
+                y = ev.pageY;
+            }else{
+                //拿到scrollTop 和scrollLeft
+                var sleft = 0,stop = 0;
+                //ie678---
+                if(document.documentElement){
+                    stop =document.documentElement.scrollTop;
+                    sleft = document.documentElement.scrollLeft;
+                }else{
+                //ie9+ 谷歌 
+                    stop = document.body.scrollTop;
+                    sleft = document.body.scrollLeft;
+                }	
+                x = ev.clientX + sleft;
+                y = ev.clientY + stop;
+            }
+            return {x:x,y:y};
+        }
+    </script>
+</body>
+</html>

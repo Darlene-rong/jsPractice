@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>应用</title>
+    <style>
+    .content{text-align: center;margin-top: 50px;height: 424px;}
+    .inline{display: inline-block;}
+    .command{
+        height: 400px;
+        width: 580px;
+        border: black solid 1px;
+        position: absolute;
+    }
+    button{
+        cursor: pointer;
+        padding: 10px 20px;
+        background-color: #1768bb;
+        margin: 7%;
+        border: none;
+        color: #fff;
+        position: relative;
+    }
+    .command p{
+        height: 50px;
+        width: 80%;
+        background-color: #4f3e84;
+        color: #fff;
+        margin: 10px;
+        line-height: 50px;
+        display: inline-block;
+    }
+    .content_lefe{left: 10%;}
+    .content_right{
+        left: 60%;
+    }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="command content_lefe  inline" id="leftbox">
+            <p>第一条</p>
+            <p>第二条</p>
+            <p>第三条</p>
+            <p>第四条</p>
+            <p>第五条</p>
+        </div>
+        <button class="inline" id="translate">转变位置</button>
+        <div class="content_right command inline" id="rightbox">
+            
+        </div>
+    </div>
+    <script>
+        function $(id) {
+            return document.getElementById(id)
+        };
+        var mark = true;
+        window.onload = function() {
+            var adoms = $("leftbox").children;
+            var adomsArr = [].slice.call(adoms);//转换为数组
+            adomsArr.forEach(function(spanDom){
+                spanDom.onclick = function(){
+                    alert(this.innerHTML)
+                }
+            })
+            $("translate").onclick = function() {
+                if(mark){
+                    mark = false;
+                    var left = $("leftbox").childNodes;
+                    var len = left.length;
+                    //第一种写法 innerHTML   只是拿文本 没拿事件
+                        // $("rightbox").innerHTML = $("leftbox").innerHTML;
+                        // adomsArr.forEach(function(spanDom){
+                        //     $("leftbox").removeChild(spanDom);
+                        // })
+                    //第二种写法 appendChild   整体 带事件用
+                        adomsArr.forEach(function(dom){
+                            $("rightbox").appendChild(dom)
+                        })
+                }
+                
+            } 
+        }
+    </script>
+</body>
+</html>

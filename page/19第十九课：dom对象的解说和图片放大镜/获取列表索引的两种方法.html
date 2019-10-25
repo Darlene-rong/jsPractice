@@ -1,0 +1,73 @@
+                      <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dom的深入理解</title>
+    <style>
+        *{margin: 0;padding: 0;}
+    ul li{list-style: none;line-height: 30px;background-color: teal;color: #fff;margin-bottom: 10px;cursor: pointer;}
+    #box2 div{line-height: 40px; background-color: steelblue;color: #fff;text-align: center;margin-bottom: 5px;}
+    </style>
+</head>
+<body>
+    <ul id="box">
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+        <li>44</li>
+        <li>55</li>
+        <li>66</li>
+        <li>77</li>
+        <li>88</li>
+    </ul>
+    <div id="box2">
+        <div>1</div>
+        <div>21</div>
+        <div>323</div>
+    </div>
+    <script>
+    /*拿索引*/
+    // 获取列表索引的两种方法 JS
+        var dom = document.getElementById("box").children;
+        for(var i=0;i<dom.length;i++){
+            //第一种方法
+            dom[i].index = i;
+            dom[i].onclick = function() {
+                console.log(this.index)
+            }
+        }
+
+        //闭包方式  即时函数会执行里面的代码体
+        /*
+            闭包的作用：()形成独立周期体   隔离变量不被全局变量所污染
+
+            (function test(id){
+                //执行体
+            })(传参数)  //括号的作用对闭包里面的方法进行初始化 即时函数
+            
+            (function(){
+                var a = 10;
+                return{
+                    //返回值
+                    a:a
+                }
+            })(id)
+            等价于
+
+            function test(id){}
+            test("jack")
+        */
+        var box2 = document.getElementById("box2").children;
+        for(var i=0;i<box2.length;i++){
+            box2[i].onclick = (function(index){
+                return function test(){
+                    console.log(index)
+                }
+            })(i)
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数学函数</title>
+    <style>
+    body{margin: 0;padding: 0;}
+    div{width: 100px;height: 100px;float: left; font-size: 12px;text-align: center;line-height: 100px;}
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript">
+    /*
+        Math.random()---随机数
+
+        Matn.floor()----向下取整
+        Math.ceil()-----向上取整
+
+        Math.max(n1,n2,n3.......)------最大值
+        Math.min(n1,n2,n3.......)------最小值
+
+        Math.roud(x)----四舍五入
+        Math.abs(x)------绝对值
+
+        Math.pow(x)------几次方
+        Math.sqrt(x)-----开平方
+    */
+    //绝对值  Math.abs()
+        var a = -100;
+        var b = Math.abs(a);
+        console.log(a)//100
+    //最小值/最大值   Math.max/Math.min
+        var maxValue = Math.max(1,3,23,55,43,22);
+        console.log(maxValue);//55
+        //最小值
+        var minValue = Math.min(1,23,123,4,5,63,2);
+        console.log(minValue); //1
+        //用在数组上面 求最大值 最小值
+        
+            var arr = [41,21,32,42,51]
+            
+            Array.prototype.max = function(){
+
+                return Math.max.apply(this,this);//相当于return Math.max.apply(this,[41,21,32,42,51]);
+                //Math.max.apply(this,this)数组对象放进this中  apply可以改变对象的指针 可以动态的改参数 
+                //第一个this 放对象
+            };
+            var a = arr.max();
+            console.log(a)//51
+    //几次方  Math.pow()
+        var a1 = 2;
+        var a2 = Math.pow(2,3)//2*2*2
+        console.log(a2)//8
+    //开平方根  Math.sqrt()
+        var b1 = 4;
+        var b2 = Math.sqrt(b1);
+        console.log(b2);//2
+
+    //向下取整 Math.floor() 只保留小数点前的数字，后面的都舍去
+    //向上取整 Math.ceil() 只保留小数点前的数字+1，后面都舍去 除非是整数，就直接返回
+    //四舍五入 Math.round()
+        var c1 = 1.999;
+        var c2 = Math.floor(c1);//1
+        var c3 = Math.ceil(c1);//2
+    //toFixed(保留小数点的位数) ，同时四舍五入
+
+    //随机数 Math.random(x)   随机数的范围：0<=num(0.5)<1的一个数字一个小数 
+        //范围随机
+        function rangeRandom(start,end) {
+            return Math.floor(Math.random()*(end-start+1)+start);
+        };
+        setInterval(function(){
+            console.log(rangeRandom(3,4));
+        },1000);
+        //单个随机
+        function rangeRandom1(start) {
+            return Math.floor(Math.random()*start);
+        };
+        setInterval(function(){
+            console.log("=="+rangeRandom1(3));
+            var divDom = document.createElement("div");
+            divDom.style.background = getRbg();
+            divDom.innerHTML = getRbg();
+            document.body.appendChild(divDom);
+        },1000/30);
+
+    //实例
+        function getRbg() {
+            var r = rangeRandom1(255);           
+            var g = rangeRandom1(255);
+            var b = rangeRandom1(255);
+            return "rgb("+r+","+g+","+b+")";
+        };
+        //转为16进制 
+        /*
+        function getRbg() {
+            var r = rangeRandom1(255).toString(16);
+            
+            var g = rangeRandom1(255).toString(16);
+            var b = rangeRandom1(255).toString(16);
+            if(r.length<2)r = r + "" + r;
+            if(g.length<2)g =  g + "0" + g;
+            if(b.length<2)b =  b + "0" + b;
+            return "rgb("+r+","+g+","+b+")";
+        };
+        */
+        
+
+    </script>
+</body>
+</html>

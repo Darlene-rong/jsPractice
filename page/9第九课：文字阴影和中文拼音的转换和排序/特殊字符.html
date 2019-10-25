@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="content" cols="30" rows="10" placeholder="请输入你的评论"></textarea>
+    <input type="button" onclick="saveComment()" value="保存评论" name="" id="">
+    <!-- 评论区域 -->
+    <div id="comment"></div>
+    <script type="text/javascript">
+        /*
+            特殊字符用处：可以过滤处理脚本，JS代码，防止网页JS恶意的注一种有效手段
+                \n
+                \r
+                \t
+                &nbsp;----空格
+                &amp; -----&，美元符号
+                &gt;------大于号
+                &lt;------小于号
+                &quot;-----双引号
+
+            //
+        */
+        function saveComment() {
+            var contentDom = document.getElementById("content");
+            var comment = document.getElementById("comment");
+            var divDom = document.createElement("div");
+            comment.appendChild(divDom).innerHTML = filterTag(contentDom.value);
+        }
+        //开发过程中解决脚本已经过滤的问题，对于textarea中直接输入脚本代码进行处理；
+        function filterTag(content) {
+            content = content.replace(/>/g,"&gt;");
+            content = content.replace(/</g,"&lt;");
+            return content;
+        }
+    </script>
+</body>
+</html>

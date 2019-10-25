@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content=""><!doctype html>
+  <html lang="en">
+   <head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<title>Document</title>
+	<style>
+	  *{padding:0;margin:0}
+	  body{font-size:14px;font-family:"微软雅黑";padding:100px}
+	  a{text-decoration:none;color:#333}
+	  #ulbox li{height:35px;background:red;color:#fff;margin-top:2px;}
+	</style>
+   </head>
+   <body>
+  
+	  <ul id="ulbox">
+		  <li>11111</li>
+		  <li>22222</li>
+		  <li>33333</li>
+	  </ul>
+  
+	  <script>
+		  function dom(id){
+			  return document.getElementById(id);
+		  };
+  
+		  //addEventListener onclick==事件绑定的两种方式，你选择其一
+  
+		  window.onload = function(){
+			  
+		  
+			  //dom("ulbox").onclick = function(){
+				  //clickme.call(this,"keke");
+			  //	clickme.apply(this,["keke"]);
+  
+			  //};
+  
+			  //addEventListener同理
+			  dom("ulbox").addEventListener("click",function(){
+				  //clickme.call(this,"keke");
+				  clickme.apply(this,["keke"]);
+			  },false);
+		  };
+  
+		  //无参数的情况this还是指向调用者
+		  function clickme(username){
+			  alert(this.innerHTML+"========="+username);
+		  }
+  
+  
+	  </script>
+  
+   </body>
+  </html>
+  
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";padding:100px}
+	a{text-decoration:none;color:#333}
+	#ulbox li{height:35px;background:red;color:#fff;margin-top:2px;}
+  </style>
+ </head>
+ <body>
+
+	<ul id="ulbox">
+		<li>11111</li>
+		<li>22222</li>
+		<li>33333</li>
+	</ul>
+
+	<script>
+		function dom(id){
+			return document.getElementById(id);
+		};
+
+		//addEventListener onclick==事件绑定的两种方式 选择其一
+		window.onload = function(){
+			
+			dom("ulbox").onclick = function(){
+				alert("2")
+			};
+
+			dom("ulbox").onclick = function(){
+				alert("11113")
+			};
+
+			dom("ulbox").onclick = null;
+			delete dom("ulbox").onclick;
+
+			//addEventListener 事件类型不要加on是语法,事件累加的过程，杀掉事件就用removeEventListener(事件类型,事件函数)
+			dom("ulbox").addEventListener("click",test,false);
+			dom("ulbox").removeEventListener("click",test);
+			dom("ulbox").addEventListener("click",test1,false);
+			dom("ulbox").removeEventListener("click",test1);
+			dom("ulbox").addEventListener("click",test2,false);
+			dom("ulbox").removeEventListener("click",test2);
+
+			function test(){
+				alert(1);
+			}
+
+			function test1(){
+				alert(2);
+			}
+
+			function test2(){
+				alert(3);
+			}
+
+		};
+	</script>
+ </body>
+</html>

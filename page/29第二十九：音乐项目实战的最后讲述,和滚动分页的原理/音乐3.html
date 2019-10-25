@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>音乐播放器(上一首,下一首)</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑"}
+    a{text-decoration:none;color:#333}
+    ul li{list-style:none}
+
+    .wrap{width: 1000px; margin: 100px auto;}
+    .item{
+        height: 40px;
+        line-height: 40px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 7px;
+        text-align: center;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+    .item:hover,.item.on:hover{background-color: cadetblue}
+    .item.on{background-color: #999}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div>
+            <span id="author"></span>
+            <span id="name"></span>
+            <span id="cur" title="播放的时间">00:00</span> / 
+            <span id="total" title="播放总时长">00:00</span>
+        </div>
+        <div id="audioBox"></div>
+        <a href="javascript:;" id="play1">播放</a>
+        <a href="javascript:;" id="stop1">暂停</a>
+        <a href="javascript:;" id="prev1">上一首</a>
+        <a href="javascript:;" id="next1">下一首</a>
+        <a href="javascript:;" id="volum">静音</a>
+        <span id="precent"></span>
+        <div>
+            <ul id="items">
+            </ul>
+        </div>
+    </div>
+    <script src="./music.js"></script>
+    <script>
+        // 闭包
+        function $(id) { 
+            return document.getElementById(id)
+        }
+
+         window.onload = function () { 
+             //切换歌曲加载的歌曲信息
+            function message(index) { 
+            $("author").innerHTML = arr[index].author;
+            $("name").innerHTML  = arr[index].name;
+            }
+            //歌曲数组
+            var arr = [
+                {
+                    id: 1,
+                    src: "./mp3/排骨教主 - 牵丝戏.mp3",
+                    name: "牵丝戏",
+                    author: "排骨教主",
+                },
+                {
+                    id: 2,
+                    src: "./mp3/Lucys - Malibu.mp3",
+                    name: "Malibu",
+                    author: "Lucys",
+                },
+                {
+                    id: 3,
+                    src: "./mp3/西彬呀 - 一生独一(cover.卢焱）.mp3",
+                    name: "一生独一(cover.卢焱）",
+                    author: "西彬呀",
+                }
+            ]
+            bMusic.add(arr);
+            bMusic.event(function () { 
+                console.log(this)
+             })
+            message(0)
+            //创建li对象
+            for(var i=0,len= arr.length;i<len;i++){
+                var liDom = document.createElement("li");
+                liDom.innerHTML = arr[i].name;
+                liDom.className = i==0?"item on" : "item";
+                liDom.index = i;
+                liDom.onclick = function () {
+                    var index = this.index; 
+                    bMusic.plauindex(this.index);
+                    message(index);
+                    hightlightLi(index);
+                    bMusic.event(function (value) { 
+                    if(value == "date"){
+                        $("total").innerHTML = this.total;
+
+                    }else if(value == "play"){
+                        $("cur").innerHTML = this.fplay;
+                    }
+                })
+                }
+                $("items").appendChild(liDom)
+            }
+            //播放当前列表的样式
+            function hightlightLi(index){
+                var liDom = $("items").children;
+                for(var i=0,len=liDom.length;i<len;i++){
+                    liDom[i].className = "item";
+                }
+                liDom[index].className = "item on";
+            }
+
+            //点击事件
+            $("play1").onclick = function () { 
+                bMusic.play()
+            }  
+            $("stop1").onclick = function(){
+                bMusic.stop();
+            } 
+            $("prev1").onclick = function () { 
+                bMusic.prev(function () {
+                    var index = this;
+                    message(index);
+                    hightlightLi(index);
+                });
+                bMusic.event(function (value) { 
+                    if(value == "date"){
+                        $("total").innerHTML = this.total;
+
+                    }else if(value == "play"){
+                        $("cur").innerHTML = this.fplay;
+                    }
+                })
+            }
+            $("next1").onclick = function () { 
+                bMusic.next(function () { 
+                    var index = this;
+                    message(index);
+                    hightlightLi(index);
+
+                })  
+                bMusic.event(function (value) { 
+                    if(value == "date"){
+                        $("total").innerHTML = this.total;
+                    }else if(value == "play"){
+                        $("cur").innerHTML = this.fplay;
+
+                    }
+                })
+                
+            }
+          }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    *{padding:0;margin:0}
+		body{font-size:14px;font-family:"微软雅黑";background: #333;}
+		ul li{list-style:none}
+		a{text-decoration:none;color:#333}
+    .wrap{height: 100px;width: 100px;margin: 300px auto;}
+    .wrap .box {position: relative;z-index: 2;}
+    .wrap .box img{height: 100px;width: 100px;border-radius: 50%;z-index: 2;line-height: 100px;display: block;position: relative;cursor: pointer;}
+    .gy{position: absolute;width: 100%;height: 100%;background: #fff; top: 0;left: 0;z-index: 0;border-radius: 50%;
+      /* animation */
+      animation: move 1s ease-in-out infinite;
+    }
+    /*keyframes是以拍的一电影，from to 没一个情节*/
+    @keyframes move {
+      0%{transform: scale(1)}
+      100%{transform: scale(1.2); opacity: 0;}
+    }
+    .gy.move2 {animation: move2 2s ease-in-out}
+    @keyframes move2 {
+      0%{transform: scale(1);}
+			100%{transform:scale(4);opacity:0} 
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="wrap">
+    <div class="box">
+      <img src="../../img/timg (1).jpg" alt="" id="imgClick">
+      <span class="gy"></span>
+    </div>
+  </div>s
+  <script>
+    window.onload = function() {
+      document.getElementById("imgClick").onclick = function () {  
+        var pdom = this.parentElement;
+        var spanDom = document.createElement("span");
+        spanDom.className = 'gy move2';
+        pdom.appendChild(spanDom);
+        setTimeout(function() {
+          pdom.removeChild(spanDom)
+        },2000)
+      }
+    }
+  </script>
+</body>
+</html>

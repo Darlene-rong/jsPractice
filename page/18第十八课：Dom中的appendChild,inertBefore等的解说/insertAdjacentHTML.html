@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        /*insertAdjacentHTML insertAdjacentText insertAdjacentElement*/
+		//appendChild insertBefore innerHTML
+		//append prepend before after 
+        q//你好,keke,最近，过的怎么样,很好
+		
+
+		var boxDom = dom("box");
+		//boxDom.insertAdjacentElement("beforebegin","<strong>你好</strong>");
+		//boxDom.insertAdjacentElement("afterbegin","<strong>keke</strong>");
+		//boxDom.insertAdjacentElement("beforeend","<strong>过的怎么样!</strong>");
+		//boxDom.insertAdjacentElement("afterend","<strong>很好</strong>");
+
+		kekebefore(boxDom,"<strong>你好</strong>");
+
+		function kekebefore(dom,html){
+			dom.insertAdjacentHTML("beforebegin",html);
+		};
+    </script>
+</body>
+</html>

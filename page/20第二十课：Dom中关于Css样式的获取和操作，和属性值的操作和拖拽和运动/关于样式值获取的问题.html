@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    #box{text-align:center;height:100px;line-height:100px;width:100px;background-color: black;color:#fff;}
+    </style>
+</head>
+<body>
+    <!-- style是内联样式  无法拿到内部样式 -->
+    <div id="box">312312</div>
+    <div id="box2" username="jack" title="呵呵">2314123</div>
+    <script>
+        window.onload = function(){
+            /*
+                不能dom.style.width 直接去拿内部样式
+                
+                有种方式可以拿到内部样式和内联样式 
+                    ie写法   
+                        dom.currentStyle["样式属性"]//style中的样式   为了更好的封装 这种写法
+                        dom.currentStyle.样式属性
+
+                    谷歌写法：
+                        window.getComputedStyle(dom,0)["样式属性"];     为了更好的封装 这种写法
+                        window.getComputedStyle(dom,0).样式属性
+            */
+            var boxDom = document.getElementById("box");
+            console.log(window.getComputedStyle(boxDom,false)["line-height"]) //100px
+            console.log(window.getComputedStyle(boxDom,0)["textAlign"])  //center
+            console.log(window.getComputedStyle(boxDom,true).backgroundColor)//rgb(0, 0, 0)
+            console.log(window.getComputedStyle(boxDom,false)["height"]) //100px
+            console.log(getStyle(boxDom,"width")) //100px
+        }
+        //获取内部样式  封装
+        function getStyle(dom,attr){
+            return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr] : dom.currentStylr[attr];
+        }
+    
+    </script>
+</body>
+</html>

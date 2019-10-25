@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>nth-child(n)和nth-of-type(n)</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    a{text-decoration: none;color: #fff;}
+    ul li{list-style: none;}
+    .cs_wrap{width: 100%;height: 48px;background-color: cornflowerblue;}
+    .nav_ul{width: 1000px;position:relative;margin: 0 auto;height: 48px;letter-spacing: -5px;}
+    .nav_li{display: inline;line-height: 48px;letter-spacing: normal;position: relative;display: inline-block;}
+    .nav_li a{display: inline-block;padding: 0 20px;}
+    .sub{position: absolute;background-color: rgba(31, 146, 229, 0.815);width: 104px;display: none;}
+    .nav_li:hover ul {
+		display: block;
+		padding: 15px 0;
+		opacity: 1;
+		visibility: visible;
+		box-shadow: 1px 1px 7px rgba(0,0,0,.5);
+		animation-name: swingdown;
+		animation-duration: 1s;
+		animation-timing-function: ease;
+
+	}
+
+	@keyframes swingdown {
+		0% {
+			opacity: .99999;
+			transform: rotateX(90deg);
+		}
+
+		30% {			
+			transform: rotateX(-20deg) rotateY(5deg);
+			animation-timing-function: ease-in-out;
+		}
+
+		65% {
+			transform: rotateX(20deg) rotateY(-3deg);
+			animation-timing-function: ease-in-out;
+		}
+
+		100% {
+			transform: rotateX(0);
+			animation-timing-function: ease-in-out;
+		}
+	}
+    </style>
+</head>
+<body>
+    <div class="main_content">
+        <!-- 导航条 -->
+        <div class="cs_wrap">
+            <ul class="nav_ul">
+                <li class="nav_li">
+                    <a href="javascript:;">学校概况</a>
+                    <ul class="sub">
+                        <li><a href="javascript:;">学校简介</a></li> 
+                        <li><a href="javascript:;">现任领导</a></li>
+                        <li><a href="javascript:;">历史沿革</a></li>
+                        <li><a href="javascript:;">校景风光</a></li>
+                    </ul>
+                </li>
+                <li class="nav_li">
+                    <a href="javascript:;">机构设置</a>
+                    <ul class="sub">
+                        <li><a href="javascript:;">党政管理机构</a></li>
+                        <li><a href="javascript:;">直属机构</a></li>
+                        <li><a href="javascript:;">管理类学院</a></li>
+                        <li><a href="javascript:;">教学学院</a></li>
+                        <li><a href="javascript:;">附属医院</a></li>
+                    </ul>
+                </li>
+                <li class="nav_li">
+                    <a href="javascript:;">人力资源</a>
+                    <ul class="sub">
+                        <li><a href="javascript:;">人事法规</a></li>
+                        <li><a href="javascript:;">师资建设</a></li>
+                        <li><a href="javascript:;">人才招聘</a></li>
+                        <li><a href="javascript:;">博士后站</a></li>
+                    </ul>
+                </li>
+                <li class="nav_li"><a href="javascript:;">教育教学</a></li>
+                <li class="nav_li"><a href="javascript:;">科学研究</a></li>
+                <li class="nav_li"><a href="javascript:;">招生 就业</a></li>
+                <li class="nav_li"><a href="javascript:;">学生天地</a></li>
+                <li class="nav_li"><a href="javaqscript:;">国际交流</a></li>
+            </ul>
+        </div>
+        <p>政府共建的综合性大学。学校由中南工学院与衡阳医学院合并组建，核工业第六研究所并入，是国家中西部高校基础能力建设工程支持建设高校，是教育部批准的卓越工程师、卓越医生教育培养计划单位，是本科一批招生院校。学校坐落在湖南省衡阳市，现有红湘和雨母两个校区。
+
+                在60年的发展历程中，学校秉承“明德、博学、求是、致远”的校训，弘扬“勤勉务实、甘于奉献、刚健自强、敢为人先”的南华精神，始终坚持本科教学中心地位，不断推进事业全面发展。进入新世纪以来，学校依据“教学研究型大学”的办学定位，明确了“特色鲜明、国内一流、具有国际影响的高水平教学研究型大学”的发展目标，确立了本科教育人才培养目标。
+                
+                学校形成了以工学、医学为主，哲学、经济学、法学、文学、理学、管理学、艺术学等9大学科协调发展的学科专业体系。设有直属学院24个，直属型附属医院4所，协作型附属医院11所，研究生协作培养单位25个。设有本科专业73个，一级学科硕士学位授权点24个，硕士专业学位授权类别13种；一级学科博士学位授权点5个；一级学科博士后科研流动站3个。学校面向全国（含港澳台）以及世界部分国家和地区招生。现有学生5万余人，其中全日制本科生近3万余人，博士、硕士研究生近4000余人，国际学生400余人，成人教育本专科生近1万8千人。
+                
+                校本部现有教职工2316人，其中专任教师1419人；直属型附属医院临床教师2947人。共有教授、主任医师等正高职称人员398人，副高职称人员1233人；有国家国防科技创新团队、部省级创新团队、省高校科技创新团队、省级教学团队14个；有国家级突出贡献中青年专家、“千人计划”专家、国家杰出青年基金获得者、长江学者特聘教授、享受国务院政府特殊津贴专家等100余名，有省部级学科学术带头人、教学名师、优秀中青年专家等220余名。
+                
+                学校拥有国家级特色专业、国防重点专业和紧缺专业、卓越计划专业、综合改革试点专业15个，国家级实验教学示范中心、虚拟仿真实验教学中心、实践教育基地6个，国家级精品课程和精品开放课程3门。有省级校企合作人才培养示范基地、创新创业带动就业示范基地、高校大学生创新创业孵化示范基地等29个，综合性实习基地347个。
+                
+                学校拥有核能与核安全国家示范型国际科技合作基地、全国首批国家核应急宣传和培训基地、国家核应急医学救援队、全国核科普教育基地，湖南省协同创新中心3个、省部级重点实验室/研究中心22个、湖南省院士工作站3个、其他各类省级科研平台/基地21个、行业重点实验室13个；拥有国家国防支撑学科和省级重点学科10个、国家国防特色学科5个。学校先后承担“863”计划、“973”计划、国家自然科学基金重大研究计划、国家自然科学基金重点、科技部重大专项、国防基础研究计划、核能开发专项等科研项目2000余项；获得国家级科技奖励12项，省部级科技奖励300多项。学校临床医学学科进入ESI全球排名前1%。
+                
+                学校成立了由省部政府机构、核工业四大央企、大型科研院所、大型三甲医院、大型企事业单位等组成的董事会；与国际组织和国内外近100所高等院校和科研机构建立了合作协作关系。
+                
+                图书馆纸质藏书260余万册，中外文期刊2400余种，数字资源352TB，其中电子图书78.5TB。学校主办《中国动脉硬化杂志》、《中南医学科学杂志》、《南华大学学报·自然科学版》、《南华大学学报·社会科学版》等学术期刊。
+                
+                学校被评为全国创新创业典型经验高校50强、全国普通高等学校招生工作先进集体、全国青年就业创业教育先进集体、全国军工文化教育基地；是湖南省文明单位、国防教育基地、学生资助工作先进单位。
+                
+                60年来，学校为国家及地方输送了近25万名各类高素质专门人才，涌现出了一批以中国科学院院士、省部级领导、行业领军人物等为代表的优秀校友。毕业生广泛分布在国防工业、核工业、卫生与健康、环境保护、装备制造、金融管理等行业，成为所在单位技术、管理骨干，为国家建设和发展、社会文明和进步、地方经济建设和社会发展做出了积极贡献。
+                
+                学校第三次党代会提出了“一基三实、一路三建”的发展思路，即夯实人才队伍之基，把人才培养做实、把科学研究做实、把服务社会做实；走内涵发展之路，加强专业建设、学科建设、创新能力建设。这一新思路引领学校向特色鲜明的高水平教学研究型大学迈进。（注：文中数据截至2018年9月30日）
+                
+                 </p>
+    </div>
+    <script>
+        
+    
+    
+    </script>
+</body>
+</html> 

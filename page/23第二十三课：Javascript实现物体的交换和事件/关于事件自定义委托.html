@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";padding:100px}
+        a{text-decoration:none;color:#333}
+        #ulbox li{height:35px;background:red;color:#fff;margin-top:2px;}
+    </style>
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+ </head>
+ <body>
+	<ul id="ulbox">
+		<li>dasd</li>
+		<li>adasd</li>
+		<li>qweqwe</li>
+	</ul>
+	<a href="javascript:void(0);" onclick="appendLi()">追加元素</a>
+	<script>
+		function dom(id){
+			return document.getElementById(id);
+		};
+		function tzOn(id,eventType,callback,type){
+			var obj = dom(id);
+			obj.addEventListener(eventType,function(e){
+				//事件类型兼容写法
+				var ev = e || window.event;
+				//当前目标元素
+				var currentTarget = ev.currentTarget;
+				//鼠标停留的元素
+				var target = ev.target || ev.srcElement;
+				//类型栏判断是不是委托
+				if(type){
+					if(target.tagName.toLowerCase() === type){
+						if(callback)callback.call(target)
+					}
+				}else{
+					if(callback)callback.call(currentTarget)
+				}
+				
+			},false);
+		}
+		function tzOn2(opts){
+			var obj = dom(opts.id);
+			obj.addEventListener(opts.eventType,function(e){
+				//事件类型兼容写法
+				var ev = e || window.event;
+				//当前目标元素
+				var currentTarget = ev.currentTarget;
+				//鼠标停留的元素
+				var target = ev.target || ev.srcElement;
+				//类型栏判断是不是委托
+				if(opts.type){
+					if(target.tagName.toLowerCase() === opts.type){
+						if(opts.callback)opts.callback.call(target)
+					}
+				}else{
+					if(opts.callback)opts.callback.call(currentTarget)
+				}
+				
+			},false);
+		}
+		tzOn2({
+			id:"ulbox",
+			eventType:"dblclick",
+			type:"li",
+			callback:function(){
+				alert(this.innerHTML);
+			}
+		})
+		function appendLi(){
+			dom("ulbox").innerHTML += "<li>"+Math.random()+"</li>";
+		};
+	</script>
+ </body>
+</html>

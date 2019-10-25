@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .box-music{
+        width: 70%;
+        height: 300px;
+        position: relative;
+        margin: 0 auto;
+        border: 1px solid #999;
+    }
+    .box-music .audio-main{
+        position: absolute;
+        bottom: 30px;
+        width: 800px;
+        left: 15%;
+        
+    }
+    a {
+        text-decoration: none;
+        color: rgb(206, 206, 206);
+        margin-right: 2px;
+        padding: 7px;
+        background-color: rgb(49, 48, 47);
+        border-radius: 2px;
+    }
+    a:active {
+        color: aliceblue;
+        background-color: rgb(68, 68, 68);
+    }
+    .progress {
+        background-color: #fff;
+        border: 1px solid #999;
+        height: 10px;
+        width: 460px;
+        position: relative;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    #percent{border-radius: 10px;position: absolute;top: 0;left: 0;height: 100%;width: 0%;background-color: rgb(39, 40, 41);}
+    #time{position: absolute;right: -42px;top: -4px;}
+    #stime{position: absolute;right: -85px;top: -4px;}
+    </style>
+</head>
+<body>
+    <div class="box-music">
+        <!-- <audio src="./mp3/001.mp3" controls></audio>         -->
+        
+        <div class="audio-main">
+            <div class="progress"><div id="percent"></div><span id="time">00:00</span><span id="stime">00:00</span></div>
+            <a href="javascript:;" onclick="clickMusic(this)">播放</a>
+            <!-- <a href="javascript:;" onclick="wwAudio.play()">播放</a> -->
+            <!-- <a href="javascript:;" onclick="wwAudio.stop()">暂停</a> -->
+            <a href="javascript:;" onclick="wwAudio.next()">下一首</a>
+            <a href="javascript:;" onclick="wwAudio.prev()">上一首</a>
+            
+            <span id="stime">00:00</span>
+            <span id="sstime">00:00</span>
+        </div>
+    </div>
+
+    <script>
+
+   /*
+        组件封装的步骤：
+            1：有页面原型
+            2：学会拆分
+            3：动态化
+
+
+            根据日期的天数，去切换背景。
+            用组件的方式去封装
+   */
+    /*
+        组件封装的步骤：==音乐播放器的组件
+        1:创建一个音乐播放器
+        2:播放音乐
+        3:暂停音乐
+        4:显示时间
+        5:音量的控制
+        6:进度展示
+        7:上一首下一首
+        8:添加音乐
+        9:静音
+        10:歌词
+    */
+//    window.onload = function() {
+        var wwAudio =  {
+            audioDom: null,//音乐对象
+            arrSongs: [],//音乐容器
+            index: 0,//音乐的播放的起始位置
+            init: function() {
+                this.audioDom = document.createElement("audio");//创建一个音乐播放器
+            },
+            //添加音乐
+            add: function(src) {
+                //将音乐放入音乐容器中
+                this.arrSongs.push(src);
+                // this.audioDom.src = src;
+                //初始化播放第一首歌
+                this.audioDom.src = this.arrSongs[this.index];
+            },
+            //播放音乐
+            play: function() {
+                this.audioDom.play();
+                console.log(this.audioDom)
+            },
+            playMusic: function() {
+                //play() 方法开始播放当前的音频或视频  audio|video.play()
+                this.audioDom.src = this.arrSongs[this.index]
+                this.audioDom.play();
+                //  this 代表的是当前对象
+                //  指向对象本身
+            },
+            stop: function() {
+                /*
+                    pause() 方法停止（暂停）当前播放的音频或视频。
+                    提示：该方法通常与 play() 方法一起使用。
+                    提示：使用 controls 属性来显示视频控件 (如：播放，暂停，查找，音量等)。
+                */
+                this.audioDom.pause()
+            },
+            //时间的进度
+            time: function(callback) {
+                var $this = this;//定义局部变量
+                //oncanplaythrough 事件在视频/音频（audio/video）可以正常播放且无需停顿和缓冲时触发。 
+                $this.audioDom.oncanplaythrough = function() {  //this指向this.audioDom.oncanplaythrough
+                    console.log(this.duration)//音乐的总时长
+                    //获取播放的总时长
+                    var totalTime = this.duration;
+                    //格式化时长
+                    var timer = $this.formateTime(totalTime);
+                    //回调函数   如果callback不为空   执行   
+                    if(callback) {
+                        var json =  {
+                            duration: totalTime,
+                            time: timer
+                        };
+                        callback.call(json);
+                    }
+                }
+            },
+            //格式化时间
+            formateTime:function(time){
+                var m = parseInt(time / 60);
+                var s = parseInt(time % 60);
+                var time = (m<10?("0"+m):m)+":"+(s<10?("0"+s):s);
+                return time;
+            },
+            //音量的控制
+            shound: function() {
+                
+            },
+            //进度展示
+            percent: function() {
+
+            },
+            //上一首
+            prev: function() {
+                this.index--;
+                this.playMusic();
+            },
+            //下一首
+            next: function() {
+                this.index++;
+                this.playMusic();
+            }
+        };
+        wwAudio.init();
+        wwAudio.add("./mp3/001.mp3");
+        wwAudio.add("./mp3/002.mp3");
+        wwAudio.add("./mp3/003.mp3");
+        wwAudio.add("./mp3/004.mp3");   
+        wwAudio.time(function() {
+            document.getElementById("time").innerHTML = this.time;
+        })          
+//    }
+
+    function clickMusic(obj) {
+        // alert(1)
+        var text = obj.innerHTML;
+        if(text == "播放") {
+            wwAudio.play();
+            obj.innerHTML = "暂停";
+        } else {
+            wwAudio.stop();
+            obj.innerHTML = "播放"
+        }
+    }
+    </script>
+</body>
+</html>

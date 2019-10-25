@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:red;width:100px;height:100px;}
+  </style>
+ </head>
+ <body>
+
+	<div id="box" lang="en" class="items" data-name="我是keke老师"  style="width:500px;height:200px;"></div>
+	<input type="button" onclick="tsetAttr()" value="设置自定义的属性值"/>
+	<input type="button" onclick="tgetAttr()" value="获取自定义的属性值"/>
+	<input type="button" onclick="tremoveAttr()" value="删除自定义的属性值"/>
+
+	<script src="dom.js"></script>
+	<script>
+		/*jquery中data是属性缓存的作用，解决什么样子的问题呢？--获取属性和属性值 
+			getAttribute(key) 
+			setAttribute(key,value) 
+			removeAttribute(key)
+		*/
+	
+			
+		//javascript中的获取属性和属性值的方式
+		
+
+
+		function setAttr(dom,json){
+			for(var key in json){
+				dom.setAttribute(key,json[key]);
+			}
+		};
+
+		function getAttr(dom,key){
+			return dom.getAttribute(key);
+		};
+
+		function removeAttr(dom,key){
+			if(key.indexOf(",")!=-1){
+				var keys = key.split(",");
+				if(!keys || keys.length==0)return;
+				for(var i=0,len=keys.length;i<len;i++){
+					if(dom.hasAttribute(keys[i])){//判断当前属性是否存在。
+						dom.removeAttribute(keys[i]);
+					}
+				}
+			}else{
+				return dom.removeAttribute(key);
+			}
+		};
+		
+
+
+
+
+
+
+		function tsetAttr(){
+			var boxDom = document.getElementById("box");
+			setAttr(boxDom,{username:"keke",age:30,tel:"1450156456"});
+		}
+
+		function tgetAttr(){
+			var boxDom = document.getElementById("box");
+			var uname = getAttr(boxDom,"username");
+			var age = getAttr(boxDom,"age");
+			var tel = getAttr(boxDom,"tel");
+			boxDom.innerHTML = uname+"=="+age+"=="+tel;	
+		};
+
+		function tremoveAttr(){
+			var boxDom = document.getElementById("box");
+			removeAttr(boxDom,"username");
+			tgetAttr();
+		};
+		
+	</script>
+ </body>
+</html>

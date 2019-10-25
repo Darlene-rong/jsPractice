@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>九九乘法表升级版</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        a{text-decoration: none;color: #fff;}
+        ul li{list-style: none}
+        td{padding: 5px; border: 1px solid #ddd;background-color: #111;color: #fff;}
+        body{font-size: 14px;font-family: 'Courier New', Courier, monospace}
+    </style>
+</head>
+<body>
+
+    <input type="text" value="9" name="" id="num" />
+    <input type="button" value="生成乘法表" onclick="result()" />
+    <input type="button" value="停止生成" onclick="clearON()" />
+    <input type="button" value="开始计时" onclick="openStart()" />
+    <table id="tab">
+            <tbody id="tbody">
+                
+            </tbody>
+        </table>
+    
+    <script>
+        //按钮的事件里执行的就是函数
+        function result() {
+            var num = document.getElementById("num").value;
+            //如果为空retrun 
+            if(!num) {
+                //获取一个焦点   
+                //为什么生成一个焦点  加强用户体验
+                document.getElementById("num").focus()
+                alert("请输入一个值");
+                return;
+            }
+            //判断是否是数字
+            if(isNaN(num)) {
+                document.getElementById("num").focus();
+                alert("请输入一个数字啦~");
+                return;
+            }
+            var k = 0;
+            var html = ""
+            for(var i=1;i<=num;i++) {
+                //外层循环控制里层循环的次数
+                html += "<tr>"
+                for(var j=1;j<=i;j++) {
+                    //变量
+                    html +="<td>"+j+"*"+i+"="+(j*i)+"</td>"
+                }
+                html += "</tr>"
+            }
+            document.getElementById("tbody").innerHTML = html;
+        }
+        //自动产生 计时器
+        // var num = 0;
+        // var timer = setInterval(function(){
+        //     num++;
+        //     document.getElementById("num").value = num;
+        //     result();
+        // },1000)
+        var timer = null;
+        var num = 0;
+        function openStart() {
+            timer = setInterval(function(){
+                num++;
+                document.getElementById("num").value = num;
+                result();
+            },1000)
+        }
+        function clearON() {
+            clearInterval(timer);
+        }
+
+    </script>
+</body>
+</html>

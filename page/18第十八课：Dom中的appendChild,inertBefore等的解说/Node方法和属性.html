@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    button{display: block;margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+    <div>
+        <ul id="ullist">
+            <li>a</li>
+            <li>b</li>
+            <li>c</li>
+        </ul>        
+    </div>
+    <button onclick="add()">按钮测试</button>
+    <button onclick="remove()">removeChild()方法测试</button>
+    <button onclick="clone()">cloneNode()方法测试</button>
+    <script>
+        /*
+        在 HTML DOM (Document Object Model) 中 , 每一个元素都是 节点:
+
+            文档是一个文档节点。
+            所有的HTML元素都是元素节点。
+            所有 HTML 属性都是属性节点。
+            文本插入到 HTML 元素是文本节点。are text nodes。
+            注释是注释节点
+
+             
+            Node属性：
+                childNodes :得到所有子节点
+                parentNode :获取父亲节点
+                lastChild  :获取最后一个子节点
+                firstChild :获取第一个子节点
+                nextSibling :返回一个给定节点的下一个兄弟节点
+                previouseSibling ：返回一个给定节点的上一个兄弟节点
+                nodeName： 
+                    元素节点返回元素的标签名（都是大写）
+                    文本节点返回#text
+                    document类型返回#document
+                    属性节点返回属性名
+                nodeValue
+                nodeType：
+                    ==1 元素节点  如：body ul
+                    ==2 属性节点  如：name,type
+                    ==3 文本节点  如：文本节点，就是一段文本（空格也算文本）
+                    标签节点对应的值： 
+                        nodeType:1
+                        nodeValue: 标签的值
+                        nodeName:  标签名称 
+                    属性节点对应的值：
+                        nodeType:2
+                        nodeValue: 属性的值
+                        nodeName: 属性的名称
+                    文本节点对应的值：   返回的#text
+                        nodeType:3
+                        nodeValue:文本的值
+                        nodeName: 文本的名称
+
+            Node节点下方法：
+                appendChild(node)：在子节点的最后添加一个节点    node	节点对象
+                    (注:如果添加的newNode是在parentNode下的，只要是同一parentNode下的 '后代' 元素那么就是将这个元素转移到parentNode下的子元素的最后)
+                insertBefore()：在指定的子节点之前插入新的子节点
+                contains()：A.contains(B)；如果A元素当中包含B 返回true
+                replaceChild()：新的节点替换某个子节点
+                removeChild()：从子节点列表中删除某个节点
+                hasChildNodes()：在当前元素节点拥有子节点时返回 TRUE,否则返回 FALSE
+                cloneNode()：复制某个元素
+            
+            
+        */
+        var domTest = document.getElementById("ullist");
+        console.log(domTest.childNodes); //[text, li, text, li, text, li, text]
+        console.log(domTest.children)    //[li, li, li]
+        console.log(domTest.parentNode); //<div></div>
+        console.log(domTest.lastChild);  //#text
+        console.log(domTest.firstChild); //#text
+        console.log(domTest.firstChild.nodeName);  //text
+        console.log(domTest.firstChild.nodeType);  //3
+        console.log(domTest.firstChild.nextSibling);   //<li>a</li>
+        console.log(domTest.lastChild.previousSibling) //<li>c</li>
+        console.log(domTest.lastChild.previousSibling.nodeName) //li
+        console.log(domTest.lastChild.previousSibling.nodeType) //1 
+        console.log(domTest.lastChild.previousSibling.nodeValue) //1 
+
+        //节点方法
+            /*
+                首先创建一个节点，
+                然后创建一个文本节点，
+                然后将文本节点添加到LI节点上。 liDom.append(textNode)
+                最后将节点添加到列表中。
+                            
+            */
+            //apeendChild()
+                var liDom = document.createElement("LI");
+                var textNode = document.createTextNode("d");
+                liDom.append(textNode)
+                var appenDom = domTest.appendChild(liDom)
+                console.log(document.getElementById("ullist"))
+            //insertBefore()
+                /*
+                请点击按钮向列表插入一个项目
+                    注释：
+                        首先请创建一个 LI 节点，
+                        然后创建一个文本节点，
+                        然后向这个 LI 节点追加文本节点。
+                        最后在列表中的首个子节点之前插入此 LI 节点。
+                */
+                console.log("-----------insertBefor()--------------------")
+                function add(){
+                    var newDom1 = document.createElement("LI");
+                    var newText1 = document.createTextNode("insertBefore()方法");
+                    newDom1.append(newText1);
+                    var newAdd = domTest.insertBefore(newDom1,domTest.childNodes[0])
+                }
+            //removeChild()
+                function remove(){
+                    domTest.removeChild(domTest.childNodes[0])
+                }
+            //cloneNode()
+                function clone(){
+                    var cln = domTest.childNodes[1].cloneNode(true);
+                    console.log(cln)
+                    domTest.appendChild(cln)
+                }
+    </script>
+</body>
+</html>

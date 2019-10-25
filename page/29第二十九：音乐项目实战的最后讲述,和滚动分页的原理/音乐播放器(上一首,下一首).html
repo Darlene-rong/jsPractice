@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>音乐播放器(上一首,下一首)</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑"}
+    a{text-decoration:none;color:#333}
+    ul li{list-style:none}
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <span id="author"></span>
+            <span id="name"></span>
+        </div>
+        <div id="audioBox"></div>
+        <a href="javascript:;" id="play1">播放</a>
+        <a href="javascript:;" id="stop1">暂停</a>
+        <a href="javascript:;" id="prev1">上一首</a>
+        <a href="javascript:;" id="next1">下一首</a>
+    </div>
+    <script>
+        // 闭包
+        function $(id) { 
+            return document.getElementById(id)
+        }
+        var bMusic = (function () { 
+            var _music = {
+                //音乐
+                songs: [],
+                len: 0,
+                //播放的索引
+                playIndex: 0,
+                //audio对象播放器元素
+                audioDom: document.createElement("audio"),
+                //添加歌曲到播放器中
+                add:function(songsArr){
+                    console.log(songsArr);
+                    this.songs = songsArr;
+                    this.len = this.songs.length;
+                    //默认播放歌曲   第一首
+                    this.audioDom.src = this.songs[this.playIndex].src;
+                    this.audioDom.controls = "controls"
+                    document.getElementById("audioBox").appendChild(this.audioDom);
+                },
+                play:function(){
+                    this.audioDom.play();
+                },
+                stop: function(){
+                    this.audioDom.pause();
+                },
+                prev: function () { 
+                    // if(this.playIndex == 0){
+                    //     this.playIndex == this.len -1;
+                    // }else{
+                    //     this.playIndex--;
+                    // }
+                    this.playIndex = (this.playIndex == 0)? this.len-1 : --this.playIndex;
+                    this.playMain();
+                },
+                next: function () { 
+                    // if(this.playIndex == this.len-1){
+                    //     this.playIndex ==0;
+                    // }else{
+                    //     this.playIndex++;
+                    // }
+                    this.playIndex = (this.playIndex == this.len-1)? 0: ++this.playIndex;
+                    this.playMain();
+                },
+                playMain: function () { 
+                    this.audioDom.src = this.songs[this.playIndex].src;
+                    if(this.audioDom.paused){
+                        this.play()
+                    }
+                },
+            };
+            return _music;
+         })();
+         window.onload = function () { 
+            var arr = [
+                {
+                    id: 1,
+                    src: "./mp3/排骨教主 - 牵丝戏.mp3",
+                    name: "牵丝戏",
+                    author: "排骨教主",
+                },
+                {
+                    id: 2,
+                    src: "./mp3/Lucys - Malibu.mp3",
+                    name: "Malibu",
+                    author: "Lucys",
+                },
+                {
+                    id: 2,
+                    src: "./mp3/西彬呀 - 一生独一(cover.卢焱）.mp3",
+                    name: "一生独一(cover.卢焱）",
+                    author: "西彬呀",
+                }
+            ]
+            bMusic.add(arr);
+            $("play1").onclick = function () { 
+                bMusic.play()
+            }  
+            $("stop1").onclick = function(){
+                bMusic.stop();
+            } 
+            $("prev1").onclick = function () { 
+                bMusic.prev();
+            }
+            $("next1").onclick = function () { 
+                bMusic.next()
+            }
+            bMusic.show(function () { 
+                console.log(this);
+                $("author").innerText = this.a;
+                $("name").innerText = this.n;
+             })
+          }
+
+    </script>
+</body>
+</html>

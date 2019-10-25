@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    /*
+        统计字符串中数字有多少，中文有多少，标点符号有多少，字母有多少
+    
+    */    
+		//统计字符中数字有多少个，中文多少个，标点符号有多少，字母有多少个。
+		var str = "123456789,,,中中中abA";		
+		var numcount = 0,chinsescount = 0,biaocount = 0,ccount = 0;
+		//字符串的长度
+		var len = str.length;
+		for(var i=0;i<len;i++){
+			var code = str.charCodeAt(i);//ascii
+			var s = str.charAt(i);//拿到值
+			if(code>=48 && code <=57){
+				numcount++;
+			}else if((code >=97 && code <=122)||(code >=65 && code <=90)){
+				//大写字母和小写字母的分别
+				//a 97 z 122
+				//A 65 Z 90 
+				ccount++;
+			//}else if(code > 127){
+			}else if(/^[\u2E80-\u9FFF]+$/.test(s)){
+				//中文
+				chinsescount++;
+			}else{
+				biaocount++;	
+			}
+		}
+		alert("当前字符中：数字有【"+numcount+"】个，字母有：【"+ccount+"】个，标点符号有:【"+biaocount+"】，中文有【"+chinsescount+"】个");
+
+
+    </script>
+</body>
+</html>

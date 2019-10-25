@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//数字排序  
+    var arr = [9,7,3,4,2,1]
+    arr.sort();//sort()默认升序,
+//
+    /*
+        sort()默认的排序算法：
+            火狐：并归算法
+            google：快速算法===分治算法
+        算法：冒泡，选择，搜索-----性能差
+              并归，快速。
+
+
+        这个是sort方法里的那个比较函数的特殊的返回值，
+        比较函数的参数 a 和 b 代表数组里的两个元素，
+        如果 a 小于 b，排序后的数组 a 在 b 前面，
+        此时返回一个负数 （即上面的 return -1）
+        如果 a 等于 b，排序后两者位置不变，
+        此时返回 0 （即上面的 return 0）
+        如果 a 大于 b，
+        排序后 a 在 b 后面， 返回一个正数 （即上面的 return 1）
+        //比较函数一般简写成： 
+        arr.sort( function(a,b){    
+             return a-b // 升序 
+        } ); 
+        arr.sort( function(a,b){    
+             return b-a // 降序 
+        } );
+    */
+    console.log(arr)//[1, 2, 3, 4, 7, 9]
+    //sort()原理
+    arr.sort(function(a,b){
+        console.log(a+"===="+b)
+        /*
+        排序.html:40 1====2
+        排序.html:40 2====3
+        排序.html:40 3====4
+        排序.html:40 4====7
+        排序.html:40 7====9 
+        */
+        if(a>b){
+            return 1;//如果a大于b  将a排序到b的后面 返回一个正数  交换位置
+        }
+        if(a<b){
+            return -1;//如果a小于b a排序在b前面  返回一个负数  交换位置
+        }
+        return 0;//相同不换位置
+    })
+    console.log(arr)//[1, 2, 3, 4, 7, 9]
+
+    Array.prototype.tSort = function(mark){
+        this.sort(function(a,b){
+            if(mark){
+                return a-b;
+            }else{
+                return b-a;
+            }
+        });
+    }
+    arr.tSort(false);
+    console.log(arr);//[9, 7, 4, 3, 2, 1]
+    arr.tSort(true);
+    console.log(arr);//[1, 2, 3, 4, 7, 9]
+
+//对象排序
+    var json1 = {username:"哈哈",age:91};
+    var json2 = {username:"啦啦",age:21};
+    var json3 = {username:"嘻嘻",age:81};
+    //将他们全部换成数组
+    var a1 = [];
+    a1.push(json1);
+    a1.push(json2);
+    a1.push(json3);
+    console.log(a1)
+    // 0:{username: "哈哈", age: 91}
+    // 1:{username: "啦啦", age: 21}
+    // 2:{username: "嘻嘻", age: 81}
+
+//根据年龄来排序
+    a1.sort(function(a,b){
+        var ageA = a.age;
+        console.log(ageA+"-")
+        var ageB = b.age;
+        console.log(ageB+"=")
+
+        return ageA-ageB;
+
+    })
+    console.log(a1)
+    console.log("a1")
+    // 0:{username: "哈哈", age: 11}
+    // 1:{username: "啦啦", age: 81}
+    // 2:{username: "嘻嘻", age: 91}
+
+ //根据名字来排序 字符串来排序  依托于将字符串改成字符表
+    /*
+        ASCII表
+        所有的小写比大写的大
+        a b c d
+        A B C D
+        a== 97
+        A== 65
+        0== 48
+    
+    */
+    var json11 = {username:"b",age:91};
+    var json21 = {username:"c",age:21};
+    var json31 = {username:"a",age:81};
+    //将他们全部换成数组
+    var a2 = [];
+    a2.push(json11);
+    a2.push(json21);
+    a2.push(json31);
+    console.log(a2)
+/*    a2.sort(function(a,b){
+        var u1 = a.username;
+        var u2 = b.username;
+        if(u1.toLowerCase() < u2.toLowerCase()){
+            console.log(u1.toLowerCase())
+            console.log(u2.toLowerCase())
+            console.log(u1.toLowerCase() < u2.toLowerCase())
+            return -1;
+        }
+        // return u1.toLowerCase() -u2.toLowerCase();
+    })*/
+    a2.sort(function(a,b){
+        //return a.username.charCodeAt(0) - b.username.charCodeAt(0)
+        return a.username>b.username
+    })
+    console.log(JSON.stringify(a2))
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{background-color: black;}
+    ul{margin: 40px;position: relative;}
+    ul li{list-style: none;width: 90%;height: 40px;line-height: 40px;color: #fff;margin-bottom: 5px;background-color: rgba(245, 245, 245, 0.411);text-align: center;}
+    a{color: rgb(250, 250, 250);text-decoration: none;float: right;}
+    .prev,.next{font-size: 25px;margin-right: 15px;}
+    </style>
+</head>
+<body>
+    <div >
+        <ul id="box">
+            <li>
+                1
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+            <li>
+                2
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+            <li>
+                3
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+            <li>
+                4
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+            <li>
+                5
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+            <li>
+                6
+                <a href="javascript:;" class="prev" title="向上移动">↑</a>
+                <a href="javascript:;" class="next" title="向下移动">↓</a>
+            </li>
+        </ul>
+    </div>
+    <script src="./dom.js"></script>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var lidom = $("box").children;
+            var len = lidom.length;
+            var arr = [];
+            /*
+                运动交互： 位置的交互---改成定位布局
+                1.把每个元素的位置坐标记录成数组
+                2.添加定位，重新赋值位置
+                3.添加移动效果动画
+            
+            */
+           //位置数组
+           console.log(arr)
+            var arr = [];
+            for(var i=0;i<len;i++){
+                lidom[i].index = i;//对象缓存索引，目的是为了找到当前元素在数组中的位置
+                lidom[i].style.left = lidom[i].offsetLeft+"px";
+                lidom[i].style.top = lidom[i].offsetTop+"px";
+                arr.push([lidom[i].offsetLeft,lidom[i].offsetTop]);//位置添加到数据中
+            }
+            for(var i=0;i<len;i++){
+                lidom[i].style.position = "absolute";
+            };
+            console.log(arr.toString())
+            for(var i=0;i<len;i++){
+                /*
+                    nextElmentSibling 某个元素的下一个元素
+                    previousElementSibling 某个元素的上一个元素
+                    children 某元素的所有的子元素
+                    insertBefore()方法  在制定的子节点之前插入新的子节点
+
+                    node.insertBefore(newnode,existingnode)
+                        newnode	Node 对象	必需。需要插入的节点对象。
+                        existingnode	Node object	可选。在其之前插入新节点的子节点。如果未规定，则 insertBefore 方法会在结尾插入 newnode。
+                */
+                //向上移动
+                lidom[i].children[0].onclick = function(){
+                    console.log(this)
+                    //当前元素的父元素
+                    var pdom = this.parentElement;
+                    //父元素的上一个元素
+                    var prevDom = pdom.previousElementSibling;
+                    if(prevDom){
+                        var pindex = pdom.index;
+                        var preindex = prevDom.index;
+                        var tempArr = arr[preindex];
+                        $("box").insertBefore(pdom,prevDom);
+                        move(pdom,{left:tempArr[0],top:tempArr[1]});
+                        move(prevDom,{left:arr[pindex][0],top:arr[pindex][1]});
+                        arr[preindex] = arr[pindex];
+                        arr[pindex] = tempArr;
+                    }else{
+                        alert("00")
+                    }
+                }
+                //向下移动
+                lidom[i].children[1].onclick = function(){
+                    //当前元素的父元素
+                    var pdom = this.parentElement;
+                    //父元素的下一个元素
+                    var nextDom = pdom.nextElementSibling;
+                    //交换
+                    if(nextDom){
+                        var pindex = pdom.index;
+                        var nextindex = nextDom.index;
+                        var tempArr = arr[nextindex]
+                        $("box").insertBefore(nextDom,pdom);
+                        move(pdom,{left:tempArr[0],top:tempArr[1]});
+                        move(nextDom,{left:arr[pindex][0],top:arr[pindex][1]});
+                        arr[nextindex] = arr[pindex];
+                        arr[pindex] = tempArr;
+                    }else {
+                        alert("no nextdom")
+                    }
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

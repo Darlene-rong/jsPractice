@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boolean布尔类型</title>
+</head>
+<body>
+    <div id="testIf">
+
+    </div>
+    <script type="text/javascript"> 
+//Boolean布尔类型
+    /*
+        布尔类型：true/false
+        逻辑运算符中返回值都是boolean（其中等于==,全等于===）;
+        逻辑运算符：
+            全等于===
+            不等于!=
+            等于=
+            大于等于>=
+            小于等于<=
+            小于<
+            大于>
+    */  
+
+//条件表达式： 如果（if）/ 否则（else）
+    /*
+    表达格式：
+        if(boolean) {
+            //程序体
+        }else {
+            //程序体
+        }       
+    */ 
+    var str = "星期一";
+    if(str == "星期二") {
+        document.getElementById("testIf").innerHTML = "YES"
+    } else {
+        document.getElementById("testIf").innerHTML = "no"
+    }
+    /*
+        ==等号 和 全等号=== 区别
+        等号：比较的字面值
+        全等号：不仅比较字面值，还会比较数据类型
+    */
+    var a1 = "0";
+    var a2 = 0;
+    console.log("a1=====>"+a1);
+    console.log("a2=====>"+a2);
+    console.log(a1=a2);
+    console.log(a1==a2);
+    console.log(a1===a2);
+    
+    /*
+        逻辑运算符：
+            &&：且
+            ||：或
+            !：非
+        如果是括号的优先级最高的，先执行括号的然后再执行外面的
+    */
+
+    //惰性求值
+        //在程序开发里面， 0 代表假
+        var b1 = "";// ""，0，false，null，undefined，NaN===>返回都是False---->falsy
+        var b2 = b1 || "jing"; //如果b1为上面的条件的话，返回"jing"为默认值
+        //truely  和 fasey
+        //返回1
+        if("0") {
+            alert ("1");
+        } else {
+            alert ("2");
+        }
+
+
+    </script>
+</body>
+</html>

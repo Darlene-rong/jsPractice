@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";background-color: black}
+        a{text-decoration:none;color:#333}
+        li{list-style:none}
+        #box{background:rgb(255, 86, 86);width:100px;height:100px;position:absolute;border-radius: 50px;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        };
+        window.onload = function(){
+            var boxDom = $("box");
+            boxDom.onclick = function(){
+                freeMove();
+            }
+            var speed = 0;
+            var timer = null;
+            function freeMove(){
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    speed +=5;
+                    var target = boxDom.offsetTop + speed;
+                    if(target > window.innerHeight -boxDom.offsetHeight){
+                        target = window.innerHeight - boxDom.offsetHeight;
+                        speed *= -1;
+                        speed *= 0.725;
+                    }
+                    boxDom.style.top = target + "px"
+                },30)
+            }
+        }
+    </script>
+</body>
+</html>

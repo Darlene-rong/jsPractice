@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择城市</title>
+    <style>
+        *{padding: 0; margin: 0;}
+        a{text-decoration: none;color: #333;}
+        body{font-size: 14px;font-family: "微软雅黑"}
+        .wrap{position: absolute;left: 0;top: 0;width: 100%;height: 100%;}
+        .wrap .left{width: 350px;height: 100%; background-color: #fff;padding: 20px; float: left;position: fixed; top: 0;left: 0;}
+        .wrap .left a {padding-left: 10px;}
+        .wrap .left a:hover {color: rgb(252, 101, 0);}
+        .wrap .right{width: 100%;background-color: rgb(199, 195, 195);height: 100%;position: fixed;left: 350px;top: 0;}
+
+        .tagsbox {margin-bottom: 15px;font-size: 16px;color: #959899;width: 300px;margin-left: 10px;position: absolute;top: 67px;}
+        .tags {padding: 6px;border: 1px solid rgb(199, 195, 195);float: left;margin-bottom: 10px;margin-right: 10px;}
+        .tags a{color: #7b7e7e}
+        .left-city {float: left;}
+        .test {margin-top: 30px; margin-left: 20px;}
+        .tags {background-color: #fff;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="left">
+            <div class="left-city">
+                <p id="city"></p>
+                <span>热门城市:</span>
+                <!-- 父子关系 -->
+                <div id="tagwrap">
+                    <a href="javascript:;">三亚</a>
+                    <a href="javascript:;">广州</a>
+                    <a href="javascript:;">重庆</a>
+                    <a href="javascript:;">北京</a>
+                    <a href="javascript:;">海南</a>                           
+                </div>
+            
+            </div>
+            <div class="tagsbox" id="leftarget">
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="tagsbox test" id="rightarget">
+            </div>
+        </div>
+    </div>
+
+    <script>
+    /*
+        1.给所有的a绑定点击事件，并且拿到点击文本值
+        2.拿到值，添加到两个Div中
+        3.如果选择了就不能点击
+        4.删除元素,联动右侧一起删除
+
+    */
+    var arr = [];
+    window.onload = function() {
+//创建数组，将选中的城市存到该数组中；
+
+        //第一步  给所有的a绑定点击事件，并且拿到点击文本值
+        var tagDom = document.getElementById("tagwrap");//获取a标签父元素的id
+        var leftTargetDom = document.getElementById("leftarget");//获取左边span标签元素的父元素的id
+        var rightTargetDom = document.getElementById("rightarget");//获取右边span标签元素的父元素的id
+        var adoms = tagDom.children;//父元素下面所有的子元素   object
+        var lef  = leftTargetDom.children;
+        console.log(leftTargetDom.children)
+        var len = adoms.length;
+        for(var i = 0;i<len;i++){
+            adoms[i].onclick = function() {
+            //第二步：拿到值，添加到两个Div中
+                //第一种：获取选中的值 数组的方式 
+                var test = this.innerHTML;
+                console.log(adoms)
+                console.log(arr[arr.indexOf(arr[0])]!=arr[0])
+                //如果选择了就不能点击
+                if(arr.indexOf(test) == -1 ){//indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+                    console.log(arr.indexOf(test))
+                    //附加到两个目标div中
+                    //目标
+                    leftTargetDom.innerHTML +=" <span class='tags'>"+test+"<a href='javascript:;' onclick='removeItems(this)'>X</a></span>";
+                    rightTargetDom.innerHTML +=" <span class='tags'>"+test+"</span>";
+                    arr.push(test);                    
+                }
+
+            }
+        }
+    };
+    function removeItems(obj) {
+        // console.log(arr)
+        
+        //获取Span元素
+        var spanDom = obj.parentElement;  
+        // console.log(spanDom);
+        //获取文本内容     
+        var text = spanDom.innerText || spanDom.textContent;
+        //获取数组中的元素的位置
+        text = text.replace('X',"")
+        var index = arr.indexOf(text);
+        //父元素的父元素进行删除
+        arr.splice(index,1);
+        //获取Span的父亲
+        var divDom = spanDom.parentElement;
+        //删除元素
+        divDom.removeChild(spanDom);
+
+        //删除右侧元素
+        var html = "";
+        var rightTargetDom = document.getElementById("rightarget");
+        for(var i=0;i<arr.length;i++){
+            html +=  "<span class='tags'>"+arr[i]+"</span>";
+        }
+        rightTargetDom.innerHTML = html;
+        /*
+            第二种方式
+            var rightTargetDom = document.getElementById("rightarget");
+            var cs = rightTargetDom.children 
+            var dom = null;
+            for(var i=0;i<cs[i];i++){
+                var t = cs[i].innerText || cs[i].textContent;
+                if(t==text){
+                    rightTargetDom.removeChild(cs[i]);
+                    break;
+                }
+            }
+        
+        */
+    };
+
+    </script>
+</body>
+</html>

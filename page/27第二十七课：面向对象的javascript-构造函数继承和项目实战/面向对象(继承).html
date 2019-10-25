@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象(继承)</title>
+</head>
+<body>
+    <script>
+        /*
+            继承
+        */
+        function Parent(name) { 
+            this.name = name;
+            this.book = [];
+         }
+         Parent.prototype.sayHello = function () {
+             return this.name;
+        }
+        function Children(age) {  };
+
+        //类式继承
+        Children.prototype = new Parent("1222");
+        Children.prototype.constructor = Children;
+        Children.prototype.showAge = function ( ) { 
+            return this.age;
+         };
+
+
+         var a = new Children(3123);
+         alert(a.name );
+
+         //instanceof判断一个对象是否来自某一个类
+        alert(a instanceof Children);//true
+		alert(a instanceof Parent);//true
+		alert(Children.prototype instanceof Parent);//true*/
+    </script>
+</body>
+</html>

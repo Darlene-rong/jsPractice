@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>时钟</title>
+</head>
+<body>
+    <h1 id="time"></h1>
+    <script type="text/javascript">
+
+        window.onload = function(){
+            //全局变量var data = new Date(); 不能再外面定义 
+            //定时函数
+            var timeDom = document.getElementById("time");//定义在外面解决性能的问题
+            //闭包 回调函数
+            setInterval(function(){
+                var data = new Date();
+                var year = data.getFullYear();//全年
+                var month = data.getMonth()+1;//月 0第一月  11第十二月 (加1才能获取当年的月份)
+                var dat = data.getDate();//日期             
+                //获取时间
+                var hourse = data.getHours();//时
+                var min = data.getMinutes();//分
+                var sec = data.getSeconds();//秒
+                var week = data.getDay();
+                // 如果分钟或小时的值小于10，则在其值前加0，
+                var MM = checkTime(min);
+                var SS = checkTime(sec);
+                var HH = checkTime(hourse);
+
+                var time1 = year +"年" + month +"月"+ dat + "日"+HH + ":" + MM + ":" + SS+"---"+getWeek(week);
+                timeDom.innerHTML = time1;
+            },1000);
+
+            function getWeek(week) {
+                switch(week) {
+                    case 0 :  return "星期天"; break;
+                    case 1 :  return "星期一"; break;
+                    case 2 :  return "星期二"; break;
+                    case 3 :  return "星期三"; break;
+                    case 4 :  return "星期四"; break;
+                    case 5 :  return "星期五"; break;
+                    case 6 :  return "星期六"; break;
+                    default:  return "";break;
+                }
+            };
+            function checkTime(val) {
+                if(val<10) {
+                    val = "0" + val;
+                }
+                console.log(val)
+                return val;
+            }
+        }
+
+    </script>
+</body>
+</html>

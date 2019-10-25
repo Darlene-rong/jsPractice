@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #box{background:red;width:100px;height:100px;}
+    </style>
+</head>
+<body>
+    <input type="text" id="username" value="all about you"/>
+	<input type="button" onclick="setValue()" value="添加"/>
+	<input type="button" onclick="getValue()" value="获取"/>
+	<input type="button" onclick="removeValue()" value="删除"/>
+    <input type="button" onclick="clearStorage()" value="清空"/>
+    
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+        //添加localStorage/sessionStorage
+        function setValue(){
+            var inputvalue = $("username").value; 
+            sessionStorage.setItem("seusername",inputvalue);
+            localStorage.setItem("lousernmae",inputvalue)
+        }
+        //获取localStorage/sessionStorage
+        function getValue(){
+            var inputvalue = $("username").value; 
+            var s = sessionStorage.getItem("seusername");
+            var l = localStorage.getItem("lousernmae");
+            console.log(s + "====" + l)
+        }
+        //移出localStorage/sessionStorage
+        function removeValue(){
+            var inputvalue = $("username").value; 
+            sessionStorage.removeItem("seusername");
+            localStorage.removeItem("lousernmae");
+        }
+        //清除localStorage/sessionStorage
+        function clearStorage(){
+            localStorage.clear();
+            sessionStorage.clear()
+        }
+    </script>
+</body>
+</html>

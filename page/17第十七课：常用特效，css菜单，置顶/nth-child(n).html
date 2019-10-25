@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>nth-child(n)和nth-of-type(n)</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    a{text-decoration: none;color: #fff;}
+    .cs_wrap{width: 100%;height: 48px;background-color: cornflowerblue;}
+    .cs_wrap ul{width: 1000px;position:relative;margin: 0 auto;height: 48px;letter-spacing: -5px;}
+    .cs_wrap ul li{list-style: none;display: inline;line-height: 48px;padding: 0 20px;display: inline-block;letter-spacing: normal;}
+    /* 
+        关于 nth-child(n)的使用 
+            E:nth-child(n)： 选择父元素下的第n个子元素
+            :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。n 可以是数字、关键词或公式。
+
+            奇数、偶数位  第一个子元素的下标是 1   n 从1开始
+            奇数:nth-child(odd)    :nth-child(n)   
+            偶数:nth-child(even)   :nth-child(2n)
+            .cs_wrap ul li:nth-child(odd){background-color: red}
+            .cs_wrap ul li:nth-child(even){background-color: blue;}
+
+            间隔性选择子元素
+                三的倍数:nth-child(3n)
+                使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始），b 是偏移值。
+                .cs_wrap ul li:nth-child(3n+1){background-color: blueviolet;}
+            n+1从0开始  n从1开始
+            li:nth-child(2n)从n是1开始
+            li:nth-child(2n+1)从0开始
+    */
+     /*
+        child 孩子
+        of-type 某一类孩子
+     
+     
+     */
+     ul li:nth-child(2n){background-color: red;}
+    </style>
+</head>
+<body>
+    <div class="main_content">
+        <!-- 导航条 -->
+        <div class="cs_wrap">
+            <ul>
+                <li><a href="javascript:;">学校概况</a></li>
+                <li><a href="javascript:;">机构设置</a></li>
+                <li><a href="javascript:;">人力资源</a></li>
+                <li><a href="javascript:;">教育教学</a></li>
+                <li><a href="javascript:;">科学研究</a></li>
+                <li><a href="javascript:;">招生就业</a></li>
+                <li><a href="javascript:;">学生天地</a></li>
+                <li><a href="javascript:;">国际交流</a></li>
+                <p></p>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

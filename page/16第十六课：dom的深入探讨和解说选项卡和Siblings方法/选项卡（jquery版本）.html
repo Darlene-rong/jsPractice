@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡（jquery版本）</title>
+    <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+	a{text-decoration:none;color:#3333} 
+	ul li{list-style:none;padding:10px;border:1px solid #ccc;cursor: pointer;}
+	#tab{width:670px;height:480px;border:1px solid #ccc;margin:0 auto;}
+	#tab ul{width:100%;height:42px;background:#ccc}
+    #tab li{float:left;}
+    #tab li.on{background-color: #fff;}
+	#tab li.on{background:#fff;}
+	#tab .content{height:438px;}
+	#content span{display:none}
+    </style>
+    <script src="../../js/jquery.js"></script>
+</head>
+<body>
+    <div id="tab">
+        <ul id="card" class="js_card">
+            <li class="on" tab="ctn1">选项卡1</li>
+            <li tab="ctn2">选项卡2</li>
+            <li tab="ctn3">选项卡3</li>
+        </ul>
+        <div id="content" class="js_content">
+            <span id="ctn1">内容1</span>
+            <span id="ctn2">内容2</span>
+            <span id="ctn3">内容3</span>
+        </div>
+    </div>
+
+    <script>
+        // jquery 方法写 选项卡
+        $(".js_card").children().click(function(){
+            //获取当前点击的索引
+            var index = $(this).index();
+            // 查找元素 所有同胞元素： siblings()
+            //添加选中的样式  同步互斥
+            $(this).addClass("on").siblings().removeClass("on");
+            //同辈隐藏  内容显示
+            $(".js_content").children().eq(index).show().siblings().hide()
+            console.log($(".js_content").children().eq(index))
+        })
+  
+    </script>
+</body>
+</html>

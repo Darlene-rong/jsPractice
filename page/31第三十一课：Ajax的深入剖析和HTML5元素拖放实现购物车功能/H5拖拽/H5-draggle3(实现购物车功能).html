@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑"}
+	a{text-decoration:none;color:#333}
+	ul li{list-style:none}
+	.box{width:140px;height:100px;background:#333;color:#fff;float:left;margin-left:10px;}
+	.box span{display:block;}
+
+	#cshopcar{width:640px;height:360px;background:#eee;margin-top:10px;margin-left:10px;}
+	#cshopcar div{float:left;margin:2px;}
+	table{width:100%;border-collapse: collapse;}
+	table td{border:1px solid #ccc;padding:5px;}
+  </style>
+ </head>
+ <body>
+		
+		
+		<div id="bookbox">
+			<div class="box" draggable="true">
+				<span class="name">Javascript面向对象</span>
+				<span class="price">120</span>
+				<span class="pub">湖南长沙</span>
+				<span class="pub">1</span>
+			</div>
+			<div class="box" draggable="true">
+				<span class="name">Java面向对象</span>
+				<span class="price">86</span>
+				<span class="pub">杭州</span>
+				<span class="pub">2</span>
+			</div>
+			<div class="box" draggable="true">
+				<span class="name">HTML5/CSS3的解说</span>
+				<span class="price">158.5</span>
+				<span class="pub">上海</span>
+				<span class="pub">3</span>
+			</div>
+		</div>
+
+		<br><br><br><br><br><br><br><br>
+		<div id="cshopcar">
+			<table>
+				<tbody id="shopcar">
+				</tbody>
+			</table>
+		</div>
+		总金额是：<h1 id="total"></h1>
+		<a href="javascript:void(0);" onclick="clearShopcar()">清空购物车</a>
+
+
+		<script>
+
+			/*
+				html5--可触动的拖放功能--draggable
+				在页面中有两个元素默认开启的：a和img ,draggable="true"
+				onmousedown onmouseove onmouseup
+
+				Draggable和文件Api通过ajax实现文件上传
+
+				参照物：拖放的元素 和 目标点
+				
+				API事件:
+					ondragstart:开始拖放元素触发的事件 ,对象：拖放的元素
+					ondrag:拖放过程中触发的事件，       对象：拖放的元素
+
+
+					ondragenter：有拖放的元素进入目标元素时触发的事件，   对象：目标元素
+					ondragover:有拖放的元素在目标元素内移动触发的事件：对象：目标元素
+					ondragleave：有拖放的元素离开目标元素触发的事件，  对象：目标元素
+					ondrop:有拖放的元素在本元素松开的时候触发的事件  对象：目标元素
+
+					ondragend：拖放元素结束触发的事件      对象：拖放的元素
+
+			*/
+            window.onload = function(){
+                var dragDom = document.getElementById("bookbox");
+                var childDom = dragDom.children;
+                var targetDom = document.getElementById("cshopcar")
+                var len = dragDom.children.length;
+                for(let i=0;i<len;i++){
+                    childDom[i].ondragstart = function(e){
+                        var jsondom = this.children;
+                        var json = {
+                            "name":jsondom[0].innerHTML,
+                            "price":jsondom[1].innerHTML,
+                            "address":jsondom[2].innerHTML,
+                            "opid": jsondom[3].innerHTML
+                        }
+                        console.log(json);
+                        e.dataTransfer.setData('json',JSON.stringify(json))//转换为string格式存储
+                        this.style.background = "red"
+                    };
+                    //释放元素的时候触发
+                    childDom[i].ondragend = function(e){  
+                        targetDom.style.background = "#eee";
+						this.style.background = "#333";
+                    }
+                }
+                targetDom.ondragenter = function (e) { 
+                    this.style.background = "#999"
+                }
+                targetDom.ondragover = function(e){
+                    e.preventDefault()
+                }
+                targetDom.ondrop = function (e) {  
+                    var textjson = e.dataTransfer.getData("json");
+                    var json = JSON.parse(textjson);
+                    var $this = this;
+                    var dom = document.getElementById("sp_"+json.opid);
+                    var len = document.getElementById("shopcar").children.length || 0
+                    if(!dom){
+                        var html = `
+                            <tr id="sp_${json.opid}">
+                                <td>${len+1}</td>
+                                <td>${json.name}</td>
+                                <td>${json.price}</td>
+                                <td>${json.address}</td>
+                                <td><a href='javascript:void(0);' onclick='delshop(this)'>删除</a></td>
+                            </tr>
+                        `
+                        document.getElementById("shopcar").innerHTML += html;
+                    }else{
+                        var p = dom.children[2].innerHTML || 0;
+                        dom.children[2].innerHTML = p*1 + json.price*1;
+                    }
+                    getTotal()
+                }
+                
+               
+            }
+            function getTotal() {  
+                var tableDom = document.getElementById("shopcar");
+                var total = 0;
+                var totalDom = document.getElementById("total")
+                for(let i=0,len=tableDom.children.length;i<len;i++){
+                    total += tableDom.children[i].children[2].innerHTML*1
+                }
+                console.log(total)
+                totalDom.innerHTML = total;
+            }
+            //删除
+            function delshop(obj){
+                var tbodyDom = document.getElementById("shopcar");
+                tbodyDom.removeChild(obj.parentElement.parentElement);
+                //计算总金额
+                getTotal();
+            }
+            function clearShopcar() {  
+                var tabDom = document.getElementById("shopcar");
+                tabDom.innerHTML = "";
+                getTotal()
+            }
+		</script>
+ </body>
+</html>

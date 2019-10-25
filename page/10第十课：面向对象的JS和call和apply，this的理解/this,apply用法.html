@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box div {
+        height: 40px;
+        width: 100%;
+        background-color: aqua;
+        margin-bottom: 3px;
+        line-height: 40px;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <div id="box">
+        <div onclick="clickMe(this)">N122231231</div>
+        <!-- onclick = "clickMe(this)" //this指向当前的元素 div的dom对象 -->
+        <div onclick="clickMe(this)">S123123123</div>
+        <div onclick="clickMe(this)">F21312312</div>
+    </div>
+    <script>
+        window.onload = function() {
+            
+            //动态绑定
+            // var boxDom = document.getElementById("box");
+            // var childDom = boxDom.children,len = childDom.length;
+            // for(var i = 0; i<len; i++) {
+            //     childDom[i].onclick = function() {
+            //         alert(this.innerHTML);//this指向调用者
+            //     }
+            // } 
+        }
+        //写法二
+        function  clickMe(obj) {
+            alert(obj.innerHTML)
+        }
+    /*
+        this 代表的是当前对象
+             指向对象本身
+    */    
+        var json = {
+            "username": "jack",
+            "age": 20,
+            "sayHello": function() {
+               //this = json
+               console.log(this.username)//jack;  
+            },
+            "eating": function() {
+                this.sayHello();//相当于json.sayHello()
+                console.log(json === this);//true;
+            }
+        };
+
+    /*
+        封装组件：对象+事件+回调函数的继承体
+        对象json：解决参数的问题
+        事件（回调函数）：将一些操作继续给用户去处理
+        call,apply：改变对象的引用
+            call 和 apply是函数的一种执行方式，只是这种执行可以改变这个函数中的this的指向
+            call(对象，参数1，参数2，......)
+            apply(对象，[参数1，参数2，.....])    
+            用法：
+                函数.call(对象，参数)
+    */
+    let arr = [2,6,45,2]
+   console.log(Math.max.apply(null,arr));
+   function test() {
+       console.log(this.username);
+   };
+   var json = {
+       "username": "jack",
+       "sayHello": function(){
+           test.call(keke);//执行并且改变函数中this的指向
+           //test.call(this);
+       }
+   }
+
+
+    </script>
+</body>
+</html>

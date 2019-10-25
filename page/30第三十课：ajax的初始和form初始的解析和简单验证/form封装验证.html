@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    form{
+        width: 180px;
+        margin: 10px auto;
+        border: 1px solid #ddd;
+        padding: 30px;
+    }
+    .fl{float: left;}
+    </style>
+</head>
+<body>
+    <form id="loginForm" name="loginForm">
+        <label>用户名：<input type="text" name="username" /></label>
+        <label>密码：<input type="password" name="password"/></label>
+        <p>性别：
+            <label><input type="radio" name="male" value="1" />男</label>
+            <label><input type="radio" name="male" value="0" />女</label>
+        </p>
+        <p>爱好：
+            <label><input type="checkbox" name="hobbys" value="1" />吃饭</label>
+            <label><input type="checkbox" name="hobbys" value="2" />喝水</label>
+        </p>
+        <p>省份：
+            <select name="prov" id="">
+                <option selected = "selected">--请选择--</option>
+                <option value="01">湖南</option>
+                <option value="02">广州</option>
+            </select>
+        </p>
+        <label>描述：<textarea name="desc"></textarea></label>
+        <input type="button" value="提交" onclick="toSave()">
+    </form>  
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script>
+        //获取form表单里面的参数值
+        function toSave(){
+            var loginForm = document.forms["loginForm"];
+            var json = getFormValue(loginForm);
+            if(json.username.value == ""){
+                alert("请重新输入....");
+                json.username.ele.focus();
+                json.username.ele.style.border = "1px solid red";
+                return;
+            };
+            if(json.password.value == ""){
+                alert("请输入密码~");
+            }
+        }
+        function getFormValue(formdom)  {   
+            var formElements = formdom.elements;
+            var json = {};
+            var len = formElements.length;
+            for(var i=0;i<len;i++){
+                //转成小写 toLowerCase()
+                var type = formElements[i].type.toLowerCase();
+                //判断 进行筛选
+                if(type !="button" && type!="submit" && type!="reset"){   //筛选掉为按钮的控件 type为 button submit reset
+                    //如果控件为复选框或者为radio  '||' 或者  '&&'并且
+                    if(type == "checkbox" && formElements[i].checked){
+                        var value = json[formElements[i].name] || formElements[i].value;
+                        if(formElements[i].name in json){
+                            value +="," + formElements[i].value;
+                        }
+                        json[formElements[i].name] = value;
+                    }else if(type =="radio" && formElements[i].checked){
+                        json[formElements[i].name] = {
+                            value: formElements[i].value,
+                            ele: formElements[i]
+                        };
+                    }
+                    if(type != "radio" && type !="checkbox"){
+                        json[formElements[i].name] = {
+                            value: formElements[i].value,
+                            ele: formElements[i]
+                        };
+                    }
+                }
+            }
+            return json;
+        }
+
+
+        //jquery中的serializeArray的原理
+			function tzParams(formDom){
+				var formElements = formDom.elements;
+				var params = [];
+				for(var i=0,len=formElements.length;i<len;i++){
+					var type = formElements[i].type.toLowerCase();
+					if(type!="button" && type!="submit" && type!="reset"){
+						if((type=="radio" || type=="checkbox") && formElements[i].checked){
+							params.push({"name":formElements[i].name,"value":encodeURIComponent(formElements[i].value)})
+						}else{
+							if(type!="radio" && type!="checkbox"){
+								params.push({"name":formElements[i].name,"value":encodeURIComponent(formElements[i].value)})
+							}
+						}
+					}
+				}
+				return params;
+			}
+			
+			//jquery中的serialize的原理
+			function tzParams2(formDom){
+				var formElements = formDom.elements;
+				var params = "";
+				for(var i=0,len=formElements.length;i<len;i++){
+					var type = formElements[i].type.toLowerCase();
+					if(type!="button" && type!="submit" && type!="reset"){
+						if((type=="radio" || type=="checkbox") && formElements[i].checked){
+							params+=((i>0)?"&":"")+formElements[i].name+"="+encodeURIComponent(formElements[i].value);
+						}else{
+							if(type!="radio" && type!="checkbox"){
+								params+=((i>0)?"&":"")+formElements[i].name+"="+encodeURIComponent(formElements[i].value);
+							}
+						}
+					}
+				}
+				return params;
+			}
+
+    </script>           
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text"  id="one" value="2" />
+    <select id="op">
+        <option value="+" selected>+</option>
+        <option value="-">-</option>
+        <option value="/">/</option>
+        <option value="*">*</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text"  id="two" value="12" />
+    <input type="text"  id="three" value="" />
+    <input type="button"  id="four" value="result" onclick="resultOne()"/>
+    <script>
+    /*
+        函数两种定义的区别     （变量的定义基本放第一行）   变量的提升  定义了a之后 现在空间把a的变量定义为undefined 再进行赋值
+            function sum(a,b){
+                return a+b;
+            }
+            
+            定义之后才能调用函数
+            var sum = function(a,b){
+                return a+b;
+            }
+
+
+        函数应用在什么地方？========一般应用在事件，事件依赖于函数，事件就是执行函数的过程的一种回调，
+
+        函数的参数的理解？
+            形参
+            实参
+            每个对象都会捆绑一个arguments
+
+        函数重载嘛
+            方法名一模一样 一种方法多个形态
+            在JS中重载的，没有定义具体的数据类型 ，所有的数据都在内部进行转换
+        
+        重写和重载没有任何关系
+    */
+
+    /*
+        重载   在java中     
+        public void test (String name ,int age)
+        public void test(int name,int age)
+        test ("hh",20);
+        test(10,20)   
+    */
+    function test(a,b){
+        console.log("====="+a+b)
+    }
+    function test(a,b){
+        console.log("*****"+a+b)
+    }
+    test("dd","ww");//*****ddww
+    test(3,5);//*****35
+    //注意 相同的方法名 后面的方法会覆盖前面的方法
+
+
+
+
+    function resultOne() {
+        //由于a,b获取的值都是字符串 所以需要将字符串进行转换 转为number数据类型
+        //方法一   将 a*1==>数字a
+        var a = document.getElementById("one").value*1;
+        var b = document.getElementById("two").value*1;
+        //方法二 parseFloat(a)
+        var op = document.getElementById("op").value;
+        var c = eval(a+op+b);//eval() 计算String去得到相应的值  执行计算
+        document.getElementById("three").value = c;
+        
+    }
+    </script>
+</body>
+</html>

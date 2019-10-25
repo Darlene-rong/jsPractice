@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:red;width:100px;height:100px;}
+  </style>
+ </head>
+ <body>
+
+	<div id="box"><a href="http://www.baidu.com" id="gobaidu">点我去百度!!</a></div>
+	<script>
+		function $(id){
+			return document.getElementById(id)
+		}
+		window.onload = function(){
+			var boxDom = $("box");
+			//onEvent(document,"click",clickme);
+			onEvent(boxDom,"click",clickme);
+			function clickme(e){
+				var ev = e || window.event;
+				//alert("点我了...");
+				//var ct = ev.currentTarget;//当前对象 this
+				//var target = ev.target;//当前对象，是当前鼠标停留的对象
+				//var srctarget = ev.srcElement;//是当前鼠标停留的对象
+				var target = ev.target || ev.srcElement;
+				alert(ct+"==="+target+"===="+srctarget);
+				stopEvent(ev);
+				offDefault(ev);
+			}
+
+		};
+	
+
+		//事件的封装
+			function onEvent(dom,type,callback){
+				if(document.addEventListener){
+					dom.addEventListener(type,callback,false);
+				}else if(document.attachEvent){
+					dom.attachEvent("on"+type,callback);
+				}else{
+					dom["on"+type] = callback;
+				}
+			}
+			//删除事件
+			function offEvent(dom,type,callback){
+				if(document.removeEventListener){
+					dom.removeEventListener(type,callback);
+				}else if(document.detachEvent){
+					dom.detachEvent("on"+type,callback);
+				}else {
+					dom["on"+type] = null;
+					//delete dom["on"+type];
+				}
+			};
+
+			//阻止浏览器的默认行为封装
+			function offDefault(e){
+				if(event.preventDefault){
+					e.preventDefault()
+				}else{
+					e.returnValue = false;//return false是即是阻止浏览器的行为又是阻止冒泡
+				}
+			}
+
+			//阻止冒泡
+			function stopEvent(e){
+				if(e.stopPropagation){
+					e.stopPropagation();
+				}else{
+					e.cancelBubble = true;
+				}
+			}
+	</script>
+ </body>
+</html>

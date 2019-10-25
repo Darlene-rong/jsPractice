@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            闭包：
+                即时函数是闭包的一种
+                回调函数也属于闭包的一种
+            解决全局变量的暴露问题 不会受到外界的干扰  不会出现变量被外界覆盖的问题
+            对象的方式 return出去  外界就可以进行调用了
+            相同的函数会进行覆盖
+            
+        */
+
+        //闭包
+        /*
+            第一种写法   将对象return 出去
+        */
+        var Music = (function () { 
+            function _Music(id,src) { 
+                //私有属性 和方法  供里面进行使用 外面无法获取
+                var index = 0;//私有属性
+                function addMusic() {  }//私有方法
+                function playMain(){
+                    //播放上一首下一首
+                }
+
+
+                //特权属性 / 方法   当作对象的自有属性
+                this.id = id;
+                this.src = src;
+
+                //特权方法
+                this.play = function () { 
+                    alert("play")
+                }
+                this.next = function () { 
+                    playMain();//调用内部的私有方法
+                }
+                this.pre = function () { 
+                    playMain();//调用内部的私有方法
+                }
+
+            };
+            _Music.prototype = {
+                constructor: Music,
+                //公共的属性/方法
+                timer: "00:00",//公有属性
+                playTime:function(){ //公有方法
+                    alert(this.timer)
+                }
+            };
+            return _Music;//返回的是一个类  Function
+         })();
+         var m  = new Music();
+         m.playTime()//00:00
+         /*
+            挂载到Window上面
+            var Music = (function (win) { 
+                function _Music(id,src) { 
+                //私有属性 和方法  供里面进行使用 外面无法获取
+                var index = 0;//私有属性
+                function addMusic() {  }//私有方法
+                function playMain(){
+                    //播放上一首下一首
+                }
+
+
+                //特权属性 / 方法   当作对象的自有属性
+                this.id = id;
+                this.src = src;
+
+                //特权方法
+                this.play = function () { 
+                    alert("play")
+                }
+                this.next = function () { 
+                    playMain();//调用内部的私有方法
+                }
+                this.pre = function () { 
+                    playMain();//调用内部的私有方法
+                }
+
+                };
+                _Music.prototype = {
+                    constructor: Music,
+                    //公共的属性/方法
+                    timer: "00:00",//公有属性
+                    playTime:function(){ //公有方法
+
+                    }
+                };
+                //暴露到win里面去
+                win.Music = _Music;
+            })(window);         
+         */
+
+         //定义静态方法和静态属性； 只能通过类 调用   不允许通过对象调用
+        //  var m = new Music();
+        //  Music.author = "rong";
+        //  Music.pushTime - function () { 
+        //      alert("出版"+new Date())
+        //   }
+
+        //  var m = new Music();
+        //  alert(m.playTime);
+        //  alert(m.index);//私有属性 不能引用
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    /*
+    下面的方法 在ie9+
+    
+    */
+//reverse() 倒序  反转
+    var arr = [1,2,3,4,5,6,7];
+    console.log(arr.reverse())
+    //[7, 6, 5, 4, 3, 2, 1]
+//filter(值，索引，下标) 过滤
+    var newArr = arr.filter(function(value,index,all){
+        //%2等于0的留下 其他都过滤掉
+        return value % 2 == 0
+    })
+    console.log(newArr)//[6, 4, 2]
+
+//every：如果你的元素的每一个都符合条件就返回true 否则返回false
+//some 如果遇到第一个不满足条件为true;
+//map 检测数组里面所有的元素是否符合条件，符合就是true 不符合就为false
+//!isNaN(value) 判断是否是一个数字 返回True和False
+
+    var arr = [1,2,"k",3,4,5,6,7];
+    //最原始的方法   将k去除之后得到新的数组
+    var newR = []
+    for(var i =0;i<arr.length;i++){
+        if(arr[i] != "k") {
+            newR.push(arr[i]);
+        }
+    }
+    //filter过滤
+    var new2 = arr.filter(function(value){
+        return value != "k";
+    })
+    console.log(newR)//[1, 2, 3, 4, 5, 6, 7]
+    console.log(new2)//[1, 2, 3, 4, 5, 6, 7]
+
+//forEach(value,index,all) 循环
+    for(var i=0;i<arr.length;i++){
+        console.log(arr[i])
+    }
+    //等价于
+    console.log(".....")
+    arr.forEach(function(value){
+        console.log("=="+value);
+    })
+    //源代码  封装 回调函数
+    Array.prototype.each = function(callback){
+        for(var i = 0;i<this.length;i++){
+            callback(this[i]);
+        }
+    }
+    arr.each(function(value){
+        console.log("====="+value);
+    })
+
+//indexOf()   找到对应的索引
+    var a1 = [1,2,"k",3,4,5,6,7];//数组相当于一个容器，可以放任何的东西，对象，函数，字符串等数据类型
+    var index = arr.indexOf("k");//返回数组的索引
+    arr[index] = "噗噗";
+    console.log(arr)
+    //[1, 2, "噗噗", 3, 4, 5, 6, 7]
+
+    //源代码
+    Array.prototype.indexOf = function(value){
+        for(var i = 0;i<this.length;i++){
+            if(this[i] === value){
+                return i;
+                break;                
+            }
+
+        }
+        return -1;
+    }
+
+    </script>
+</body>
+</html>

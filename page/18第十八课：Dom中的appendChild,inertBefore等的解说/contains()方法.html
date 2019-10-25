@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>contains()方法</title>
+</head>
+<body>
+    <h2>contains()方法</h2>
+    <div id="parent">
+        <span id="child">方法测试</span>
+    </div>
+    <button onclick="test()">contains()方法测试</button>
+    <script>
+        /*
+            A.contains(B)；
+            如果A元素当中包含B 返回true
+            如果A元素中不包含B 返回false
+        
+        */
+        function test(){
+            var parentDom = document.getElementById("parent");
+            var childDom = document.getElementById("child")
+            alert("A中包含B====="+parentDom.contains(childDom));//true
+            
+        }
+    </script>
+</body>
+</html>

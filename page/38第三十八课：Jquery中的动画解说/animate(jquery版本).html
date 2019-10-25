@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../js//jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <script>
+    /*
+      继承 jquery  $.extend()
+      $.extend();相当于mix多对象的混入
+    */ 
+    $(function() {
+      var a = {name: 'java'};
+      var b = {age: 132,name: 'opppo'};
+      var c = $.extend(a,b);
+      alert(JSON.stringify(c))
+    });
+
+    /*
+      动画 animate()
+        animate({样式列表},[动画时间],[fn])
+        修改默认常量速度 $.fx.speeds
+    */
+    function clickme(){
+			//$("#box").css({width:100,height:100,background:"red"});
+			//我宽度和高度以动画从0 -- 100- 通时位移到 left 400 在改变背景色
+			//默认：400 normal
+			//$.fx.speeds.keke = 300;
+			//$.fx.speeds = {keke:300,t2:240}
+			//$.fx.speeds.t2 = 240;
+			//$("#box").css({width:0,height:0,left:0,background:"red",position:"absolute"})
+			//.animate({width:100,height:100},{duration: 200,queue:false,easing:"linear",step:function(){
+			//	$(this).css("background","green");
+			//}})//slow:600 normal 400 fast 200
+			//.animate({left:400}).delay(1000)
+			//.animate({top:400})
+		};
+  </script>
+</body>
+</html>

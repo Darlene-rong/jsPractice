@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数</title>
+    <style>
+    div{width: 100px;height: 100px;text-align: center; background-color:#999;margin: 10px auto;color: #fff;font-size: 36px;line-height: 100px;}
+    </style>
+</head>
+<body>
+    <div id="box">1</div>
+    <div id="box2">2</div>
+    <div id="box3">3</div>
+    <div id="box4">4</div>
+    <script type="text/javascript">
+    /* 
+        函数进阶  ------一般用于组件和开发和封装
+            回调函数：
+        
+        即时函数，私有函数，闭包，都是为了解决作用域的问题
+
+    */
+    //动态绑定
+    // function clickMe(){
+        
+    // }
+    //window.onload  因为页面中的代码一般情况下按照，从上到下，从左到右的顺序执行。
+    // 所以当js代码需要获取页面中的元素时，如果script标签在元素的前面，需要加window.onload；如果script放在了元素后面，就不需要加 window.onload。 
+    window.onload = function() {
+    //第一种写法
+        // var boxDom = document.getElementById("box");
+        // boxDom.onclick = function() {
+        //     this.style.background = "blue";
+        //     this.style.width = "300px";
+        //     this.style.height = "300px";
+        // }
+        // //box2
+        // var boxDom2 = document.getElementById("box2");
+        // boxDom2.onclick = function() {
+        //     this.style.background = "blue";
+        //     this.style.width = "300px";
+        //     this.style.height = "300px";
+        // }
+        // //box3
+        // var boxDom3 = document.getElementById("box3");
+        // boxDom3.onclick = function() {
+        //     this.style.background = "blue";
+        //     this.style.width = "300px";
+        //     this.style.height = "300px";
+        // }
+        // //box4
+        // var boxDom4 = document.getElementById("box4");
+        // boxDom4.onclick = function() {
+        //     this.style.background = "blue";
+        //     this.style.width = "300px";
+        //     this.style.height = "300px";
+        // }
+    
+    //进行函数的封装  函数可以当做参数进行传递  (变量，函数参数名字 只要遵循变量的命名规则就可以了)
+        // function clickMe(id,value) {
+        //     var boxDom = document.getElementById(id);
+        //     boxDom.onclick = function() {
+        //         // this.style.background = value;、
+        //         if(callback) callback();//如果不传入回调函数 也不报错
+        //     }
+        // };
+        // //第一个盒子的高宽变400*400
+        // clickMe("box","red");
+        // //执行一个跳转页面的需求，window.location.href = ""
+        // clickMe("box2","green");
+        // //我要执行计算1+1 = 2；
+        // clickMe("box3","yellow")
+
+        //方法二
+        function clickMe(id,callback) {
+            var boxDom = document.getElementById(id);
+            boxDom.onclick = function() {
+                if(callback) callback(this);//如果不传入回调函数 也不报错
+            }
+        };
+        //回调函数一
+        var mark = true;
+        function callback1(obj) {
+            
+            if(mark) {
+                obj.style.background = "pink";
+                obj.style.width = "400px";
+                obj.style.height = "400px";
+                obj.style.border = "1px dolid #999";                
+            } else {
+                obj.style.background = "red";
+                obj.style.width = "200px";
+                obj.style.height = "200px";
+                obj.style.border = "1px dolid #999"; 
+            }
+            mark = !mark;
+            console.log("1")
+
+        };
+        function callback2(obj){
+            window.location.href = "https://www.baidu.com/"
+        };
+        function callback2(obj3){
+            window.location.href = "https://www.baidu.com/"
+        }
+
+
+        //第一个盒子的高宽变400*400
+        clickMe("box",callback1);
+        //执行一个跳转页面的需求，window.location.href = ""
+        clickMe("box2",callback2);
+        //我要执行计算1+1 = 2；
+        clickMe("box3",function callback2(obj3){
+            var a = 1;
+            var b = 4;
+            var c = a + b;
+            obj3.innerHTML = c
+        })
+    }
+    </script>
+</body>
+</html>

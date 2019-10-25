@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组案例</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+    /*
+        将数组打印到div中
+    */
+        var boxDom = document.getElementById("box")
+        
+        var stu = ["小A","小b","小c","小d","小e"];
+        var len = stu.length;
+        for(var i=0;i<len;i++) {
+            boxDom.innerHTML += "<h2>正在听课的学生是："+ stu[i] + "</h2>";
+        }
+    </script>
+</body>
+</html>

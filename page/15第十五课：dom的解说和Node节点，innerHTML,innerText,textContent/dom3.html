@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="box">
+            <span>元素</span>
+            水电费水电费  水电费
+            水电费
+            <p>wrwer</p>
+        </div>
+    <script>
+       /*
+			innerHTML:带有标签格式 支持所有浏览器,一般都使用它。
+			innerText:获取文本 在火狐浏览器不支持innerText 但是它支持textContent
+			textContent:获取文本，但是它保留格式,ie678不支持textContent但是支持innerText
+
+			outerHTML,outerText可能在ie678是不支持  外面包裹的div都返回
+		*/ 
+        window.onload = function() {
+            var boxDom = document.getElementById("box");
+            
+            var html = boxDom.innerHTML;
+            var text = boxDom.innerText;
+            //兼容性写法 兼容所有的浏览器
+                var ot = boxDom.innerHTML || boxDom.innerText;
+
+            var text2 = boxDom.textContent;
+            var ohtml = boxDom.outerHTML;
+            var otext = boxDom.outerText;
+
+            console.log("innerHtml"+html);
+            /*
+                   <span>元素</span>
+                        水电费水电费  水电费
+                        水电费
+                    <p>wrwer</p>
+            */
+            console.log("innerText"+text);
+             /*
+                innerText元素 水电费水电费 水电费 水电费
+                wrwer
+            */
+            console.log("textContent"+text2);
+             /*
+               textContent
+                    元素
+                    水电费水电费  水电费
+                    水电费
+                    wrwer
+            */
+            console.log("outerHTML"+ohtml);
+             /*
+            outerHTML<div id="box">
+                        <span>元素</span>
+                        水电费水电费  水电费
+                        水电费
+                        <p>wrwer</p>
+                </div>
+            */
+            console.log("outerText"+otext);
+             /*
+                  outerText元素 水电费水电费 水电费 水电费
+                    wrwer
+            */
+            //赋值
+			divDom.innerHTML = "<b> I Love You</b>";
+			//divDom.innerText = "<b> I Love You</b>";
+			//divDom.innerHTML = "";
+
+			//追加
+			divDom.innerHTML +="&nbsp;&nbsp;<b>keke</b>";
+             
+        }
+    
+    </script>
+</body>
+</html>

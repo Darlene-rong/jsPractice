@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>方格定义</title>
+    <style>
+    *{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑"}
+	a{text-decoration:none;color:#fff}
+	ul li{list-style:none}
+	#box{width:1000px;height:350px;background:#1111;margin:50px auto;position:relative;}
+	#box #imgbox{position:absolute;top:0;left:0;z-index:1}
+	#box #imgbox a{display:block;position:absolute;left:0;top:0;display:none}
+	#ullist{position:absolute;top:0;left:0;z-index:2}
+	#box li{background:red;float:left;border:1px solid transparent;
+		background-image:url("./banner/img/01.jpg");
+		background-repeat:no-repeat;
+		background-origin:border-box;
+		opacity:1
+	}
+    </style>
+</head>
+<body>
+        <div id="box">
+            <div id="imgbox">
+                <a href="#" style="z-index:3;display:block"><img src="./banner/img/01.jpg" width="1000" height="350"/></a>
+                <a href="#" style="z-index:2"><img src="./banner/img/02.jpg" width="1000" height="350"/></a>
+                <a href="#" style="z-index:1"><img src="./banner/img/03.jpg" width="1000" height="350"/></a>
+            </div>
+            <ul id="ullist"></ul>
+        </div>
+    <!-- <script src="./dom.js"></script> -->
+    <script>
+        window.onload = function(){
+            var ulDom = $("ullist");
+            var boxDom = $("box");
+            var bitw = 50;
+            var bith = 50;
+            //列
+            var cells = Math.floor(boxDom.offsetHeight / bith);
+            var rows = Math.floor(boxDom.offsetWidth / bitw);
+            var arr = [];
+            
+            for(var i=0;i<cells;i++){
+               for(var j=0;j<rows;j++){
+                   var liDom = document.createElement("li");
+                   liDom.style.height = bith-2 + "px";
+                   liDom.style.width = bitw-2 + "px";
+                   liDom.style.backgroundPosition = "-" + (bitw * j) + "px -" + (bith * i) +"px"
+                   ulDom.appendChild(liDom);
+                   arr.push(liDom);
+                   
+               } 
+            }
+            //横向显示
+            //随机
+            var imgIndex = 0;	
+			var timer = null;
+			var newArr = [];
+			var mark = false;
+			timer = setInterval(function(){
+				if(mark){
+					clearInterval(timer);
+					arr = newArr;
+					newArr = [];
+					mark = false;
+				}else{
+					var cindex = randomRange(0,arr.length);
+					var lidom = arr.splice(cindex,1)[0];
+					move(lidom,0);
+                    newArr.push(lidom);
+					if(newArr.length==1){
+						$("imgbox").children[imgIndex].style.display = "none";
+                        imgIndex++;
+						$("imgbox").children[imgIndex].style.display = "block";
+					}
+					if(arr.length==0){
+						mark = true;
+					}
+				}
+			},30);
+
+        }
+        function move(dom,target){
+            var timer = null;
+            //让每次动画都是新的
+            clearInterval(dom.timer)
+            dom.timer = setInterval(function(){
+                var mark = true;
+                var cur = null;
+                cur = getStyle(dom,"opacity") * 100;
+                var speed = (target - cur ) * 0.2;
+                speed = (speed>0 ? Math.ceil(speed) : Math.floor(speed))
+                if(cur != target ){
+                    mark = false;
+                    dom.style.opacity =(cur +speed)/100;
+                }
+                if(mark){
+                    clearInterval(dom.timer)
+                }
+            },30)
+        }
+        //范围随机数
+        function randomRange(begin,end){
+            return Math.floor(Math.random()*(end-begin))+begin;
+        };
+        function $(id){
+            return document.getElementById(id);
+        }
+        //获取css中的样式的值，跟浏览器兼容无关
+        function getStyle(dom,attr){
+            return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr]:dom.currentStyle[attr];
+        };        
+    </script>
+</body>
+</html>''

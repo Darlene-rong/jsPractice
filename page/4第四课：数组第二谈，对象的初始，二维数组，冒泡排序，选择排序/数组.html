@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        a{text-decoration: none;color: #fff;}
+        ul li{list-style: none}
+        td{padding: 5px; border: 1px solid #ddd;background-color: #111;color: #fff;}
+        body{font-size: 14px;font-family: 'Courier New', Courier, monospace}
+    </style>
+</head>
+<body>
+
+    <table id="tab">
+        <tbody id="tbody">
+
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>            
+        </tbody>
+
+    </table>
+
+    <script>
+        /*
+            数组的目的 ----数组可以装javascript中任意的数据类型
+        
+        */
+        var arr = [1,2,3,4,5,6,7,8,9]
+        /*
+            arr[0]数组元素的第一个值
+            arr[arr.length-1]
+
+            push(往后添加元素) unshift(往前添加元素)
+            popo(尾部删除元素) shift(头部删除元素)
+
+            join(默认的分隔符 ,)
+            concat(数组的连接)
+
+            slice(starIndex,endIndex)：复制拷贝  copy形成一个副本 返回一个新的数组
+                不包含endIndex 的值   如果是负数用长度减去负数就是取值范围
+           
+            splice(start,deltecount):剪切  
+                deltecount:剪切的数量 可以省略 不能用负数
+
+            循环 for 数组循环 
+            for in 循环 和冒泡排序 和选择排序 以及while do while循环
+        
+        */
+    //slice() 复制  返回一个新的数组 不改变原来的值
+        var narr  = arr.slice(2,4)//[3,4]  不包含endIndex的值
+        var narr = arr.slice(-2);//等价于arr.slice(7)  [8,9]
+        var narr = arr.slice(-2,-2)//null
+        var narr = arr.slice(-2,-4)//返回空
+
+    //splice() 剪切  
+        var narr = arr.splice(1)//[4,5,6,7,8,9]
+        var narr = arr.splice(-1)//8  [9]
+
+    //删除数组 arr = [];
+        // delete arr[index] //长度不变 逻辑删除 不是真的删除
+
+    //for
+        var k = 0;
+        var html = ""
+        for(var i=1;i<=9;i++) {
+            //外层循环控制里层循环的次数
+            html += "<tr>"
+            for(var j=1;j<=i;j++) {
+                //变量
+                html +="<td>"+j+"*"+i+"="+(j*i)+"</td>"
+            }
+            html += "</tr>"
+        }
+        document.getElementById("tbody").innerHTML = html;
+    </script>
+</body>
+</html>

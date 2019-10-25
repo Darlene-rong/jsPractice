@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    /*
+
+        
+    */
+    var arr = [1,2,3,4,'som',5,6,7,8,9];
+    //取出所有的偶数
+    //如果遇到som就循环退出
+
+//for in 可以循环对象和数组
+    for(var i in arr) {
+        //i是代表数组的索引
+        console.log(i+"===="+arr[i])
+    }
+    //对象
+    /* 
+    var json = {
+        width:"100px",
+        height: "100px",
+        background: "red"
+    }
+    var bxDom = document.getElementById("box");
+    for(var key in json) {
+        var value = json[key];
+        //判断json里的元素的值是否为数字
+        if(typeof value == "number"){
+            value+="px"
+        }
+        bxDom.style[key] = json[key];
+        console.log(key+"===="+json[key])
+    }    
+    */
+
+
+    //进行封装
+    function css(id,json){
+        var bxDom = document.getElementById(id);
+        for(var key in json) {
+            var value = json[key];
+            //判断json里的元素的值是否为数字
+            if(typeof value == "number"){
+                value+="px"
+            }
+            bxDom.style[key] = json[key];
+            console.log(key+"===="+json[key])
+        }
+    }
+    css("box",{
+        width:"100px",
+        height: "100px",
+        background: "red"
+    })
+
+
+
+
+//continue
+    for(var i=0;i<arr.length;i++){
+        var name = arr[i];
+        if(name == "som"){
+            continue;
+            //遇到当前逻辑，忽略当前逻辑，继续往下执行
+        
+        }
+        buyTip(arr[i]);
+    }
+//break
+    for(var i=0;i<arr.length;i++){
+        var name = arr[i];
+        buyTip(arr[i]);
+        if(name == "som"){
+            break;
+        }
+    }
+
+    function buyTip(name) {
+        console.log(name+"买了一张票");
+    }
+
+//for  while   do/while   三种循环写法 ，一般用于For
+
+//了解while循环
+    /*
+        while定义格式：
+            var i = 0;变量初始化
+            while(逻辑判断){
+                循环体；
+                变量累加
+            }
+    */
+    var i = 0;
+    while(i<9){
+        console.log(i);
+        i++;
+    }
+ 
+    // var j = 0;
+    // do{
+    //     // alert(i);
+    //     i++
+    // }while(i>9)
+
+
+
+
+
+    </script>  
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+    a{text-decoration:none;}
+    ul li{list-style:none}
+    
+    .datalist{width: 300px; height: 33px; border: 1px solid #eee}
+    .datalist .dt_inp{width: 100%;height: 100%;border: none;text-indent:0.5em;font-family:inherit}
+    .dt_nav{background: rgba(243, 243, 243, 0.801);position: 0;z-index: 999;margin-top: 1px;display: none;}
+    .datalist:hover .dt_nav{display: block;}
+    .dt_nav li a {padding: 5px;color: #333;display: block;}
+    .dt_nav li a:hover{background: rgba(136, 136, 136, 0.884); color: #fff;}
+  </style>
+</head>
+<body>  
+    <div class="datalist">
+      <input type="text" class="dt_inp" autofocus="autofocus" placeholder="请选择性别..." />
+      <ul class="dt_nav" dl-append="true" dt-lv=",">
+        <li><a href="javascript:;" class="dt_items">男</a></li>
+        <li><a href="javascript:;" class="dt_items">女</a></li>
+        <li><a href="javascript:;" class="dt_items">不男不女</a></li>
+      </ul>
+    </div>
+
+    <div class="datalist" style="margin-top: 130px">
+        <input type="text" class="dt_inp" autofocus="autofocus" placeholder="多选..." />
+        <ul class="dt_nav" dl-append="false" dt-lv="," >
+          <li><a href="javascript:;" class="dt_items">足球</a></li>
+          <li><a href="javascript:;" class="dt_items">篮球</a></li>
+          <li><a href="javascript:;" class="dt_items">羽毛球</a></li>
+        </ul>
+      </div>
+    <script>
+      function $(id) {
+        return document.getElementById(id)
+      }
+      function domClass(domPid,sclass) {
+        var ele = (typeof domPid === "string" ? dom(domPid) : domPid).getElementsByTagName("*");
+        var arr = [];
+        for(let i=0;i<ele.length;i++) {
+          if(ele[i].className.indexOf(sclass) != -1) {
+            arr.push(ele[i]);
+          }
+        }
+        return arr;
+      }
+      window.onload = function () {  
+        var dItems = domClass(document.body,"dt_items");
+        //单选
+        dItems.forEach(function(obj) {
+          obj.onclick = function() {
+            // this.parentElement.parentElement.previousElementSibling.value = this.innerHTML;  单选
+            var ele = this.parentElement.parentElement;
+            var $inp = ele.previousElementSibling;
+            var atrr = ele.getAttribute("dl-append");
+            var dvatrr = ele.getAttribute("dt-lv")
+            if(atrr == "true") {
+              if(this.parentElement.parentElement.children.length == 1) {
+                $inp.value += this.innerHTML;
+              } else {
+                $inp.value += this.innerHTML + dvatrr;
+              }
+              ele.removeChild(this.parentElement)
+            }else {
+              $inp.value = this.innerHTML;
+            }
+            
+          }
+        })
+      }
+    </script>
+</body>
+</html>

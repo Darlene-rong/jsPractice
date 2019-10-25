@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  
+    <div>First</div>
+    <div>Second</div>
+    <div>Third</div>
+    <div>Fourth</div>
+  <script>
+    /*
+      $.makeArray() 将类数组转换为真正的数组
+    
+    */
+    var obj = document.getElementsByTagName("div");
+    console.log(obj);
+    var objtoArr = $.makeArray(obj);   //转换为数组
+    console.log(objtoArr);
+    objtoArr.reverse();  //reverse() 方法用于颠倒数组中元素的顺序。
+    $(objtoArr).appendTo(document.body);
+
+    // 原理
+    var obj1 = document.getElementsByTagName("div");
+    // obj1.reverse(); //报错 类数组 不具有数组的属性 obj1.reverse is not a function
+    function toArray(obj) {  
+      return Array.prototype.slice.call(obj);
+    }
+    var objArr = toArray(obj1);
+    objArr.reverse();
+    console.log(objArr)
+  </script>
+</body>
+</html>

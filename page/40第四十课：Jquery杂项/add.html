@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  	<ul id="namelist">
+      <li>小哥</li>
+      <li>小龙</li>
+      <li>小手</li>
+      <li>龙龙</li>
+      <li>阿黄</li>
+      <li>花花</li>
+    </ul>
+  <script>
+    $("#namelist").find("li").add("<span>Again</span>").css('color','red')
+  </script>
+</body>
+</html>

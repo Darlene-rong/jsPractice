@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    select {
+      height: 300px;
+      width: 150px;
+      border: 1px solid #eee;
+    }
+    select option {
+      cursor: pointer;
+      padding: 10px;
+    }
+    select option:hover{
+      background: #eee;
+      color: rgba(138, 137, 137, 0.933);
+    }
+    input{
+      background: rgb(241, 241, 241);
+      border: 1px solid #eee;
+      padding: 10px 15px;
+      border-radius: 5;
+      cursor: pointer;
+      position: relative;
+      top: -160px;
+    }
+  </style>
+</head>
+<body>
+  <select name="" id="sel_l" multiple>
+      <option value="1">HTML5 教程</option>
+      <option value="2">HTML5 教程</option>
+      <option value="3">HTML5 教程</option>
+      <option value="4">HTML5 简介</option>
+      <option value="5">视频</option>
+      <option value="6">视频/DOM</option>
+  </select>
+  <input type="button" value="去右边" onclick="moRight()" />
+  <input type="button" value="去左边" onclick="moLeft()" />
+  <select name="" id="sel_r"  multiple></select>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    /*
+      select 多选 两边移动
+      主要知识点：
+        document.getElementById("select").options；获取selected下面的所有的options;
+        document.getElementById("select").options[i].selected; selected下面某个options的选中状态
+
+      其他知识点：
+        appendChild() 添加子元素；removeChild()移除子元素
+    
+    */ 
+    function moRight() {
+      var leftDom = $("sel_l");
+      var rightDom = $("sel_r");
+      var leftOption = leftDom.options;
+      var opArr = [];
+      for(let i=0;i<leftOption.length;i++) {
+        if(leftOption[i].selected) {
+          opArr.push(leftOption[i])
+        }
+      }
+      opArr.forEach(function(val,index) {
+        rightDom.appendChild(val)
+      })
+    }
+    function moLeft() {
+      var leftDom = $("sel_r");
+      var rightDom = $("sel_l");
+      var leftOption = leftDom.options;
+      var opArr = []
+      for(let i=0;i<leftOption.length;i++) {
+        if(leftOption[i].selected) {
+          opArr.push(leftOption[i])
+        }
+      }
+      opArr.forEach(function(val,index) {
+        rightDom.appendChild(val)
+      })
+    }
+  </script>
+</body>
+</html>

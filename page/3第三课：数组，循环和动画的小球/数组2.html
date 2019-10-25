@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组2</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+    /*
+    数组    
+        1.数组的定义
+            var arr = [] 或者 var arr = new Array()
+            var arr = [1,2,3] 或者 var arr = new Array(1,2,3)
+        2.数组的增删查改
+            添加：push()从后面添加 和 shift()从前面添加
+            删除：pop()从后面拿元素删除 和 unshift()从前面拿元素删除  
+            修改：splice()剪切 逼和 通过索引去修改
+            查找：splice()剪切 和 索引 或者 slice()复制
+            截取：slice()
+            数组的长度：arr.length
+            索引是从0开始的
+            合并数组：concat()
+            打印格式：toString() 默认的用逗号分隔
+            分隔符更改：join(符号)
+            
+    */
+ 
+    //concat()
+        var a = [1,2,3];
+        var b = [4,5,6];
+        var c = a.concat(b);
+        console.log(typeof(c))//object
+        //c===>[1,2,3,4,5,6]
+    //arr.join(spearator)  把数组中的所有的元素放入一个字符串  spearator:可选，代表指定的分隔符
+        var d = a.join("-");
+        console.log(d)//1-2-3
+        console.log(typeof(d)) //string
+    
+    //字符串转换为数组 split()分割符
+        var att = "1,2,3,4,5,6";
+        var arr = att.split(",");
+        console.log(arr);//[1,2,3,4,5,6]
+        console.log(typeof(arr))//object
+    //判别是不是数组
+        console.log(Array.isArray(arr))//返回为true就是数组  IE 6 7 8不支持该写法
+        console.log(isArray (arr))//true
+        function isArray (arr) {
+            // console.log(arr.constructor)
+            //方法一：
+            if(typeof arr === "object" && arr.length >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+            //等价于：return typeof arr === "object" && arr.length >= 0;
+            //方法二
+            //return typeof arr === "object" && arr.constructor.toLowerCase().indexOf("array")!=-1;
+        }
+            
+    /*
+        数组长度：student.length
+        索引：初始索引==0
+        结束索引：length-1
+        for语句格式 a++执行完之后再加一
+            for(索引变量初始化;逻辑判断;递增){
+                循环体
+            }
+    
+        双重for()循环    
+    */
+        var stu = ["小A","小b","小c","小d","小e"];
+        //要做的事情或者动作，在程序里面叫做方法或者函数（function()函数数据类型代表我们要做的事情）
+        //封装
+        function work(name) {
+            console.log(name+"早上要去上课")
+        }
+        work(stu[1]);
+
+    //for循环====循环总有终止的时候，
+        //偶数位取出来
+        for(var i=1;i<stu.length;i+=2){
+            //局部变量
+            work(stu[i]);
+               
+        }
+        //下面这种写法性能更高,弊端是定义的i事全局变量，只能定义一次， 不用不断的获取数组
+        var i = 0;//全局变量i 
+        var len = stu.length;
+        for(;i<len;i++) {
+            work(stu[i]);
+        }
+
+    //双重for()循环、嵌套  外层循环控制内层循环，内层一定要循环完毕之后才执行外部循环
+        for(var i=0;i<10;i++) {
+            for (var j=0;j<10;j++) {
+                console.log("j====="+j +"----i="+i);
+            }
+            console.log("**************")
+        }
+    </script>
+</body>
+</html>

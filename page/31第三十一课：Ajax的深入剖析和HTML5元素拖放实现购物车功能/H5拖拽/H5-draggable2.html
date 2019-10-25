@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑"}
+	a{text-decoration:none;color:#333}
+	ul li{list-style:none}
+	#box{width:140px;height:100px;background:#333;color:#fff}
+	#box span{display:block;}
+
+	#shopcar{width:640px;height:360px;background:green;margin-top:10px}
+	#shopcar div{float:left;margin:2px;}
+  </style>
+ </head>
+ <body>
+        <a href="#" draggable="false">我是一个连接哦!!!</a>
+		<div id="mco">
+
+                <div id="box" draggable="true">
+                    <span class="name">Javascript面向对象</span>
+                    <span class="price">120</span>
+                    <span class="pub">湖南长沙</span>
+                </div>
+        </div>
+		
+		<div id="shopcar" draggable="true">购物车</div>
+		<script>
+            /*
+                html5可触动拖放的功能 ---- draggable
+                    draggable ===> true or false  
+                在页面中有两个元素的draggable是默认开启的
+                    a标签和img标签  draggable = true
+
+
+                Draggable 和文件API 通过ajax实现文件上传
+
+                参照物： 拖放的元素 和目标点
+
+                API事件:  on-
+                    dragstart-----开始拖放元素触发的事件   对象：拖放的元素
+                    drag--------拖放过程中触发的事件       对象：拖放的元素
+
+                    dragenter---有拖放的元素进入目标元素的时候触发的事件    对象：目标元素
+                    dragover----有拖放的元素再目标元素内移动触发的事件      对象：目标元素
+                    dragleave---有拖放的元素离开目标元素触发的事件          对象：目标元素
+                    drop--------有拖放的元素再本元素中松开的时候触发的事件   对象：目标元素
+
+                    dragend-----拖放元素结束触发的事件      对象：拖放的元素
+            */
+            function $(id){
+                return document.getElementById(id)
+            }
+            window.onload = function(){
+                var dragDom = $("box");//拖拽元素
+                var targetDom = $("shopcar");//目标元素
+                /*
+                    在拖拽的时候将数据存储起来，进行交互
+                    event.dataTransfer 
+                        setData(key,value)
+                        getData(key)
+                        clearData(key)
+                */
+                dragDom.ondragstart = function(e){
+                    console.log(this.outerHTML)
+                    e.dataTransfer.setData('dragdom',this.outerHTML);
+                };
+                dragDom.ondragend = function(e){
+                    document.getElementById("mco").removeChild(this)
+                };
+                targetDom.ondragover = function(e){
+                    e.preventDefault()
+                };
+                targetDom.ondrop = function(e){
+                    var clonebox = e.dataTransfer.getData('dragDom');
+                    this.innerHTML += clonebox;
+                }
+            }
+		
+		</script>
+ </body>
+</html>

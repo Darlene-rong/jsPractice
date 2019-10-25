@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        prototypr：原型链对象。（扩展属性和方法）
+        原型：每个对象的基类
+        对象：扩展属性和方法
+        可以把某个类中的prototype当前每一个创建以后对象的基类
+
+        是围绕类去创建的一个基类，每一个对象中都会创建的时候拥有一个prototype的引用
+    */
+        //小球对象 面向对象
+        function Ball() {//Ball类
+            this.x = 0;
+            this.y = 0;
+            this.radius = 10;
+            this.color = "red";
+            //方法去用原型对象扩展
+        };
+        //Ballprototype 继承Oject.prototype   对Ball对象进行方法扩展  动态扩展
+        Ball.prototype.draw = function() {
+            console.log(this.x+"===="+this.y+this.name);//this指向Ball.prototype
+        };
+        Ball.prototype.name = "hahah"
+        var ball = new Ball();//对象创建的时候，它拥有一个prototype对象
+        var ball1 = new Ball();
+        ball.x = 100;
+        ball.draw();
+        ball1.x = 200;
+        ball1.draw();
+    </script>
+</body>
+</html>

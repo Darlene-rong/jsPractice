@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dom基础2</title>
+</head>
+<body>
+    <div id="box">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+    </div>
+    <script>
+
+		//window.onload:页面中所有的元素节点初始化完毕以后才执行的回调函数，包括图片，和iframe
+        //确保上面的所有的元素加载完之后才开始执行js
+		window.onload = function() {
+            var boxDom = document.getElementById("box");
+            /*
+                firstElementChild :获取第一个一个元素
+				lastElementChild 获取最后一个元素
+
+                //某个元素的下一个元素
+                nextElementSibling;
+            */
+            var firstSpan = boxDom.firstElementChild.nextElementSibling;//获取第一个元素的下一个元素
+            console.log(firstSpan);//<span>2</span>
+            var lastSpan = boxDom.lastElementChild.previousElementSibling;//获取最后一个元素的上一个元素
+            console.log(lastSpan);//<span>4</span>
+            
+            /*
+                获取所有的子元素：children      (返回值：类数组  nodeList) 类数组要取值  只能用for循环取值
+                Array.isArray()
+            */
+            var boxdomChild = boxDom.children;
+            var chLen = boxdomChild.length;
+            console.log(boxdomChild)//HTMLCollection(5) [span, span, span, span, span]
+                //获取第一个元素
+                    var childFist = boxdomChild[0];
+                //获取最后一个元素
+                     var childLast = boxdomChild[chLen-1];
+            console.log(childFist);//<span>1</span>
+            console.log(childLast);//  <span>5</span>                
+                            
+                            
+        }
+		/*Node中的节点的属性和方法有哪些呢:*/
+		//document --Node.DOCUMENT_NODE=9
+		
+		//document是属于Node.DOCUMENT_NODE节点类型.
+
+		//node < document
+
+			/*
+				*******************************Node的属性和方法*********************************
+				节点属性：
+					childNodes :获取一个dom对象下的所有的节点   一般用不到
+
+					firstChild:
+					lastChild
+					nextSibling
+					nodeName
+					nodeType
+					tagName
+					parentNode
+					nodeValue
+					previousSibling
+
+				节点方法：
+					appendChild()
+                    removeChild()
+                    
+					cloneNode()
+					contains()
+					hasChildNodes()
+					insertBefore()
+					
+					isEqualNode()
+					replaceChild()
+
+				******************************Element的属性和方法***********************
+				HTML*Element
+
+				属性：
+				firstElementChild :获取第一个一个元素
+				lastElementChild 获取最后一个元素
+				nextElementSibling 某个元素的下一个元素
+				previousElementSibling 某个元素的上一个元素
+				children 获取所有的子元素
+
+
+				innerHTML  ：文本
+				outerHTML
+				innerText   
+				textContent
+				outerText
+
+
+				方法：
+				insertAdjacentHTML
+				insertAdjacentElement
+				insertAdjacentText
+			
+				****************************元素创建************************************
+				创建方法
+				document.createElment
+				document.createTextNode\
+		*/
+
+    </script>
+</body>
+</html>

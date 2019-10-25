@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象(链式对象)</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            1.链式对象的定义
+
+        */
+        var Test = {
+            username: function () { 
+                alert("name");
+                return this;//把对象返回出来
+            },
+            password: function () { 
+                alert("password");
+                return this;//把对象返回出来
+            }
+        }
+        Test.username(); // name
+        Test.username().password();// name password
+
+        var testA = function () {  };
+        //用原型扩展的东西 都是给对象去使用的
+        testA.prototype = {
+            constructor: testA,//构造函数纠正过来
+            username: function (name) { 
+                alert(name);
+                return this;
+             },
+             password: function (psa) { 
+                 alert(psa);
+                 return this;
+              }
+        }
+        
+        var t1 = new testA();
+        t1.username("dddd").password(1212123);
+
+        var t2 = new testA();
+        t2.username("23").password(213123)
+    </script>
+</body>
+</html>

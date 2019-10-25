@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            json
+        
+        */
+        var json = {
+            username: "nacy",
+            age: 10,
+            email: "ooofosfsf@qq.com"
+        }
+        //json转字符串
+        var jsonString = JSON.stringify(json);
+        console.log(jsonString);
+        //json字符串还原成对象
+        var obj = JSON.parse(jsonString);
+        console.log(obj)
+    </script>
+</body>
+</html>

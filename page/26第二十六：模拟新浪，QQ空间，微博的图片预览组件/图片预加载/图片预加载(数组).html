@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_ris0mad0qm.css">
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{font-size: 14px;font-family: "微软雅黑";user-select: none;background-color: black;}
+    #box{margin: 10px auto;width: 90%;padding: 15px 0 0 55px;}
+    #box li{display: inline-block;margin: 0 0 20px 20px;box-sizing: border-box; cursor: pointer;position: relative;overflow: hidden;}
+    #box li img{width: 300px;height: 200px;display: block;}
+    .thumb{background-color: #68686896;width: 300px;height: 30px;position: absolute;top: 200px;line-height: 30px;transition: top .3s;}
+    .thumb span:nth-child(1){color: rgba(255, 255, 255, 0.8392156862745098);padding-left: 10px;}
+    .thumb span:nth-child(1) .iconfont{padding-left: 5px;}
+    .thumb span:nth-child(2){color: rgba(255, 255, 255, 0.8392156862745098);float: right;padding-right: 10px;}
+    #box li:hover .thumb{top:170px;}
+    h1{
+        font-size: 20px;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    </style>
+</head>
+<body>
+    <h1>图片加载</h1>
+    <div id="box">
+        <ul id="imgul">
+            <li>
+                <img src="../img/loading.gif" data-src="../img/01.jpg" />
+                <div class="thumb">
+                    <span class="star">520<i class="iconfont icon-shoucang1"></i></span>
+                    <span class="title">1920X1288</span>
+                </div>
+            </li>
+            <li>
+                <img src="../img/loading.gif" data-src="../img/02.jpg" />
+                <div class="thumb">
+                    <span class="star">55<i class="iconfont icon-shoucang1"></i></span>
+                    <span class="title">1920X1288</span>
+                </div>
+            </li>
+            <li>
+                <img src="../img/loading.gif" data-src="../img/03.jpg" />
+                <div class="thumb">
+                    <span class="star">20<i class="iconfont icon-shoucang1"></i></span>
+                    <span class="title">1920X1288</span>
+                </div>
+            </li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            
+        </ul>
+    </div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+			//图片按需加载
+			var ulDom = $("imgul");
+			var imgDoms = ulDom.getElementsByTagName("img");
+			var imgArr = [].slice.call(imgDoms);
+			var start = 0;//记录初始索引
+
+			function showImage(){
+				if(imgArr.length==0)return;
+				var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+				var clientHeight = window.innerHeight || document.body.clientHeight; 
+				for(var i=start,len = imgArr.length;i<len;i++){ 
+					if(getTop(imgArr[start]) < scrollTop +clientHeight){
+						imgArr[start].src = imgArr[start].getAttribute("data-src");
+						imgArr.splice(start,1);//真删,数组的长度会变化，索引也会发现变化
+					}
+				}
+			};
+
+			//imgDoms[i].offsetTop 如果是浮动布局
+			//定位布局。offetTop	
+			function getTop(obj){
+				var top = 0;
+				while(obj){
+					top+=obj.offsetTop;
+					obj = obj.offsetParent;
+				}
+				return top;
+			};
+
+			showImage();
+			//滚动加载图片
+			window.onscroll = showImage;
+			
+		};
+    </script>
+</body>
+</html>

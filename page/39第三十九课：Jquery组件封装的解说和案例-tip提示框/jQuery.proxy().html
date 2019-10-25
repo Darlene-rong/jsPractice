@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+  <style>
+    #box {
+      height: 40px;
+      width: 40px;
+      background: rebeccapurple;
+    }
+  
+  </style>
+</head>
+<body>
+  <div id="box">1</div>
+  <script>
+    // function test() {  
+    //   alert(this.innerHTML)
+    // }
+    // $("#box").click(function() {
+    //   test.call(this); 
+    // });
+
+      /*
+
+      
+      */
+      var json = {
+        name: 'zr',
+        clickme: function () {  
+          alert("我是对象里的函数" +":" + this.name)
+        }
+      }
+      $("#box").click(json.clickme)  //我是对象里的函数:undefined
+      $("#box").click($.proxy(json.clickme,json)) //我是对象里的函数:zr
+  </script>
+</body>
+</html>

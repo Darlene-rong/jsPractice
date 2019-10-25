@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dom</title>
+</head>
+<body>
+    <!-- <ul >Node节点 Node节点(空格)
+        <li></li>Node节点 Node节点(空格)
+        <li></li>Node节点 Node节点(空格)
+        <li></li>Node节点 Node节点(空格) -->
+        <!-- 注释也算一个节点 -->Node节点 Node节点(空格)
+    <!-- </ul> -->
+    <ul id="box">
+        <li>weqwe</li>
+        <li>qweqwe</li>
+        <li>weqweq</li>
+    </ul>
+    <script>
+    /*
+    1.dom知识点：
+            appendChild 
+            insertBefore
+
+            createElement
+            createTextNode
+    
+    */
+    function domChild(id) {
+        var boxDom = document.getElementById(id);
+        var nodes = boxDom.childNodes;
+        var arr = [];
+        for(var i=0;i<nodes.length;i++){
+            if(nodes[i].nodeType == Node.ELEMENT_NODE){
+                arr.push(nodes[i]);  
+            }
+        };
+        console.log(arr);
+        return {
+            childer: arr,
+            fisrt: arr[0],
+            eq: function(i) {
+                return arr[i];
+            },
+            last: arr[arr.length-1]
+        }
+    };
+    // domChild();
+    domChild("box").eq(2).style.background = "pink";
+    domChild("box").fisrt.style.background = "green";
+    </script>
+</body>
+</html>

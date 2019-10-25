@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>-fwwxvbjuttfgp/
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+  <style>
+    #box{height: 600px;width: 400px;margin: 100px auto;}
+    #box div{display: inline-block;border:1px solid #dcdfe6;background: #fff;color: #606266;margin-bottom: 40px;height: 50px;line-height: 50px;padding-left: 20px;cursor: pointer;width: 90%;transition: transform 1s ease; }
+    #box div:hover {background: #ecf5ff;color:#409eff; border-color: #c6e2ff;transform: scale(1.1) }
+    /* tip样式 */
+    .zrui_tip{background: #303133;color: #fff;display: inline-block;padding: 10px;position: fixed;left: 10px;top: 10px;border-radius: 5px;min-width: 88px;text-align: center;}
+    .zrui_tip .zrui_tip_cron {display: inline-block;border-top: 10px solid #303133;border-bottom:10px solid transparent;border-right:10px solid transparent;border-left:10px solid transparent;position: absolute;top: 40px;left: 47px;}
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="tip" tip="1">我是一条数据1p</div>
+    <div class="tip" tip="2">我是一条数据2</div>
+    <div class="tip" tip="9" >我是一条数据3p</div>
+    <div class="tip" tip="8">我是一条数据 4</div>
+    <div class="tip" tip="7">我是一条数据5</div>
+    <div class="tip" tip="6">我是一条数据6</div>
+  </div>
+  <script src="./tip.js"></script>
+  <script>
+    /*
+      jQuery 封装
+       语法格式：
+        (function($){5
+          //$.组件名称
+          //$.fn.组件名称
+        })(jQuery);
+        $(dom).组件名称();
+
+        $.fn = {}； 空对象 自定义就绑定在里面
+    */
+    (function($) {
+  //提示框组件的封装
+   $.fn.zrTip = function(options) {
+       var opts = $.extend($.fn.zrTip.defaults,options, options, $.fn.zrTip.methods);
+       $(this).data('tipData',JSON.stringify(opts));//保存为字符串类型
+       $(this).on(opts.type,function() {
+         var params = JSON.parse($(this).data('tipData')); //转换为json格式
+         var newOpts = $.extend(params, $.fn.zrTip.parseJson.call(this));
+         opts.init(newOpts, this);
+       });
+       
+   };
+   $.fn.zrTip.methods = {
+     init: function(opts,targetDom) {
+       var $tip = this.template(opts);
+       this._position($tip,targetDom);
+       this._methods($tip, targetDom);
+     },
+     _position: function($tip, targetDom) {
+       var left = ($(targetDom).offset().left +$(targetDom).width()/2)-$tip.width()/2;
+       var top = $(targetDom).offset().top-$tip.outerHeight(true)-$(window).scrollTop()-10;
+       $tip.css({
+         left: left,
+         top: top
+       });
+     },
+     _methods: function($tip, targetDom) {
+       $(window).scroll(function() {
+         $tip.remove();
+       })
+       $tip.on('mouseleave', function() {
+         $(this).remove();
+       });
+       $(targetDom).on('mouseleave', function() {
+         $tip.fadeOut().remove();
+       });
+     },
+     template: function(opts) {
+       var html = ` <div class="zrui_tip" id="${opts.id}">
+           <span>${opts.tip}</span>
+           <div class="zrui_tip_cron"></div>
+         </div>`;
+       var tipDom = $(html);
+       $(".zrui_tip").remove();
+       $("body").append(tipDom);
+       return tipDom;
+     }
+   };
+   $.fn.zrTip.defaults = {
+     type: 'click'
+   };
+   $.fn.zrTip.parseJson = function(obj) {
+     console.log();
+     var tip = $(this).attr("tip");
+     return {
+       'tip': tip
+     }
+   }
+})(jQuery);
+    $("#box").find(".tip").zrTip({type: 'mouseover'})
+  </script>
+</body>
+</html>

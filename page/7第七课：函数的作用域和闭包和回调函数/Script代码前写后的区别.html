@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style></style>
+    <script>
+        //
+        var boxDom = document.getElementById("box");
+        boxDom.style.background = "red";
+        boxDom.style.width = "200px";
+        boxDom.style.height = "200px";
+        //无法显示 
+        //head里面的东西优先执行   先head 再Body
+        //window.onload  的含义就是 等浏览器所有的元素加载完毕之后再去执行的函数  加载函数  性能问题
+        //window.onload  代表的是 当页面中所有的元素，图片，iframe加载完毕执行的回调函数
+    </script>
+</head>    
+<body>
+    
+    <div id="box">
+
+    </div>
+
+    <script>
+        var boxDom = document.getElementById("box");
+        boxDom.style.background = "red";
+        boxDom.style.width = "200px";
+        boxDom.style.height = "200px";
+        //可以显示
+    </script>
+</body>
+</html>

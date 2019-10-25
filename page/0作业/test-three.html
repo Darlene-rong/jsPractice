@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript">
+        /*
+            作业：理解双重for循环，用表格去打印一个九九乘法表，菱形和三角形
+                 实现1-100的求总和，1-100中每个数字的平方数的累加，并且对总和开平方
+
+        */
+//实现1-100的求总和，1-100中每个数字的平方数的累加，并且对总和开平方    
+    var sum = 0;
+    for(var i=0;i<=100;i++) {
+        // console.log(i)
+        sum += i;
+        // if()
+    }   
+    console.log(sum)
+    //Math.sqrt( x ) ;这个方法返回一个数的平方根。如果数的值是负的，开方返回NaN。
+    console.log(Math.sqrt(sum))
+//平方
+    var s1 = 0;
+    // function sum(x,y) {
+    //     return x+y;
+    // }
+    // function square(a) {
+    //     return a*a;
+    // }
+    for(var i=0;i<=100;i++) {
+        j = i*i;
+        // console.log(j+"====")
+        s1 = s1 + j
+        // console.log(s1+"====")
+    }
+    console.log("1-100的每个数的平方和："+s1);
+//菱形和三角形
+        document.write("<h3>打印等腰三角形</h3>")
+        for(var i=0;i<5;i++) {
+            for(var j=5;j>i;j--) {
+                document.writeln("&nbsp")
+            }
+            for(var k=0;k<2*i+1;k++) {
+                document.writeln("*")
+            }
+            document.writeln("<br>");
+        }
+        document.write("<h3>打印直角三角形</h3>")
+        for(var i=0;i<5;i++) {
+            for(var j=0;j<i;j++) {
+                document.writeln("❥");
+            }
+            document.writeln("<br>")
+        }
+        document.write("<h3>打印倒三角形</h3>")
+        for(var i=0;i<5;i++) {
+            for(var j=5;j>i;j--) {
+                document.writeln("❥");
+            }
+            document.writeln("<br>")
+        }
+        document.write("<h3>打印菱形</h3>")
+        for(var i=0;i<6;i++) {
+            for(var j=6;j>i;j--) {
+                document.writeln("&nbsp");
+            }
+            for(var k=0;k<2*i+1;k++) {
+                document.writeln("*")
+            }
+            document.writeln("<br>")
+        }
+        for(var i=5;i>0;i--) {
+            for(var j=6;j>=i;j--) {
+                document.writeln("&nbsp");
+            }
+            for(var k=0;k<2*i-1;k++) {
+                document.writeln("*")
+            }
+            document.writeln("<br>")
+        }
+        document.write("<h3>打印空心菱形</h3>")
+    </script>
+</body>
+</html>

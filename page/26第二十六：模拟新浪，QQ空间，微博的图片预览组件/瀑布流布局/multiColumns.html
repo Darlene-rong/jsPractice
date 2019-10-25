@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 兼容移动设备 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_1enbqsmznva.css">
+    <title>multi-columns</title>
+    <style>
+        *{padding: 0;margin: 0}
+        ul li {list-style: none;}
+        body{margin-right: 10px;height: 100%;width: 100%;}
+        .masonry{
+            /* 对象的列数 */
+            column-count: 3;
+            /* 列与列之间的间隙 */
+            column-gap: 5px;
+            margin: 10px;
+        }
+        /* 自媒体 */
+        @media screen and (min-width: 1600px){
+            .masonry{
+                column-count: 3;
+            }
+        }
+        @media screen and (max-width: 1200px){
+            .masonry{
+                column-count: 2;
+            }
+        }
+        /* 当前页面小于500的时候执行 */
+        @media screen and (max-width: 500px){
+            .masonry{
+                column-count: 1;
+                
+            }
+            .items img{
+                width: device-width
+            }
+        }
+        @media screen and (min-width: 1922px){
+            .masonry {
+                column-count: 4;
+            }
+        }
+        .items{
+            /* 控制文本分解成单独的列 以免项目列表的内容跨列 破坏整体的布局  实现响应式布局 */
+            break-inside: avoid;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 5px;
+            position: relative;
+            overflow: hidden;
+            counter-increment: item-counter;
+        }
+        .mongolia{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            background-color: #88888875;
+            top: 0;
+            left: 0;
+            display: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+        img{
+            box-shadow: 2px 2px 4px #aaaaaa;
+        }
+        .thumb{background-color: #68686896;width: 300px;height: 40px;position: absolute;top: 0px;line-height: 40px;}
+        .thumb span:nth-child(1){color: rgba(255, 255, 255, 0.8392156862745098);padding-left: 10px;}
+        .thumb span:nth-child(1) .iconfont{padding-left: 5px;}
+        .thumb span:nth-child(2){color: rgba(228, 228, 228, 0.839);float: right;padding-right: 20px;font-size: 18px;}
+        .iconfont{font-size: 20px;}
+
+        /* 弹层 */
+        .cont{
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+        .bigimg{
+            height: 86%;
+            width: 84%;
+            background-color: #fff;
+            position: absolute;
+            top: 44%;
+            left: 50%;
+            margin-left: -42%;
+            margin-top: -20%;
+            min-width: 1200px;
+            min-height: 700px;
+        }
+        .rightimg{
+            width: 70%;
+            height: 90%;
+            margin: 36px;
+            position: relative;
+
+        }
+        .rightimg img{
+            display: inline-block;
+        }
+        .fl {
+            float: left;
+        }
+        
+        .close {
+            position: absolute;
+            right: 8%;
+            z-index: 5;
+            top: 10px;
+            color: #333;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .close .iconfont {
+            font-size: 30px;
+            color: #564;
+        }
+        .leftTest{
+            display: inline-block;
+            height: 85%;
+            margin-top: 77px;
+            color: #333; 
+        }
+    </style>
+</head>
+<body>
+    <div class="masonry" id="box">
+        <div class="items">
+            <img src="../img/pexels-photo-1687028.jpeg" data-im = "./img/bigimg/pexels-photo-1-1.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-8.jpeg" data-im = "./img/bigimg/pexels-photo-1-2.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-4.jpeg" data-im = "./img/bigimg/pexels-photo-1-5.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-3.jpeg" data-im = "./img/bigimg/pexels-photo-1-7.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-1.jpeg" data-im = "./img/bigimg/pexels-photo-1-1.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-5.jpeg" data-im = "./img/bigimg/pexels-photo-1-5.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items" >
+            <img src="./img/pexels-photo-6.jpeg" data-im = "./img/bigimg/pexels-photo-1-1.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items" >
+            <img src="./img/pexels-photo-7.jpeg" data-im = "./img/bigimg/pexels-photo-1-7.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+        <div class="items">
+            <img src="./img/pexels-photo-4.jpeg" data-im = "./img/bigimg/pexels-photo-1-4.jpeg">
+            <div class="thumb">
+                <span class="star">
+                    <i class="iconfont icon-pinpai"></i>
+                    hello
+                </span>
+                <span class="title">
+                    <i class="iconfont icon-information"></i>
+                    <i class="iconfont icon-fabu"></i>
+                </span>
+            </div>
+        </div>
+    
+    </div>
+    <!-- 蒙层 -->
+    <div class="mongolia" id= "m"></div>
+    <div class="cont" style="display:none" id="test">
+       <div class="close" id="c" onclick="close()"><i class="iconfont icon-guanbi1"></i></div>
+    </div>
+    <script>
+        function $(id) {
+            return document.getElementById(id)
+        }
+        window.onload = function () { 
+            var windoWidth = window.innerWidth;
+            var boxDom = $("box");
+            var imgDom = boxDom.getElementsByTagName("img");
+            var divDom = document.getElementsByClassName("thumb")
+            var len = imgDom.length;
+            var imgWidth = imgDom[0].offsetWidth;
+            var divH = divDom[0].offsetHeight;
+            var ch = $("box").children;
+            for(var i=0;i<len;i++){
+                var imgH = imgDom[i].offsetHeight;
+                ch[i].style.width = imgWidth;
+                var h = (imgH-divH+50);
+                imgDom[i].index = i;
+                divDom[i].style.top =  h+ "px";
+                divDom[i].style.width = imgWidth-13 + "px";
+                imgDom[i].onmouseover =function(e){
+                    let heig = this.offsetHeight
+                    var indeximg = this.index;
+                    divDom[indeximg].style.top = (heig-divH) + "px"
+                    divDom[indeximg].style.transition=  "top .5s"
+                    this.onmouseout = function (e) {
+                        divDom[indeximg].style.top = h + "px";
+                    }
+                }
+                if(windoWidth < 500){
+                    imgDom[i].style.width = (windoWidth-20) +"px";
+                };
+                //给图片绑定点击事件
+                imgDom[i].onclick = function (e) { 
+                    document.body.style.overflow = "hidden";
+                    $("m").style.top =  document.documentElement.scrollTop + "px";
+                    $("test").style.top =  document.documentElement.scrollTop + "px";
+                    changePic(this);
+                    e.preventDefault();  
+                    var dDom = $("right");
+                    $("img").style.height = dDom.offsetHeight + "px";
+                    $("img").style.width = dDom.offsetWidth + "px"
+                 }
+            };
+         }
+         window.onresize = function () {
+            var bigImgDom = $("img");
+            bigImgDom.style.width = dDom.offsetWidth +"px";
+            bigImgDom.style.height = dDom.offsetHeight + "px"
+        }
+        function changePic(obj) {
+            var src = obj.getAttribute("data-im");
+            var html = `
+                <div class="bigimg">
+                <div class="rightimg fl" id="right">
+                    <a href="javascript:;">
+                        <div class="picture">
+                            <img src="${src}" id="img" style="height: 630px; width: 903px;"/>
+                        </div>
+                    </a>
+                </div>
+                <div class="leftTest fl">
+                    <div>
+                        <h3>Pexels License</h3>
+                        <div>✓ Free for personal and commercial use</div>
+                        <div>✓ No attribution required</div>
+                        <div>Learn more about the license »</div>
+                        <div> Like Pexels on Facebook </div>
+                    </div>
+                </div>
+            </div> 
+            `
+            var pre = document.createElement("div");
+            pre.innerHTML = html;
+            var tDom = $("test");
+            tDom.appendChild(pre);
+            tDom.style.display = "block";
+            $("m").style.display = "block";
+        }
+        $("c").onclick = function() { 
+            $("m").style.display = "none";
+            $("test").style.display = "none";
+            document.body.style.overflow = "auto";
+         }
+    </script>
+</body>
+</html>

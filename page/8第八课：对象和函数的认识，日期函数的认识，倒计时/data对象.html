@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data日期对象</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        /*
+            typeOf 
+                object 
+                    array --object
+                    data  --object
+                    RegExp --object
+                    {}    --[object object]
+            constructor （构造函数）
+                object 
+                    array --array
+                    data  --data
+                    RegExp --regex
+                    {}    --[object object]
+        
+        */
+        window.onload = function() {
+            var data = new Date();
+            var year = data.getFullYear();//全年
+            var month = data.getMonth()+1;//月 0第一月  11第十二月 (加1才能获取当年的月份)
+            var dat = data.getDate();//日期
+            console.log(year +"年" + month +"月"+ dat + "日");//2018年9月3日
+            
+            //获取时间
+            var hourse = data.getHours();//时
+            var min = data.getMinutes();//分
+            var sec = data.getSeconds();//秒
+            console.log(hourse + ":" + min + ":" + sec);//16:48:23
+
+            //获取星期天
+            var week = data.getDay();//0是星期天 一周第一天是星期日，最后一天是星期六
+            var result = ""
+            switch(week) {
+                case 0 :  result="星期天"; break;
+                case 1 :  result="星期一"; break;
+                case 2 :  result="星期二"; break;
+                case 3 :  result="星期三"; break;
+                case 4 :  result="星期四"; break;
+                case 5 :  result="星期五"; break;
+                case 6 :  result="星期六"; break;
+            }
+            console.log(result);
+
+            //毫秒数(获取毫秒数 1997 1 1 0 0 0到当前的时间差)
+            var time = data.getTime();
+        }
+    
+    </script>
+</body>
+</html>

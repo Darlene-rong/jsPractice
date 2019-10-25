@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+             1.直接定义 function test(){}   
+                弊端： 定义的函数都是全局的，会与引用的JS文件可能发生冲突，会暴露全局变量函数
+            
+            function test() { alert("我是全局定义的函数") };
+            test();
+            var username = "hello";
+            function test1(name) { alert(name) }
+            test1(username)
+        */
+
+        /*
+            2.对象形式定义
+            var Test3 = {
+                username: "", //定义变量
+                one: function () {   //定义函数
+                    this.username = "he"
+                    alert(this.username);
+                },
+                two: function(){
+                    this.username = "two";
+                    alert(this.username)
+                }
+            }
+            Test3.one();// "he"
+        */
+        
+        /*
+            定义函数的两种方式
+                1.函数声明
+                    function test(){}
+                2.函数表达式
+                    var test = function(){}
+        */
+
+        /*
+            3.构造函数的静态方法和属性
+                var Form = function(){};
+                //静态方法和属性
+
+                Form.checkname = function(){
+                    alert("11111");	
+                };
+                Form.checkPassword = function(){
+                    alert("222222");
+                };
+                Form.checkPassword()
+        */
+
+        /*
+            4.真假对象   全局对象覆盖  操作的是同一个对象
+                var dom = function (id) { 
+                    var domObj = document.getElementById(id);
+                    return {
+                        html: function (message) { 
+                            domObj.innerHTML = message;
+                        },
+                        text: function () { 
+                            return domObj.innerText || domObj.textContent
+                        }
+                    }
+                }
+                dom("box").html("000");
+                alert(document.getElementById("box").innerHTML)
+        */       
+        
+        /*
+            5.面向对象的写法  构造函数中定义属性和方法
+              在每一个对象创建的时候， 会复制一份给当前创建的对象作为它的自有属性
+                function Bmusic(name){
+                    this.play = function () {alert(name);  };
+                    this.stop = function () {};
+                    this.volume = function () {};
+                };
+                var music1 = new Bmusic("kkk.mp3");
+                alert(music1.hasOwnProperty("play")); //true
+                music1.play(); // kkk.mp3
+                var music2 = new Bmusic("ooo.mp3");
+                music2.play();//ooo.mp3
+        */
+
+        /*
+            6.每一个类都拥有prototype子对象
+              子对象是专门为每一个创建的对象用来继承的
+              通过prototypr扩展的属性和方法是共享的方法
+              对象公有方法
+            
+            格式： 类propotype.属性/方法
+            1.通过 propotype 动态给对象扩展属性和方法  属于公共方法和属性
+        */
+            function Music(name){
+                this.name = name;
+            }
+            Music.prototype = {
+                constructor: Music,
+                age: 30,
+                books: ['html','css'],//引用数据类型
+                cplay:function(name){
+                    alert(name)
+                }
+            }
+            var m1 = new Music("ssss");
+            m1.age = 30;
+            m1.books.push("hhh");// html css hhh
+            alert(m1.books)
+            var m2 = new Music("jjjj");
+            alert(m2.books)// html css hhh
+    </script>
+</body>
+</html>

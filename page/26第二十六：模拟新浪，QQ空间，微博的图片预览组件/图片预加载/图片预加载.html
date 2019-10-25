@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{font-size: 14px;font-family: "微软雅黑";user-select: none;background-color: black;}
+    #box{margin: 100px auto;width: 90%;padding: 15px 0 0 55px;}
+    #box li{display: inline-block;margin: 0 0 20px 20px;box-sizing: border-box; cursor: pointer;}
+    #box li img{width: 300px;height: 200px;display: block;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="imgbox">
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/01.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/02.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/03.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/04.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/05.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/06.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/07.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/08.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/09.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/10.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/11.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/12.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/13.jpg" /></li>
+            <li><img src="../img/loading.gif" data-src="../img/14.jpg" /></li>
+            
+        </ul>
+    </div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var imgDom = $("imgbox");
+            var imgDoms = imgDom.getElementsByTagName("img");
+            showImg()
+            /*
+                onscroll 元素进行滚动条在滚动的时候进行触发
+            
+            */
+           window.onscroll = showImg;
+           function showImg(){
+               var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+               var len = imgDoms.length;
+               for(var i=0;i<len;i++){
+                   if(imgDoms[i].offsetTop<(scrolltop + document.documentElement.clientHeight) && !imgDoms[i].isLoad){
+                        console.log(i)
+                        imgDoms[i].src = imgDoms[i].getAttribute('data-src');
+                        imgDoms[i].isLoad = true;
+                   }
+               }
+           }
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 引入iconfont -->
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_mznjmvl3am.css">
+    <style>
+        *{padding: 0;margin: 0;}
+        .iconfont{cursor: pointer;}
+        a{text-decoration: none;}
+        html,body{width: 100%;height: 100%;font-size: 12px;color:#333;font-family: "微软雅黑"}
+        .main{height: 100%;width: 100%;background-color: #f5f5f5;min-height: 982px;}
+        .maincontent{width: 900px;margin: 0 auto;background-color: #fff;border: 1px solid #d3d3d3;min-height:700px;}
+        .content{margin-top: 30px;padding: 15px;}
+        .line_header{height: 40px;border-bottom: 2px solid rgb(185, 0, 0);}
+        .line_header h3{font-size: 20px;line-height: 41px;display: inline;font-weight: normal;padding-right: 10px;}
+        .triangle_border_left{width: 0;height: 0;border:1px solid red;border-width: 30px 30px 30px 0;border-style: solid;border-color:transparent #333 transparent transparent;/*透明 灰 透明 透明 */;margin:40px auto;position: relative;}
+        .sl{height: 10px;width: 10px;position: absolute;border-left: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;transform: translate(0,-48%) rotate(45deg);background-color: #fff;    top: 30px;left: -5px;}
+        .comment{height: 119px;width: 100%;margin: 20px 0;position: relative;}
+        .inline{display: inline-block;}
+        .comment_img{width: 6%; display: inline-block;position: relative;top: -29px;margin-right: 10px;}
+        .comment_text{width: 92%;}
+        .comment_text_main{position: relative;height: 90px;}
+        .comment_text_content{height: 80px;border: 1px solid #cdcdcd;}
+        .comment_text_content textarea{width: 98%;height:68px;resize: none;padding: 6px;outline: none;border: none;line-height: 18px;padding-right: 10px;}
+        .fotcomit{height: 40px;margin-left: 66px;line-height: 30px;}
+        .right_fot{float: right;} 
+        .left_fot i{font-size: 18px;cursor: pointer;}
+        .right_fot button{height: 31px;width: 50px;background-color: steelblue;color: #fff; border: none;margin: 0 5px;cursor: pointer;}
+        .right_fot span{color: #999; }
+        /* img{    vertical-align: middle;} */
+        /* 精彩评论 */
+        .hotcom_header{height: 30px;line-height: 30px;}
+        .hotcom_cont{padding: 5px 0;border-top: 1px dotted #ccc;}
+        .ht_left{position: relative;top: 5px;}
+        .ht_right{padding: 10px;height: 92px;width: 90%;position: relative;top: -23px;}
+        .ht_content{word-break: break-word;}
+        .ht_content p{overflow: hidden;line-height: 20px;}
+        .fo_ht{margin-right: 7px;}
+        .left_ht{color: #999;margin-left: 5px;}
+        .fo_ht .iconfont {color: #666;}
+        .fo_ht a{color: #666}
+        .fo_ht a:last-child{padding: 0 10px;border-left: 1px solid #d3d3d3}
+        .fo_ht a:nth-child(2){padding-right: 10px;}
+        .fo_ht a:hover{color: royalblue;}
+
+        /* emojo表情 */
+        .m-emts{position: absolute;width: 300px;height: 200px;z-index: 10;top: 125px;left: 60px;border: 1px solid #cdcdcd;background-color: #fff;box-shadow: 1px 1px 8px rgba(148, 148, 148, 0.51);}
+        .gl{height: 10px;width: 10px;background-color: #fff;position: absolute;border-left: 1px solid #cdcdcd;border-bottom: 1px solid #cdcdcd;transform: translate(0,40%) rotate(133deg);top: -11px;left: 8px;}
+        .memogj{height: 150px; margin: 10px;}
+        .memogj span{float: left;width: 21px;height: 21px;margin: 1px 2px 2px 1px;border: 1px solid #fff;}
+        .memogj span:hover{border: 1px solid rgb(173, 3, 3);cursor: pointer;display: inline-block;}
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="maincontent">
+            <div class="content">
+                <div class="line_header">
+                    <h3>评论</h3>
+                    <span>共<span>1</span>条评论</span>
+                </div>
+                <div class="comment">
+                    <div class="comment_img inline">
+                        <img src="./img/109951163606449552.jpg" alt="" height="50" width="50">
+                    </div>
+                    <div class="comment_text inline">
+                        <div class="comment_text_main">
+                            <div class="sl"></div>
+                            <div class="comment_text_content">
+                                <!-- maxlength 限制输入的字数 ie9以上支持-->
+                                <textarea name="" id="js_textarea" placeholder="请输入评论..." maxlength="20"></textarea>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="fotcomit">
+                        <div class="left_fot inline"  id="happy">
+                            <i class="iconfont icon-biaoqing" id="icong"></i>
+                        </div>
+                        <div class="right_fot inline">
+                            <span id="text_num" num = "20">20</span>
+                            <button onclick="command()">评论</button>
+                        </div>
+                    </div>  
+                    <div class="m-emts" id="emjomain" style="display:none">
+                        <div class="gl"></div>
+                        <div class="memogj" id="emojo">
+                            <span title="[大笑]"><img data-text="大笑" src="http://s1.music.126.net/style/web2/emt/emoji_86.png" alt=""></span>
+                            <span title="[可爱]"><img data-text="可爱" src="http://s1.music.126.net/style/web2/emt/emoji_85.png" alt=""></span>
+                            <span title="[憨笑]"><img data-text="憨笑" src="http://s1.music.126.net/style/web2/emt/emoji_359.png" alt=""></span>
+                            <span title="[色色]"><img data-text="色色" src="http://s1.music.126.net/style/web2/emt/emoji_95.png" alt=""></span>
+                            <span title="[亲亲]"><img data-text="亲亲" src="http://s1.music.126.net/style/web2/emt/emoji_363.png" alt=""></span>
+                            <span title="[惊恐]"><img data-text="惊恐" src="http://s1.music.126.net/style/web2/emt/emoji_96.png" alt=""></span>
+                            <span title="[流泪]"><img data-text="流泪" src="http://s1.music.126.net/style/web2/emt/emoji_356.png" alt=""></span>
+                            <span title="[亲亲]"><img data-text="亲亲" src="http://s1.music.126.net/style/web2/emt/emoji_362.png" alt=""></span>
+
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>                
+                </div>   
+                <!-- 评论内容展示 -->
+                <div class="hotcom" id="contentcom">
+                    <div class="hotcom_header">
+                        <h3>精彩评论</h3>
+                    </div>
+                    
+                </div>             
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function $(clas){
+            return document.getElementById(clas)
+        }
+        
+        window.onload = function(){
+            /*
+                1.按下键盘事件字数减少，超过规定字数的时候不能进行输入
+                2.按下表情再textarea上显示相应的表情text
+
+            
+            */
+            // 数字的改变 onkeyup:键盘按下被松开时触发的事件
+                /*
+                    1.绑定键盘点击事件 onkeyup
+                */
+                $("js_textarea").onkeyup = $("js_textarea").onkeydown = changeNum;
+                function changeNum() {
+                    //2.获取键入的值
+                    var value = this.value;
+                    var len = value.length;
+                    //3.拿到数字对象
+                    var numDom = $("text_num");
+                    //4.递减
+                    var num = numDom.getAttribute("num");//拿num的值进行转换为数字 乘以1 转换为数字类型
+                    if(len <= num){
+                        numDom.innerHTML = num - len;
+                    }else{
+                        $("text_num").style.color = "red";
+                        numDom.blur()
+                        return false;
+                    }
+                    //将数据缓存瘩哦storage中
+                    if(value){
+                        if(localStorage) localStorage.setItem("message",value);
+                    }
+                };
+            //点击表情 添加到textarea文本框里面
+            domChild("emojo").each(function(){
+                this.onclick = function(){
+                    var text = this.getAttribute("title");
+                    insertText($("js_textarea"),text);
+                    changeNum.call($("js_textarea"))
+                }
+            })
+            //按键盘ctrl+enter键进行提交
+            document.onkeydown = function(e){
+                var ev = window.event || e;
+                var code = e.keyCode || e.which;
+                //ev.shiftkey  shift键
+                if(ev.ctrlKey && code == 13){
+                    command()
+                }
+            }
+            //缓存数据 缓冲
+            if(localStorage){
+                var html = localStorage.getItem("message");
+                if(html) {
+                    $("js_textarea").innerHTML = html;
+                }
+            }
+        }
+        //提交评论
+        function command() {
+            let value = $("js_textarea").value.replace(/\[|\]/ig,"#");
+            if(!value){
+                alert("请输入评论内容.....");
+                $("js_textarea").focus();
+                return;
+            }
+            //表情包转换为 图片  对比和替换
+            domChild("emojo").each(function(){
+                var text = this.getAttribute("title").replace(/\[|\]/ig,"#");
+                var imgHTML = this.innerHTML;
+                var r = new RegExp(text,"igm");
+                value = value.replace(r,imgHTML);
+            });
+            var date = new Date();
+            var year,month,date,hour,mintue;
+            dataTime(function(){
+                year = this.Y;
+                month = this.M;
+                date = this.D;
+                hour = this.H;
+                mintue = this.m;
+            });
+            let num = $("text_num").getAttribute("num")
+            var html = `
+                <div class="hotcom_cont">
+                    <div class="ht_left inline">
+                        <img src="./img/109951163606449552.jpg" alt="" height="60" width="60">
+                    </div>
+                    <div class="ht_right inline ht_content">
+                        <div class="ht_content ">
+                            <a href="javascript:;">xxxh_<span>:</span></a>
+                            <p>${value}</p>                                
+                        </div>
+                    </div>
+                    <div class="fotcomit">
+                        <div class="left_ht inline">
+                            <span>${year}年${month}月${date}日</span>
+                            <span>${hour}:${mintue}</span>
+                        </div>
+                        <div class="right_fot fo_ht inline" id="a">
+                            <i class="iconfont icon-dianzan" id="dianzan"></i>
+                            <a href="javascript:;">(<span id="dianzan_num">0</span>)</a>
+                            <a href="javascript:;">回复</a>
+                        </div>
+                    </div>
+                </div>
+            `
+            //添加评论
+            $("contentcom").innerHTML += html;
+            //字数限制的值初始化
+            $("text_num").innerHTML = num;
+            //textarea的值初始化
+            $("js_textarea").value = "";
+            $("text_num").style.color = "#999";
+        }
+        function domChild(id){
+            var childs = document.getElementById(id).children;
+            return {
+                each: function(callback){
+                    var liDomarr = [].slice.call(childs);
+                    liDomarr.forEach(function(obj,index){
+                        callback.call(obj,obj,index);
+                    })
+                }
+            }
+        }
+        //时间
+        function dataTime(callback){
+            var data = new Date();
+            var year = data.getFullYear();
+            var month = data.getMonth()+1;
+            var date = data.getDate();
+            var hour = data.getHours();
+            var min = data.getMinutes();
+            var YY = checkTime(year);
+            var MM = checkTime(month);
+            var DD = checkTime(date);
+            var HH = checkTime(hour);
+            var mm = checkTime(min);
+            var json = {
+                "Y": YY,
+                "M": MM,
+                "D": DD,
+                "H": HH,
+                "m": mm
+            }
+            callback.call(json);
+        }
+        function checkTime(val){
+            if(val<10){
+                val = "0" + val;
+            }
+            return val;
+        }
+
+        //光标处插入文本
+        function insertText(obj,str) {
+			if (document.selection) {
+				var sel = document.selection.createRange();
+				sel.text = str;
+			} else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+				var startPos = obj.selectionStart,
+					endPos = obj.selectionEnd,
+					cursorPos = startPos,
+					tmpStr = obj.value;
+				obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+				cursorPos += str.length;
+				obj.selectionStart = obj.selectionEnd = cursorPos;
+			} else {
+				obj.value += str;
+			}
+		};
+        
+        //emojo
+        var mark = false;
+        $("happy").onclick = function () {
+            
+            if(mark) {
+                $("emjomain").style.display = "none";
+                mark = false;
+                return false;
+            }
+            $("emjomain").style.display = "block";
+            mark = true;
+        }
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    form{
+        width: 180px;
+        margin: 10px auto;
+        border: 1px solid #ddd;
+        padding: 30px;
+    }
+    .fl{float: left;}
+    </style>
+</head>
+<body>
+    <form id="loginForm" name="loginForm">
+        <label>用户名：<input type="text" name="username" /></label>
+        <label>密码：<input type="password" name="password"/></label>
+        <p>性别：
+            <label><input type="radio" name="male" value="1" />男</label>
+            <label><input type="radio" name="male" value="0" />女</label>
+        </p>
+        <p>爱好：
+            <label><input type="checkbox" name="hobbys" value="1" />吃饭</label>
+            <label><input type="checkbox" name="hobbys" value="2" />喝水</label>
+        </p>
+        <p>省份：
+            <select name="prov" id="">
+                <option selected = "selected">--请选择--</option>
+                <option value="01">湖南</option>
+                <option value="02">广州</option>
+            </select>
+        </p>
+        <label>描述：<textarea name="desc"></textarea></label>
+        <input type="submit" value="提交" onclick="toSave()">
+    </form>  
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script>
+        /*
+            ajax的参数条件
+
+            获取form表单对象formDom:   formId(form表单的ID)
+                document.getElementById(formId)
+                document.forms[0]
+                document.form[formId]
+            获取form表单的单个元素
+                formDom.name.value
+        */
+        function toSave() { 
+        //拿到form表单对象
+            // console.log(document.getElementById("loginForm"))
+            // console.log(document.forms[0]);
+            // console.log(document.forms["loginForm"])
+            var formDom = document.forms["loginForm"];
+        //获取元素
+            // var username = formDom.username.value;
+        //获取forms中所有的控件元素
+            var formElement = formDom.elements;
+            console.log(formDom.elements);
+            console.log(formElement[3].value);
+            console.log(formElement["username"].value);
+            console.log(formElement["hobbys"]);
+            //encodeURICompment 解决参数中有特殊字符和注入的问题
+            var parms = "";
+            var len = formElement.length;
+            for(var i=0;i<len;i++){
+                var type = formElement[i].type.toLowerCase();
+                if(type != "button" && type!="submit" && type!="reset"){
+                    if((type=="radio" || type=="checkbox") && formElement[i].checked){
+                        parms +=((i>0)?"&":"") + formElement[i].name + "=" + encodeURIComponent(formElement[i].value);
+                    }else{
+                        if(type!="radio" && type!="checkbox"){
+                            parms +=((i>0)?"&":"") + formElement[i].name + "=" + encodeURIComponent(formElement[i].value);
+                        }
+                    }
+                }
+            }
+            console.log(parms)
+            //json
+            var json = {};
+            for(var i=0;i<len;i++){
+                var type = formElement[i].type.toLowerCase();
+                if(type!="button" && type!="submit" && type!="reset"){
+                    if(type == "checkbox" && formElement[i].checked){
+                        var value = json[formElement[i].name] || formElement[i].value;
+                        if(formElement[i].name in json){
+                            value += "," + formElement[i].value;
+                        }
+                        json[formElement[i].name] = value;
+                    }else if( type == "radio" && formElement[i].checked){
+                        json[formElement[i].name] = formElement[i].value;
+                    }
+                    if(type != "radio" && type !="checkbox"){
+                        json[formElement[i].name] = formElement[i].value;
+                    }
+                }
+            }
+            alert(JSON.stringify(json));
+        }
+    </script>           
+</body>
+</html>

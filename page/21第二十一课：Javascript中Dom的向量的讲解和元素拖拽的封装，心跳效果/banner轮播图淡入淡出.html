@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    body,html{font-size: 12px;font-family: "微软雅黑";height: 100%;width: 100%;background-color: rebeccapurple;}
+    .banner{height: auto;width: 1000px;margin: 100px auto; position: relative;}
+    .banner-img{width:1000px;}
+    .banner-img a{position: absolute;}
+    .banner-num{position: absolute;width: 130px;height: 30px;border-radius: 30px;background-color: rgba(58, 58, 58, 0.8);top: 304px;left: 500px}
+    .banner-num a span{display:block;height: 15px;width: 15px;background-color: rgba(255, 255, 255, 0.49);border-radius: 50px;}
+    .banner-num a{display: inline-block;padding-top: 8px;padding-left: 7px;}
+    .banner-num a span.active{width: 37px}
+    </style>
+
+</head>
+<body>
+    <!-- 
+        1.布局
+        2.点击的特效 圆形变成椭圆形
+     -->
+     <div class="contanier">
+        <div class="banner">
+            <div class="banner-img" id="bannerimg">
+                <a href="javascript:;"><img src="./img/pic_15204412868039842.png" height="350" width="1000" alt=""></a>
+                <a href="javascript:;"><img src="./img/pic_15371498489764255.png" height="350" width="1000" alt=""></a>
+                <a href="javascript:;"><img src="./img/1544159113_637.png" height="350" width="1000" alt=""></a>
+                <a href="javascript:;"><img src="./img/1543822657_288.jpg" height="350" width="1000" alt=""></a>
+            </div>
+            <div class="banner-num" id="bannernum">
+                <a href="javasript:;"><span class="active"></span></a>
+                <a href="javasript:;"><span></span></a>
+                <a href="javasript:;"><span></span></a>
+                <a href="javasript:;"><span></span></a>
+            </div>
+        </div>         
+     </div>
+     <script src="../20第二十课：Dom中关于Css样式的获取和操作，和属性值的操作和拖拽和运动/move.js"></script>
+    <script>
+        /*
+            1.点击圆形切换相应的点击 且改变形态
+
+        
+        */
+        window.onload = function(){
+            var numDom = $("#bannernum");
+            var imgDom = $("#bannerimg").children;
+            var numdomChild = numDom.getElementsByTagName("span");
+            var len = numdomChild.length;
+            for(var i=0;i<len;i++){
+                console.log(numdomChild[i]);
+                numdomChild[i].index = i;
+                numdomChild[i].onmouseover = function(){
+                    for(let i=0;i<len;i++){
+                        numdomChild[i].className = "";
+                        move(numdomChild[i],{width:15})
+                        move(imgDom[i],{opacity:0},function(){
+                            this.style.display = "none"
+                        })
+                    }
+                    move(numdomChild[this.index],{width:37})
+                    console.log(imgDom[this.index])
+                    imgDom[this.index].style.display = "block";
+                    move(imgDom[this.index],{opacity:100});
+
+                };
+            }
+        };
+        function $(id){
+            return document.querySelector(id);
+        };
+        // function move(dom,json,callback){
+        //     clearInterval(dom.timer)
+        //     dom.timer = setInterval(function(){
+        //         var mark = true;
+        //         for(var attr in json){
+        //             var cur =  null;
+        //             if(attr == "opacity"){
+        //                 cur = getStyle(dom,attr)*100;
+        //             }else{
+        //                 cur = parseInt(getStyle(dom,attr)) || 0;
+        //             }
+        //             var speed = (json[attr] - cur) *0.2;
+        //             speed = (speed>0 ? Math.ceil(speed): Math.floor(speed));
+        //             if(cur != json[attr]){
+        //                 mark = false;
+        //                 dom.style[attr] = cur + speed + "px"
+        //             }
+        //         }
+        //         if(mark){
+        //             clearInterval(dom.timer);
+        //             if(callback) callback.call(dom);
+        //         }
+        //     },40)
+
+        // }
+        function getStyle(dom,attr){
+            return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr] : dom.currentStyle[attr] 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setTimeout 和 setInterval的用法</title>
+    <style>
+    #box{
+        height: 100px;
+        width: 100px;
+        background-color: pink;
+    }
+    </style>
+</head>
+<body>
+    <h1 id="timer"></h1>
+    <div id="box"></div>
+    <button id="close" onclick="coloseSet()">关闭定时器</button>
+    <button id="close" onclick="openSet()">启动定时器</button>
+    <script type="text/javascript">
+    /*
+        setTimeout 和 setInterval的用法
+            通过定时器去自动的执行函数就是 setTimeout 和 setInterval；
+        
+        清除动画：clearTimeout 和 clearInterval
+
+        setInterval和for循环的区别
+
+        用法：
+            定时器：setTimeout(fn,timer)//fn表示函数数字类型
+                   setTimeout("fn()",timer)//不推荐使用，立面进行了一次eval
+                   setTimeout(function(){
+                       fn();
+                   },timer)//传参数推荐用这种写法
+            
+            清除动画:clearTimeout(fn);
+                   注意：一般的定时器要将动画清除
+    
+    */
+    var timerDom = document.getElementById("timer");
+
+    setInterval(function test(){
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        timerDom.innerHTML = h + ":" + m + ":" +s;
+    },1000)
+
+    /*
+        需求大部分都是通过人为控制一些键盘，鼠标触发的事件
+        开发过程中 动画移动要关闭
+    
+    */
+    function change() {
+        var boxDom = document.getElementById("box");
+        boxDom.style.width = "200px";
+        boxDom.style.height = "200px";
+        boxDom.style.background = "red";
+    }
+    // setTimeout(change,6000);//不能写change()，一个执行函数，立马执行
+    // //eval()
+    // setTimeout(function(){
+    //     change();//写法二  传参数用这种写法
+    // },300)
+    // requestAnimationFrame();//处理计时器的延迟
+    var timerr = null;
+    function openSet() {//节流  防止用户多次点击
+        if(timerr!=null)clearTimeout(timerr);//在执行动画开始之前都要进行清除动画一次
+        timerr = setTimeout(change,2000);
+    };
+    function coloseSet() {
+        if(timerr!=null)clearTimeout(timerr);
+    }
+
+
+
+
+
+
+
+
+
+
+//自己封装个定时器函数 衍生
+    // testOne(fn,2000,params);
+    function testOne(fn,timer) {
+        var args = arguments;
+        setTimeout(function(){
+            if(args.length>2){
+                var arr = [];
+                for(var i=2;i<args.length;i++){
+                    arr.push(args[i]);
+                }
+                fn.apply(this,arr);
+                //apply()
+            } else {
+                fn();
+            }
+        },timer);
+        return clearTimer;
+    };
+    function clearTimer(timer){
+        clearTimeout(timer); //关闭
+    };
+
+    function sum(a,b,c) {
+        console.log(a+b+c);
+    };
+    testOne(sum,1000,100,100,100);//300 函数 时间 参数   多个参数
+    </script>
+</body>
+</html>

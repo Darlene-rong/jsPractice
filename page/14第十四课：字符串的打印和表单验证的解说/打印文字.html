@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script type="text/javascript">
+    /*
+        掌握字符串中substring的用法
+            了解数组
+            substring的使用
+            定时器setTimeOut
+    
+        不管任何的动画效果或者位移都是一定是通过setTimeout或者setInterval实现的，绝对不是用循环
+            对于for cpu执行For是不会停歇的
+            对于setTimeout，cpu执行是根据指定的间隔时间去执行回调函数的
+    */
+        var boxDom = document.getElementById("box");//存放文字的目标
+        // var str = "I love you ";
+        var arr = [];
+        arr.push("I love you");
+        arr.push("1掌握字符串中substring的用法");//arr[0]+arr[1].substring(0,1)
+        arr.push("2掌握字符串中substring的用法掌握字符串中substring的用法掌握字符串中substring的用法");
+        arr.push("3掌握字符串中substring的用法掌握字符串中substring的用法掌握字符串中substring的用法");
+        arr.push("4掌握字符串中substring的用法掌握字符串中substring的用法");
+
+        var strlen = arr[0].length;//?问题
+        var len = arr.length;//数组的长度
+        var index = 0;//数组索引
+        var timer = null;//动画对象
+        var time = 30;//动画的时间
+        var row = 0;//记录上次已经运行完毕的行数
+        var pos = 1;//位置
+        var c = "";
+        function start(){
+            //记录上次上次已经执行过的数组的内容+<br>
+            while(row<index){
+                c+=arr[row++]+"<br>";
+            }
+            boxDom.innerHTML = c + arr[index].substring(0,pos); //I love you
+            if(pos ==strlen){
+                //下个字符串的位置
+                index ++;//数组索引进行便宜
+                pos = 0;//位置重新置为0，下
+                if(index < len){
+                    //字符串的长度等于下一个字符串的长度
+                    strlen = arr[index].length;
+                }else{
+                    clearTimeout(timer);
+                }
+            }else{
+                pos++;
+            }
+        };
+        var timer = setInterval(start,time);
+        
+    </script>
+</body>
+</html>

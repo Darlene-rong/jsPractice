@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:#111;width:260px;height:100px;font-size:24px;line-height:100px;color:#fff;text-align:center;}
+  </style>
+ </head>
+ <body>
+	<div id="box"></div>
+	<input type="text" id="input" />
+	<select id="etype" onchange="changeEvent(this)">
+		<option value="onblur">onblur</option>
+		<option value="onselect">onselect</option>
+		<option value="onfocus">onfocus</option>
+		<option value="onfocusin">onfocusin</option>
+		<option value="onfocusout">onfocusout</option>
+		<option value="onchange">onchange</option>
+		<option value="onselect">onselect</option>
+		<option value="onmousedown">onmousedown</option>
+		<option value="onmouseover">onmouseover</option>
+		<option value="onmousemove">onmousemove</option>
+		<option value="onmouseout">onmouseout</option>
+		<option value="onmouseenter">onmouseenter</option>
+		<option value="onmouseleave">onmouseleave</option>
+		<option value="onmouseup">onmouseup</option>
+		<option value="onclick">onclick</option>
+		<option value="ondblclick">ondblclick</option>
+		<option value="onkeydown">onkeydown</option>
+		<option value="onkeypress">onkeypress</option>
+		<option value="onkeyup">onkeyup</option>
+	</select>
+	<script>
+        function $(id){
+            return document.getElementById(id)
+        }
+		//变量和属性的区别
+		//变量它是一个数据结构，是存储数据的一样形态，
+		function changeEvent(obj){
+            console.log(obj.value);
+            var value = obj.value;
+            $("input")[value] = function(e){
+                cg(value)
+            }
+        }
+        function cg(type){
+            $("input").style.background = "pink"
+        }
+	</script>
+ </body>
+</html>

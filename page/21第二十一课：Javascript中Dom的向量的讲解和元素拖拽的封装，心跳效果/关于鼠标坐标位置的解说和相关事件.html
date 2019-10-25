@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";padding:25px;}
+        a{text-decoration:none;color:#3333}
+        .item2{width:200px;height:200px;background:black;padding:25px;margin:25px;position:absolute;color:#fff;
+        text-align:center;line-height:200px;font-weight:bold;font-size:24px;}
+        #text{font-size:24px;font-weight:bold;}
+    </style>
+</head>
+<body>  
+    <div id="box" class="items item2"></div>
+    <script>
+        /*
+            鼠标位置 要通过鼠标事件才能进行获取
+                鼠标按下：onmousedown
+                鼠标松开：onmouseup
+                鼠标移动：onmousemove
+                鼠标进入：onmouseenter / onmouseover
+                鼠标离开：onmouseleave  /  onmouseout
+        */
+        window.onload = function(){
+            var boxDom = $("#box");
+            //onmouseover 鼠标进入
+            boxDom.onmouseover = function(){
+                this.style.background = "pink";
+                this.innerHTML = "onmouseover"
+            };
+            //onmouseout 鼠标离开
+            boxDom.onmouseout = function(){
+                this.style.background = "black";
+                this.innerHTML = "onmouseout"
+            }
+            //onmousemove鼠标移动
+            boxDom.onmousemove = function(){
+                this.style.background = "green";
+                this.innerHTML = "onmousemove"
+            };
+            //onmousedown 鼠标按下
+            boxDom.onmousedown = function(){
+                this.style.background = "red";
+                this.innerHTML = "onmousedown"
+            };
+            //onmouseup鼠标松开
+            boxDom.onmouseup = function(){
+                this.style.background = "yellow";
+                this.innerHTML = "onmouseup"
+            }
+
+        };  
+        function $(id){
+            return document.querySelector(id)
+        }
+    </script>
+</body>
+</html>

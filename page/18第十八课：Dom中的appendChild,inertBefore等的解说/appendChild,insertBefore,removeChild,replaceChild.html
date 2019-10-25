@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>appendChild,insertBefore,removeChild,replaceChild</title>
+    <style>
+        #box div{
+            height: 50px;
+            background-color: rgb(3, 82, 56);
+            color: #fff;
+            line-height: 50px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        span{
+            display: block;
+            height: 50px;
+            background-color: rgb(136, 55, 1);
+            color: #fff;
+            line-height: 50px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        button{
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #1768bb;
+            float: right;
+            margin: 7px;
+            border: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div>第一次</div>
+        <div>第二次</div>
+        <div>第三次</div>
+    </div>
+    <div id="a">ddddddd</div>
+    <script>
+        /*
+            appendChild(dom对象)：添加dom元素
+            insertBefore(追加dom子元素,dom元素position)：指定的已有子节点之前插入新的子节点。
+            removeChild(dom)：删除dom元素
+            replaceChild(dom子元素，要替换的元素)：替换dom
+        */
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+        //appendChild(dom对象)   ： 这里面的dom对象要动态创建的
+            var spanDom = document.createElement("span");
+            spanDom.innerHTML = "appendChild(dom对象)-----我是一个动态创建的dom对象";
+            var insertDom = document.createElement("span");
+            insertDom.innerHTML = "insertBefore(追加dom子元素,dom元素position) 追加添加";
+            var insertDom2 = document.createElement("span");
+            insertDom2.innerHTML = " insertBefore：在box的第一个子元素前面添加子元素。";
+            var insertDom3 = document.createElement("span");
+            insertDom3.innerHTML = "insertBefore：在第二个子元素面前添加子元素"
+            $("box").appendChild(spanDom);
+            $("box").insertBefore(insertDom,null);
+        
+        //insertBefore(追加dom子元素,dom元素position) 追加添加 ，在指定元素之前添加子元素， position可以忽略不写
+        //position不写的时候  insertBefore(dom,null) = appenChild(dom)
+            $("box").insertBefore(insertDom2,$("box").firstElementChild);//在box的第一个子元素前面添加子元素
+            $("box").insertBefore(insertDom3,$("box").children[2]);//在第二个子元素面前添加子元素
+
+        
+        //removeChild(dom)   没有直接删除的概念， 在JS中一定要通过父元素去删除子元素
+            var removeDom = document.createElement("span");
+            removeDom.innerHTML = "我是一个测试removeChild方法子元素";
+            var buttonDom = document.createElement("button");
+            buttonDom.innerHTML = "删除";
+            buttonDom.onclick = function() {
+                $("box").removeChild(this.parentElement);
+            };
+            removeDom.appendChild(buttonDom);
+            $("box").appendChild(removeDom);
+        
+        //replaceChild() 替换 在父元素找到元素进行子元素的替换
+            var replaceDom = document.createElement("span");
+            replaceDom.innerHTML = "replaceChild()替换";
+            $("a").parentElement.replaceChild(replaceDom,$("a"))
+        }
+
+
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于height和line-height的区别</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    body{font-size: 14px;font-family: "微软雅黑"}
+    #text{font-size:36px;color:#fff;line-height:89px;}	/*哪些不被继承：width,height,padding,margin,border position top left right bottom */
+    #text p{background:red;margin-top:2px;}
+    #text p a{color:#fff}
+    input{font-family:"微软雅黑"}
+    </style>
+</head>
+<body>
+	<div id="text">
+		<p>werwerwe<a href="">sdf</a><input/></p> 
+		<p>erwrwerw</p>
+		<p>dsfsdf</p>
+		<p>sfsdf</p>
+		<span style="background:green">1111111111111111111111</span>
+		<a href="" style="background:green">sdfsdfasdf</a>
+		<div style="background:green">sdfsdfsdfs</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串总结</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        //正则表达式服务于字符串  
+        //常用的： substring slice
+        var str = "12345678"
+        //多个查找
+        var index = str.indexOf("34");//2返回第一个值得下标
+
+        //截取文件名称 substring(开始，结束)   slice()
+        var text = "helloword/werwerwerw.txt";
+        var ext = text.substring(text.lastIndexOf(".")+1,text.length);
+        console.log(ext);
+        var name = text.substring(text.lastIndexOf("/")+1,text.lastIndexOf("."))
+
+
+        //分割
+        var str2 = "jj!dd!gg!aw";
+        console.log(str2.split("!"));// ["jj", "dd", "gg", "aw"]
+
+        /*
+			正则表达式它有两种形态：
+			第一种：字符串形态："/^正则表达式$/" 
+			
+		
+			第二种：对象形态：RegExp regex = new Regex("正则表达式",匹配模式(igm))
+			一般用于：变量形态的
+			i代表忽略大小写
+			g:全局替换
+			m多行匹配
+		*/
+		
+		var str = "我123柯柯456";
+		var r= /^(\d{4})-(\d{1,2})-(\d{1,2})$/; //正则表达式 匹配出生日期(简单匹配)     
+			
+		//var c = "1985-10-15".replace(r,"$1#$2#$3");
+		var s = str.replace(/^.*?(\d{3})$/,"$1");
+		
+		/*？当该字符紧跟在任何一个其他限制符（*,+,?，{n}，{n,}，{n,m}）后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串， 而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串“oooo”，“o+?”将匹配单个“o”，而“o+”将匹配所有“o”。
+		alert(s);
+
+		.单个字符
+		*0个或多个
+		?:0或一个
+		*/
+		//r.exec('');
+		//s1=RegExp.$1;
+		//s2=RegExp.$2;
+		//s3=RegExp.$3;
+
+		//alert(s1+"==="+s2+"==="+s3);
+		
+		//^1[3|4|5|7|8][0-9]\\d{8,}$"；
+		//{8}必须是八位
+		//{8,13}8<=num<=13
+		//{8,} 8<=num<n
+		//{,8};
+		//[11||22|56]//范围的意思
+
+		
+		//密码必须有字母，包含数字，特殊字符-- 6 16
+		//alert(/^[a-zA-Z]*\d*){6,16}$/.test("keke123456"));
+		//alert(/^[(a-zA-Z)]*$/.test("keke"));
+
+
+
+
+
+		
+		  
+	
+
+		//alert(/^1[3|5|7|8][0-9]+\d{8}$/.test("18675787887"));
+		//alert(/^1[3|5|7|8][0-9]+\d{8}$/.test("19074816437"));
+		
+
+	
+    </script>
+</body>
+</html>

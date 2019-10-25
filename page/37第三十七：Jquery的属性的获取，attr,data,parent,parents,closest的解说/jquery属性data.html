@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <div id="box" data-money="66"></div>
+  <a href="javascript:;" onclick="checkData()">检查</a>
+  <script>
+      /*
+        jquery中的data是属性缓存的作用，比attr更具有安全性，获取属性和属性值；
+        attr(key,value) 兼顾了setAttribute 和 getAttribute
+        removeAttr(key,value);
+
+        安全性
+          jquery引入 data
+          格式： data-key
+
+          用法：
+            获取和设置： data(key,value);
+            动态通过data设置属性和属性值写入内容中，不会同步到节点上面
+            删除 removeData
+      */ 
+     function checkData() {  
+        var money = $("#box").data("money"); //更安全 不会被更改数据
+        alert(money)
+        $("#box").data("num",{ myType: "test", count: 40 })
+        console.log($("#box").data("num"));
+        $("#box").removeData("num");
+        console.log($("#box").data("num"));
+f     }
+  
+  </script>
+</body>
+</html>

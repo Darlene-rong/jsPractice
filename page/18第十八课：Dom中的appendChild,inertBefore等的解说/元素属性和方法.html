@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    button{display: block;margin-bottom: 10px;padding: 10px;background: #319db5;color: #fff;border-style: none;cursor: pointer;}
+    </style>
+</head>
+<body>
+    <h2>元素下方的属性和方法：</h2>
+    <div>
+        <ul id="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <button onclick="btn1()">children属性</button>
+    <button onclick="first()">firstElementChild：当前元素第一个子元素</button>
+    <button onclick="last()">lastElementChild：当前元素的最后一个子元素</button>
+    <button onclick="next()">nextElementSibling：获取当前元素的下一个子元素</button>
+    <button onclick="pre()">previousElementSibling：获取当前元素的上一个子元素</button>
+    <button onclick="innHtml()">innerHTML：</button>
+    <button onclick="inntext()">innerText：</button>
+    <script>
+    /*
+        元素下方的属性和方法：
+            属性如下：
+                children：元素的所有的子元素 返回一个集合
+				parentElement：获取元素的父元素
+				firstElementChild：当前元素第一个子元素
+				lastElementChild：当前元素的最后一个子元素
+				nextElementSibling：获取当前元素的下一个子元素
+				previousElementSibling：获取当前元素的上一个子元素
+				innerHTML:
+				innerText：
+				textContent
+				outerHTML
+				outerText
+            方法：ie678不支持
+				insertAdjacentHTML();
+				insertAdjacentText();
+				insertAdjacentElement();
+			
+			创建元素
+                createElement 创建元素
+                createTextNode 创建文本
+    */
+    var ulDom = document.getElementById("list");
+        //childrens
+            function btn1(){
+                console.log("children属性====")
+                console.log(ulDom.children)//[li, li, li, li, li]
+                console.log("parentElement属性=====")
+                console.log(ulDom.parentElement)   //<div>...</div>
+            }
+        //firstElementChild
+            function first(){
+                console.log(ulDom.firstElementChild)//<li>1</li>
+                console.log(ulDom.firstChild)//#text    获取第一个元素的子节点
+            }
+        //lastElementChild
+            function last(){
+                console.log(ulDom.lastElementChild);//<li>5</li>
+                console.log(ulDom.lastChild);//#text    获取最后元素的子节点
+            }
+        //nextElementChild
+            function next(){
+                console.log(ulDom.firstElementChild.nextElementSibling)//<li>2</li>
+            }
+        //previousElementSibling
+            function pre(){
+                console.log(ulDom.lastElementChild.previousElementSibling);//<li>4</li>
+            }
+        //innerHTML
+            function innHtml(){
+                console.log(ulDom.children[0].innerHTML)
+            }
+        //innerText
+            function inntext(){
+                console.log(ulDom.innerText)
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于元素居中问题</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{font-size: 14px;}
+    ul li{list-style: none;}
+    #box1{
+        width: 400px;
+        height: 400px;
+        background-color: crimson;
+        /* 元素居中 */
+        /* 
+        方式一：
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -200px;
+            margin-top: -200px; 
+        */
+
+        /* 
+            calc() = calc(四则运算)
+            用于动态计算长度值
+            任何长度值都可以使用calc()函数进行计算
+            calc()函数支持 "+", "-", "*", "/" 运算；
+            calc()函数使用标准的数学运算优先级规则；
+            需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；
+         */
+        position: absolute;
+        /* 兼容性写法 */
+        top: -webkit-calc(50% - 200px);
+        top: -moz-calc(50% - 200px);
+        top: calc(50% - 200px);
+
+        left: -webkit-calc(50% - 200px);
+        left: -moz-calc(50% - 200px);
+        left: calc(50% - 200px);
+    }
+
+    </style>
+</head>
+<body>
+    <div id="box1">
+
+    </div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            /*
+                元素居中---基于浏览器
+                css2的方式(calc)元素居中
+            */
+
+        }
+
+    </script>
+</body>
+</html>

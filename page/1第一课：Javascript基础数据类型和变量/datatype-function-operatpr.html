@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据类型、操作符、函数</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script type="text/javascript"> 
+        //封装
+        function log(content) {
+            if(console) {
+                console.log("result:"+content);
+            }else {
+                alert(content);
+            }
+        }
+//数据类型
+    /*
+    JS的数据类型有：
+        string：字符串（定义规则：由双引号和单引号引起来的就是字符串）
+        number：数字
+            NaN---not a number 不是一个数字
+            什么时候产生NaN：当无法计算的时候（1+“姐姐” == NaN）
+            typeof NaN == Number;
+
+            Infinite ----无穷数 
+            typeof In
+        object：对象 大括号{} ==对象的根本所在
+            Array：数组
+            null：空
+            Date：日期
+            RegEx：正则
+        function：函数
+        undefined：空对象
+        boolean：布尔类型（true/false），一般应用于逻辑判断，循环
+    */
+        var num1 = 10; //数值 number
+        var num2 = "你好";//字符串 string
+        var num3 = {};//object 
+        function num4() {
+
+        }//函数 function类型
+        var bool = true;//布尔 boolean
+        var arr = [];//object  数组是一个对象不是数据类型
+        //undefined是一个数据类型
+        //数据类型是去决定空间大小的
+
+//查看Var的真实数据类型：typeof 变量名称
+        log(typeof num1);
+        log(typeof num2);
+        log(typeof num3 );
+        log(typeof underfined);
+        log(typeof num4);
+        log(typeof bool);
+        log(typeof arr );
+
+        //js引擎--->编译器---->内存（window对象）       
+        //定义的变量存储的东西都是给函数（方法）去用---->执行（调用函数：通知JS引擎去让cpu去运行）----
+        
+
+//操作符和函数
+        //算术运算符： + - *  \  %（取余）
+        //逻辑运算符: &&（且） 、||（或）、|（非） 
+        //位运算符： <，>，=，<=,!=，==（相等），===（值内存相等）
+        //三元运算符： ?  :
+        //赋值运算符：=（赋值）
+        //递增递减运算符：++ ， --
+//算术运算符
+        //+号（算术运算符加号）
+        /*
+        1:一个加法（加法的时候）运算  
+        2:通过连接符（字符串相加的时候是连接符）
+        3：如果是两个数字字符串还是字符串连接符，但是对于乘法，除法 取余运算一直是
+            var a = "2",b = "3";
+            log(a+b)//23
+            log(a-b)//-1
+         */
+        //从左到右
+        var a = 1;
+        var b = 2;
+        var str1 = "我";
+        var str2 = "爱你";
+
+        var c = a;//将a赋值给c  c不能改变a的内存地址
+        c = 10;//c赋值为10 不该变a的值
+        //数字放在前面运算，先计算再拼接；如果后面就是当做字符串拼接
+        log(str1 + a + b);//我12 （如果一个运算无法计算就会返回NaN）not a number
+        log(a + b + str1);//3我
+
+        //相同的定义是不允许的
+        //定义变量之后可以修改 但是不允许定义重复的变量
+
+        //两个字符串在乘法,减法，除法（返回浮点数（小数），除的尽就是整数），取余就运算符
+        var st1 = "2";
+        var st2 = "4";
+        log(st1 + st2);//24
+        log(st1 - st2);//-2
+        
+        log(1/2);//2  结果是余数 、
+
+//赋值运算符
+        //从内存里找到a
+        //在将a的内存地址赋给c
+        //c是一块临时的占空间地址的（c得内存地址指向了a的内存地址)
+        //改了c的值不改变a的值
+        var a = 1;
+        var b = 2; 
+        var c = a;
+        //给c赋值 之后c自己有了自己的内存空间
+        //相当于定义了c变量
+        c = 10;
+        var b1 = 100;
+        var b1 = b2 = b3 = 1000;//b1 b2内存为空 指向 1000 连引用
+        var b4 = 1 , b5 = 2 , b6 = 5;
+
+//递增、递减运算符
+        var c1 = 100;
+        // var c2 = c1++;//等价于 a = a +1;
+        // var c3 = ++c1;//等价于 c1 = c1 + 1;
+        //执行行为（方法）以外的地方a++和++a是相等的
+        //如果在执行程序和逻辑判断中
+        //a++（先执行在计算），++a（先运算后执行）
+        log(c1);//100
+        log(c1++);//100
+        //101
+        log(++c1);//102
+
+//布尔类型
+
+//进制
+        /*
+        十进制：逢十进一 0 1 2 3 4 5 6 7 8 9
+        八进制：逢八进一 0 1 2 3 4 5 6 7
+            定义方法：一个数字以0开头的就是八进制
+        十六进制：0-9 a-f （以0x开头）
+        */
+        var d1 = 100;
+        var d3 = 0311;//八进制以0开头的
+        console.log(typeof d1);
+        //toString（字符串转换）可以进制转换 toString(2/8/16/10)---->最后变成字符串
+        //parseInt（）函数 解析一个字符串，返回一个整数
+            //颜色转换例题:
+            function getColor(r,g,b) {
+                var r = parseInt(r).toString(16);
+                var g = parseInt(g).toString(16);
+                var b = parseInt(b).toString(16);
+                return "#"+r+g+b;
+            }
+            var d2 = getColor(255,255,255);
+            console.log(d2);
+            //随机产生一个颜色数
+            function getRandomColor(r,g,b) {
+                var r = parseInt(Math.floor(Math.random()*256)).toString(16);
+                var g = parseInt(Math.floor(Math.random()*256)).toString(16);
+                var b = parseInt(Math.floor(Math.random()*256)).toString(16);
+                return "#"+r+g+b;
+            }
+            var d2 = getRandomColor(255,255,255);
+            console.log(d2);
+            document.getElementById("box").style.background = d2;
+//指数2e+3（2乘以10的三次方）  2e-3（2乘以10的负三次方） （e代表的是科学计数法）
+//无穷数 infinity NaN
+    //NaN  一个字符串去除以 或者 乘以 一个数字的时候 得到的事NaN
+    //Infinity（无穷数）----如果计算的结果超出了JS的数值范围之外，则这个数值自动转换成特殊的Infinity值，有正Infinity，负Infinity;
+
+    var num = Infinity;//它是由number 扩展出来的一个子对象，用来代表无穷数
+    console.log(typeof num ); //number数据类型
+    var e1 = Infinity - Infinity;//对象减对象 不存在  返回NaN（不是一个数字）
+    var e2 = Infinity * 1;//还是Infinity
+
+    //NaN 和 Infinity 的区别
+    /*
+        NaN是代表一个非正常四则运算而得出的结果数字的代替
+        Infinity：在正常计算过程中，一个数字除不尽的时候，得到了无穷数，或者计算的结果超出了数字的最大值也会得到Infinity；
+
+    */
+    //undefined（未定义）
+
+//undefined 和 null 的区别
+    /*
+        1.数据类型层面
+        undefined：是一个undefined数据类型
+        null：它是一个object数据类型
+        2.内存分配层面
+            undefined如果一个变量没有赋值操作就是undefined；
+                var str ;//str是undefined数据类型
+            null :代表的是对象的默认值，可以清空对象
+                  想要清空对象就赋值为null
+                var obj = null;//boj是一个object数据类型，
+        3.运算中
+            var n = 1 + undefined；//NaN
+            Var nn = 1 + null; //1（null相当于false里面的0）
+    */
+     f = 100; //全局变量 相当于省略了var
+    //内存分配层面
+     var obj =  {};
+     obj.name = "tom";
+     console.log (obj.name);
+     obj = null; //对象的清空；
+     console.log(obj);
+    //运算中
+    var n = 1 + undefined;
+    console.log(n) //NaN
+    var nn = 1 + null;//null相当于false里面的0
+    console.log(nn);
+    </script>
+</body>
+</html>

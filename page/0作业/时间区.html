@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>时间区</title>
+</head>
+<body>
+
+    <input type="text" name="he" id="searchext" placeholder="请输入1-12">
+    <input type="button" onclick="search1()" value="查询">
+    <div id="timer"></div>
+    <script type="text/javascript">
+    
+    /*
+        布置一个作业：北京时间，东京市，纽约时间，巴黎时间
+        getTime函数获取1970年1月1日午夜到现在的时间差，配合上现在本地与GMT时间的差来求得GMT时间的标准值。
+        也就是函数里面的utcTime变量
+    */
+    // var inputDom = document.getElementById("searchext").value;
+    // var timerDom = document.getElementById("timer");
+    function search1(){ 
+        var json = {
+            "0" : "零时区-伦敦时间：",
+            "1" : "东一区-柏林时间：",
+            "2" : "东二区-雅典时间：",
+            "3" : "东三区-莫斯科时间：" ,
+            "4" : "东四区-时间：",
+            "5" : "东五区-伊斯兰堡时间：",
+            "6" : "东六区-科伦坡时间：",
+            "7" : "东七区-曼谷时间：",
+            "8" : "东八区-北京时间：" ,
+            "9" : "东九区-东京时间：",
+            "10": "东十区-悉尼时间：" ,
+            "12": "东十二区-斐济时间：" ,
+            "-10": "西十区-斐济时间：",
+            "-9" : "西九区-阿拉斯加时间：" ,
+            "-8" : "西八区-太平洋时间（美国和加拿大）：" ,
+            "-7" : "西七区-山地时间（美国和加拿大）：",
+            "-6" : "西六区-中部时间（美国和加拿大）：",
+            "-5" : "西五区-东部时间（美国和加拿大）：" ,
+            "-4" : "西四区-大西洋时间（加拿大）：",
+            "-3" : "西三区-巴西利亚时间："  ,
+        }; 
+        // var arr = [];
+        // arr.push(json);
+        // var len = arr.length;
+        for(var key in json){     
+            var inputDom = document.getElementById("searchext").value;
+            var a = inputDom*1;
+            var timerDom = document.getElementById("timer");
+            key = a;
+            console.log(key);
+            if(parseInt(key)<12){  
+                timerDom.innerHTML = json[key]+setTimea(key);
+                break;  
+            } else {
+                timerDom.innerHTML = "请输入正确的时区";
+                break; 
+            }                       
+        }
+    }
+    function setTimea(i) {
+        var data = new Date();
+        //返回 1970 年 1 月 1 日至今的毫秒数
+        var dataSeven = data.getTime();
+        //本地时间与GMT时间的时间偏移差
+        var offset = data.getTimezoneOffset()*60*1000;
+        //获得现在的格林尼治时间
+        var utcTime = dataSeven + offset;
+        return new Date(utcTime+1000*60*60*i).toLocaleString();
+    }
+    // var a = parseInt(timerDom);;
+    // console.log(typeof a)
+    // function search(a) {
+    //     console.log(timerDom);
+    //     if(typeof a != 'number'){
+    //         alert("请输入正确的时区!");
+    //         console.log(typeof a)
+    //     }else {
+    //         var data = new Date();
+
+    //     }
+    // }
+    </script>
+</body>
+</html>

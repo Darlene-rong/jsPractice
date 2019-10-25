@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象参数的问题</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    //只有对象才能给属性赋值的权利和调用方法的权利
+        //只有对象才操作属性和方法
+        var json = {
+            title: "22",
+            content: "2"
+        }
+        function tzDialog(json){
+			json.title
+			json.content
+		};
+        
+		var gg = {
+			username:"keke",
+			age:30,
+			address:"长沙",
+			listen:function(){
+			}
+		};
+        //源码 js内部代码
+        var temp = new Object({
+            username:"keke",
+			age:30,
+			address:"长沙",
+			listen:function(){
+			}
+        });
+        gg = temp;
+        delete temp;
+
+
+		gg.username = "keke";//string
+		gg.age = 20;//number
+		gg.address = "长沙";//string
+		gg.listen();
+
+		var a = "2";
+		var b = "3";
+    </script>
+</body>
+</html>

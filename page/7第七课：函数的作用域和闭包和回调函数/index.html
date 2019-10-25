@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+    /*
+        function：是一种数据类型，应用于事件，事件回调函数就是function数据类型
+        应用于代码的时候，应该把函数当做number，string等数据类型一样看待
+        键盘事件，鼠标事件，点击事件等.......
+        特点：达到封装的目的
+        
+        //形参命名 按照变量命名规则
+        function test(参数) {
+                //函数体
+            }
+        
+        //函数体：函数中的函数体 有作用域和生命周期
+
+        写在函数体里面的内容，只有在执行函数的时候才被cpu去执行；
+
+    */
+
+    //
+    var a = 100;
+    //全局变量，所有的函数都可以共享和修改（在执行函数的时候修改）
+    //局部变量：是定义函数中的变量，它的生命周期只在函数中
+    //两者都需要用var 去修饰
+
+    //第一步查找是否存在变量a在作用域中，如果不存在就定义a = undefined；
+    //第二次右查询，如果有a的值  再把100赋值给变量a
+    function test() {
+        //函数体
+        //写在函数里面的变量 是局部变量    局部变量的优先级大于全局变量
+        var a = 200;
+        console.log("test====="+a);//200
+        var b = 100;
+        var c = a+b;
+        return c;
+        //return 返回值 根据情况用， 延续函数的生命周期
+    }
+    test();
+    console.log("全局======="+a);//100
+
+    function test1() {
+        //函数体
+        a = 200;   //加了Var是重新开辟内存空间   不加var 去改变之前a的值  全局变量值
+        console.log("test====="+a);//200
+    }
+    test1();
+    console.log("全局======="+a);//200
+
+//函数里的函数
+    function f(){
+        var a = 100;
+        function test1(a) {
+            console.log(a);
+            // return a;
+        }
+        return test1;
+        //返回一个对象 就能  obj.test
+    }
+    var obj = f();
+    console.log(obj);
+    console.log("-----")
+    //f()()  也可以执行
+    //f()是个执行函数  返回的初始值是undefined
+    //对象.方法和属性
+    //f()返回一个对象将里面的函数暴露出去 就能  对象.方法和属性
+    function f1(){
+        var a = 100;
+        //私有函数
+        function test1() {
+            console.log(a);  //100 
+        }
+        return {
+            test1: test1    //返回一个对象  将私有函数暴露出去
+        };
+        //返回一个对象 就能  obj.test
+    }
+    var obj1 = f1();
+    console.log(obj1.test1());//undefined
+    //直接定义在script中的函数和变量都是全局的； 全局的命名的时候不能重复；重复会发生覆盖，会影响别的代码
+//设计模块---模块模式 
+//私有函数
+    //闭包  防止开发过程中自己的函数命名与别人的函数命名一样的时候  将他们锁起来  防止命名的冲突  有独立的生命周期体
+
+//即使函数(是闭包里面的一种)，只执行一次，独立的运行周期，不会被外界干扰，外界也无法访问即时函数中的函数和变量
+    //如果要调用即时函数里面的函数  要将函数里暴露出来
+
+    //为了解决命名冲突的问题
+    var tavTab1 = (function(){
+        let Tab1={
+            //私有函数
+             a() {
+
+            },
+             b() {
+
+            },
+        }            
+        // return {
+        //     tab1: Tab1
+        // }
+    })();
+    // tavTab1.tab1();//1
+    (function(){
+        function Tab2() {
+            function a() {
+
+            };
+            function b() {
+
+            }
+        }
+    })();
+// 闭包------就是突破函数里面的作用域的问题
+    //-------就是将一个函数的局部变量，能够返回给外界去访问
+    var q = "全部变量";
+    var w = function() {
+        var a = "局部变量";
+        var c = function() {
+            var d = "内部变量";
+            return a;
+        } 
+        return c ;
+    }
+    var ff = w()();//局部变量   w()执行函数，返回是一个function数据类型，并且再执行 
+    console.log(ff);
+
+//$("#id").html().text().css();  jQuery 就是js封装的
+    function $(id){
+        var dom = document.getElementById(id);
+        // var html = function(html) {
+        //     dom.innerHTML = html;
+        //     return dom;
+        // };
+        // var css = function(key,value){
+        //     dom.style[key] = value;
+        //     return dom;
+        // }
+
+        //定义到大对象中
+        var json = {
+            //this 指向json
+            html : function(html){
+                dom.innerHTML = html;
+                return this;
+            },
+            css : function(key,value){
+                dom.style[key] = value;
+                return this;
+            }
+        }
+        return json;
+    }
+    $("box").html("<p>xxxxxx</p>").css("border","1px solid red");
+
+
+    </script>

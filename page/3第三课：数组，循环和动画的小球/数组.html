@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组</title>
+    <link rel="stylesheet" href="./../../css/common.css">
+</head>
+<body>
+    
+    <script>
+    /*
+        数组：（相当于一个容器）
+        （不是一种数据类型，是用来装数据类型的。
+          js数组可以装：string , number, boolean，function，object（日期，数组，正则，ERROR,obj）,undefined  
+         ）
+        定义：
+            var arr = [];//推荐使用这种。开辟了一个undefined空间。
+            var arr = new Array();//占用内存
+        定义并且初始化：
+            var arr = [1,2,3,4,5];
+            var arr = new Array(1,2,3,4,5);
+
+        注意：用数组装载起来的数据，可以很方便的进行控制和管理
+             用数组装载起来的数据，统一去执行一个方法和行为-- 函数function
+        添加数组：
+            1.push()是从栈底添加(数组的后端添加)
+            2.unshift()是从数组的前面添加
+        数组索引：
+            数组的数据一定添加到内存，会给她们创建一个索引，索引的存在是方便去查询元素和控制元素
+            索引从 0 开始
+        删除数组: 括号里面没有参数 （返回的具体的数据类型）
+            1.pop()往后拿删除元素----拿出来之后数组的长度减一；删除并且返回
+            2.shift()往前拿删除元素
+        delete() 只能删除数组中的元素和对象中的属性，不能删除其他的变量
+        剪切
+            splice(starIndex);//从startIndex索引位开始剪切，负数往后裁剪（等价于books.length-1）
+            splice(starIndex,endIndex);
+            splice(starIndex,endIndex,填充值)
+        复制
+            slice(startIndex,endIndex)
+            负数相当于length-1  startIndex < endIndex（必须）
+            负数相当于从最后面开始
+    */
+        var books = ["java","js"]//创建一个空书包
+    //增 删 查 改
+        books.push("c++书籍");//添加书籍 ----"java","js","c++书籍"
+        books.unshift("哈哈哈书籍","嘿嘿书籍")//添加书籍------"哈哈哈书籍","嘿嘿书籍","java","js","c++书籍",
+        //数组的长度 数组.length;
+        
+    //更改数组的值
+        books[2] = "啦啦书籍"//"哈哈哈书籍","嘿嘿书籍","啦啦书籍","js","c++书籍"
+
+    //删除数组
+            //pop()往后拿   shift()往前拿   delete()清空--钱被偷走了给了张白纸
+        var items = books.pop();//c++书籍
+        var items2 = books.shift();//哈哈哈书籍
+        console.log(items);
+
+    //delete 只能删除数组中的元素和对象中的属性，不能删除其他的变量
+        delete books[1]//"嘿嘿书籍", undefined, "js"
+        console.log(books)
+
+    //复制(slice)和剪切(splice) 数组中多个数据的操作，返回值是：数组
+        /*  
+        剪切splice
+            splice(starIndex);//从startIndex索引位开始剪切，负数往后裁剪（等价于books.length-1）
+            splice(starIndex,endIndex);
+            splice(starIndex,endIndex,填充值)
+        */
+    //splice(starIndex);
+        var nbs = books.splice(1);//
+        console.log(books)//"嘿嘿书籍"
+        books.push("1书籍","2书籍","3书籍","4书籍","5书籍","6书籍")
+        //["嘿嘿书籍", "1书籍", "2书籍", "3书籍", "4书籍", "5书籍", "6书籍"]      
+    //splice(starIndex,endIndex);
+        var nbs1 = books.splice(1,3);
+        //["嘿嘿书籍", "4书籍", "5书籍", "6书籍"]
+    //splice(starIndex,endIndex,填充值)
+        var nbs2 = books.splice(1,2,"10书籍")
+        //["嘿嘿书籍", "10书籍", "6书籍"]
+        console.log(books);
+
+    /*  
+    复制
+        slice(startIndex,endIndex)
+        负数相当于length-1  startIndex < endIndex（必须）
+        负数相当于从最后面开始
+    */
+        var arr = [1,2,3,4,5,6,7];
+        var ns = arr.slice(1,3);//不包含最后一个
+        //[2, 3]
+        console.log(ns)
+    </script>
+</body>
+</html>

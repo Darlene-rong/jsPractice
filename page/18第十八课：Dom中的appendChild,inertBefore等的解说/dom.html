@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+      function $(id){
+          return document.getElementById(id);
+      }  
+      window.onload = function(){
+          /*
+            innerHTML 和 createElement 的区别
+            在火狐里面innerText是不支持的
+            
+          */
+
+          //文本赋值innerHTML
+          $("box").innerHTML = "<p>innerHTML</p>";
+          //兼容性写法
+          //$("box").innerHTML = $("box").textContent = "ok"
+
+          //动态创建
+          var spanDom = document.createElement("p");
+          spanDom.innerHTML = "createElement";
+          //给我们盒子动态添加子元素 appenChild
+          $("box").appendChild(spanDom);
+          //innerHTML绑定事件
+      }
+    
+    </script>
+</body>
+</html>

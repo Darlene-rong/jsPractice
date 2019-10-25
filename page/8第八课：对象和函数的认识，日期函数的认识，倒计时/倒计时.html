@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>倒计时</title>
+</head>
+<body>
+    <div id="timer"></div>
+    <script type="text/javascript">
+    /*
+        距离明年的元旦放假还有多少天
+
+        日期的构造函数  
+            var data = new Date(year,moth,date);//至少保证两个参数
+            var data = new Date(year,month,date,week,hour,minutes,second,mss);//完整
+    */
+    //获取当年的时间和下一年的时间
+    window.onload = function() {
+
+        function star(y,m,d) {
+            var data = new Date();//当前时间
+            var end = new Date(y,m-1,d) //当前年份加一年  明年一月一份 
+            console.log(end)//(Tue Jan 01 2019 00:00:00 GMT+0800 (中国标准时间))
+            var time = end.getTime() - data.getTime();//毫秒数(获取毫秒数)
+            console.log(time);
+            var sec = time/1000;//公式：1秒 == 1000毫秒  1分钟 = 60秒
+            console.log(sec)
+            //计算天数（还剩下多少天）
+            var dd = Math.floor(sec/60/60/24);//四舍五入取整
+            console.log(dd);
+            var hh = Math.floor(sec/60/60%24);
+            var mm = Math.floor(sec/60/60%24);
+            var ss = Math.floor(sec%60);
+
+            var result = "距离国庆还有:"+dd+"天"+hh+"小时"+mm+"分"+ss+"秒"
+            document.getElementById("timer").innerHTML = result;
+        }
+        star(2018,10,1);
+        setInterval(function(){
+            star(2018,10,1);
+        },1000)
+
+    }
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: absolute;
+    }
+    </style>
+</head>
+<body>
+    
+    <div id="box">
+        
+    </div>
+    <script>
+        window.onload = function() {
+            var boxDom = document.getElementById("box");
+            //onmousedown 事件会在鼠标按键被按下时发生。
+            boxDom.onmousedown = function(e) {
+                /*
+                    clientX	返回当事件被触发时，鼠标指针的水平坐标。
+                    clientY	返回当事件被触发时，鼠标指针的垂直坐标。
+                    offsetX,offsetY	发生事件的地点在事件源元素的坐标系统中的 x 坐标和 y 坐标。
+                    onmouseup	鼠标按键被松开。
+                    onmousemove	鼠标被移动。
+                */
+                console.log(e)
+                var $this = this;
+                var x = e.clientX;
+                var y = e.clientY;
+                var left = $this.offsetLeft;
+                var top = $this.offsetTop;
+                document.onmousemove = function(e) {
+                    var xx = e.clientX;
+                    var yy = e.clientY;
+                    var nl = xx - x +left;
+                    var nt = yy - y + top;
+                    $this.style.left = nl + "px";
+                    $this.style.top = nt + "px";
+                };
+                document.onmouseup = function() {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                } 
+
+            }
+        }
+    
+    </script>
+</body>
+</html>

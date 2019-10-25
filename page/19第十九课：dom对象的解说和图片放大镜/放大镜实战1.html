@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body,html{background-color: dimgrey}
+    #imgbox{height: 180px;width: 180px;background-color:rgb(206, 19, 19);position: absolute; top: 100px;left:100px;margin: 10px;overflow:hidden;}
+    .dragimg{cursor:move;display: none;width: 100px;height: 100px;position: absolute; top: 0; left: 0;background-color: rgb(187, 155, 11);opacity: 0.5;filter: alpha(opacity=50)}     
+    #maximgbox{width: 500px;height:500px;position: absolute;top:110px;left:320px;overflow: hidden;background-color: transparent;}
+    #maximgbox img{position: absolute;top:0;left: 0;}
+    .bgmark{position:absolute;top:0;left:0;height:100%;width:100%;opacity: 0;cursor:move;}
+    </style>
+</head>
+<body>
+    <div id="imgbox">
+        <img src="http://img13.360buyimg.com/n1/jfs/t2029/300/648214297/246948/e2032999/561f1f2fN9b6d042b.jpg" alt="" height="180" width="180" />
+        <!-- 定义一个拖拽图层 -->
+        <span class="dragimg" id="drag"></span>
+        <!-- 解决在IR浏览器中闪动的问题  CSS方式-->
+        <!-- 
+
+            js解决方案：父子鼠标事件的隔离：onmouseenter 和 onmouseleave
+			绑定box鼠标移入和移出事件
+			boxDom.onmouseenter = function(){
+				spanDom.style.display = "block";
+			};
+			boxDom.onmouseleave = function(){
+				spanDom.style.display = "none";
+			};
+
+         -->
+        <div class="bgmark"></div>
+    </div>
+    <div id="maximgbox">
+        <img id="maximg" src="http://img13.360buyimg.com/n0/jfs/t2029/300/648214297/246948/e2032999/561f1f2fN9b6d042b.jpg"/>
+    </div>
+    <script>
+        /*
+            放大镜的原理
+                1.准备一张大图片 一张小图片
+                2.定义拖拽层
+                3.box绑定onmouseover(鼠标进入) 和 onmouseout（鼠标离开） 事件
+                4.实现层的拖拽中心点的问题 和层闪动的问题
+                5.通过拖拽求出放大的x,y的比例
+                6.用x,y比例计算出大图要偏移的位置
+                7.效果展示
+            类似延伸技术：自定义滚动条
+        */
+        function $(id){
+            return document.querySelector(id)
+            //或者
+                //document.getElementById(id);
+        }
+        (function(){
+            //获取盒子的id
+            var boxDom  = $("#imgbox");
+            var imgDom = $("#maximg");
+            var maximgDom = $("#maximgbox")
+            console.log(boxDom)
+            //获取盒子里面的span元素
+            var spanDom = boxDom.getElementsByTagName("span")[0];
+                //或者： var spanDom = boxDom.children[1];
+            //box绑定 鼠标移进移出 事件  onmouseover onmouseout
+            boxDom.onmouseover = function(){
+                spanDom.style.display = "block";
+                imgDom.style.display = "block";
+                maximgDom.style.display = "block";
+            };
+            boxDom.onmouseout = function(){
+                spanDom.style.display = "none";
+                imgDom.style.display = "none";
+                maximgDom.style.display = "none";
+            }
+            //box 绑定盒子的移动事件 onmousemove事件  在boximg这个盒子里面的移动事件
+            boxDom.onmousemove = function(e){
+                var x = (e.pageX || e.clientX) - boxDom.offsetLeft;
+                var y = (e.pageY || e.clientY) - boxDom.offsetTop;
+                //将鼠标移到span 的中心点
+                    var top = y - spanDom.offsetWidth/2;
+                    var left = x - spanDom.offsetHeight/2;
+                //临界点判断
+                    //上边界
+                    if(top<0) top=0;
+                    if(left<0) left=0;
+                    //右边界
+                    var maxleft = boxDom.offsetWidth - spanDom.offsetWidth;
+                    var maxTop = boxDom.offsetHeight - spanDom.offsetHeight;
+                    if(left>maxleft) left=maxleft;
+                    if(top>maxTop) top=maxTop;
+                //将x y 赋值给 span元素的 top left
+                    spanDom.style.top = top +"px";
+                    spanDom.style.left = left + "px";
+
+                //通过小图片的位置计算大图片的位置   计算相对比例
+                    var spitleft = left / maxleft;
+                    var spittop = top / maxTop;
+                    //拖过图片层减去父元素maxImgbox的宽度，因为要把图片限制在可视区域中
+                    var maximgtop = (imgDom.offsetHeight - imgDom.parentElement.offsetHeight)* spittop * -1;
+                    var maximgleft = (imgDom.offsetWidth - imgDom.parentElement.offsetWidth)* spitleft * -1;
+                    imgDom.style.top = maximgtop + "px";
+                    imgDom.style.left = maximgleft + "px";
+            }
+        })();
+        //闭包 防止外界的变量重复定义
+    </script>
+</body>
+</html>

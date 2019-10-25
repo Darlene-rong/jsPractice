@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>dom对象的深入理解</title>
+</head>
+<body>
+    <div id="box">adasdas</div>
+    <div id="box1">213123123</div>
+    <div id="box2">qweqeqweqwe</div>
+    <script>
+    /*
+        对象：就是给属性赋值或者调用方法；
+        添加样式和绑定事件
+        在所有dom对象下方有一个子对象就是：style  
+        样式里面的都可以style.
+
+        JS中任何的对象（dom对象）都能通过动态扩展属性和方法
+    */
+
+    var bocDom = document.getElementById("box").style;
+    for(var key in bocDom){
+        // console.log(key+"===="+bocDom[key])
+    };
+    document.getElementById("box")["style"]["backgroundColor"] = "red";//可以当做参数进行传递
+    document.getElementById("box1").style.backgroundColor = "black";
+    //fengzhuang 
+    function css(id,css,value){
+        var dom = document.getElementById(id);
+        dom.style[css] = value;
+    };
+    css("box","color","pink");
+    css("box1","color","#fff")
+    css("box2","border","1px solid #666");
+
+    //对象可以动态扩展属性，删除，覆盖
+    document.getElementById("box")["onclick"] = function(){
+        alert("1")
+    };
+    var json = {username:"jack"};
+    json.username = "kk";
+    json.username = "QQ";//覆盖前面的赋值  打印出来QQ
+    console.log(json.username);
+    //对象覆盖
+    document.getElementById("box")["onclick"] = function(){
+        alert("2")//覆盖前面的点击事件     打印弹框2
+    }
+    </script>
+</body>
+</html>

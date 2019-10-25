@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var json = {"username":"javk"};
+        function test(age){
+          console.log(this.username + "====" +age);
+            //如果不Call    this指向window
+        };
+        test.call(json,20);
+        test.apply(json,[10,31,193]);//与Call的意义一样 ，不过apply传的事数组·
+        //.call指向对象
+        //两层含义：执行函数test(),改变函数中this.de执行
+
+
+        //slice() 数组的复制   源代码
+        Array.prototype.slice = function(start,end) {
+            console.log(arr);//[1,2,3,5,43,23,5,3]
+            var arr1 = [];
+            var index = (start<0?length+start:start) || 0;
+            var end = (end<0?length+end:end) || this.length;
+            for(var i=index;i<end;i++) {
+                // console.log(this[i]);
+                arr1.push(this[i])
+            }
+            return arr1;
+        };
+        
+        var arr = [1,2,3,5,43,23,5,3];
+        console.log(arr.slice.call(arr,0,3));
+        //[1, 2, 3]
+    
+    //argument：类数组  有数组长度，有小标，不能调用数组的soty push revrse shift slice
+    </script>
+</body>
+</html>

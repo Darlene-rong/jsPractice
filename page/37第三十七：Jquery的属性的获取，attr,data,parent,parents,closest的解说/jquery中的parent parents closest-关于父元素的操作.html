@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:red;width:100px;height:100px;}
+  </style>
+ </head>
+ <body>
+	
+
+	<div class="items">1
+		<div class="items">2
+			<ul >3
+				<li >4
+					<a href="javascript:void(0);" class="del">删除5</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	
+	<hr/>
+
+	<div class="items">1
+		<div class="items">2
+			<ul >3
+				<li>4
+					<a href="javascript:void(0);" class="del">删除5</a>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+
+	<hr/>
+
+	<script src="jquery-1.11.1.min.js"></script>
+	<script>
+		
+		//parent()找到第一级父类 
+
+		//parents() 就是不断的往父级元素去查找一直找到根位置
+		//closest() 一定要有过滤条件,往父级找，第一级父亲没有，继续往上找，只要在某个父级上找到了就直接返回
+
+
+		$(".del").click(function(){
+			//$(this).parent().remove();
+
+			$(this).parents(".items").remove();
+
+			$(this).closest(".items").remove();
+
+			
+
+		});
+			
+		
+				
+	</script>
+ </body>
+</html>

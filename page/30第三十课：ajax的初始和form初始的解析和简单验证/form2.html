@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    form{
+        width: 180px;
+        margin: 10px auto;
+        border: 1px solid #ddd;
+        padding: 30px;
+    }
+    .fl{float: left;}
+    </style>
+</head>
+<body>
+    <form id="loginForm" name="loginForm">
+        <label>用户名：<input type="text" name="username" /></label>
+        <label>密码：<input type="password" name="password"/></label>
+        <p>性别：
+            <label><input type="radio" name="male" value="1" />男</label>
+            <label><input type="radio" name="male" value="0" />女</label>
+        </p>
+        <p>爱好：
+            <label><input type="checkbox" name="hobbys" value="1" />吃饭</label>
+            <label><input type="checkbox" name="hobbys" value="2" />喝水</label>
+        </p>
+        <p>省份：
+            <select name="prov" id="">
+                <option selected = "selected">--请选择--</option>
+                <option value="01">湖南</option>
+                <option value="02">广州</option>
+            </select>
+        </p>
+        <label>描述：<textarea name="desc"></textarea></label>
+        <input type="button" value="提交" onclick="toSave()">
+    </form>  
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script>
+        /*
+            document.forms 拿到页面中所有的form的个数
+
+            document.images---获取页面中的所有图片
+            document.links ----所有的链接
+            document.title-----页面中的标题
+            document.referer-----上一级的链接
+        
+        */
+
+        //获取form表单里面的参数值
+        function toSave() {   
+            //拿到form表单对象 方法一
+            // var formDom = document.getElementById("loginForm");
+
+            //拿到form表单对象 方法二
+               // var formDom = document.forms[0];
+            
+            //拿到form表单对象 方法三           
+                // var formDom = document.forms["loginForm"]; //中括号里面是name
+               //获取里面单个元素  formDom.元素name值.value
+                //    var username = formDom.username.value;  
+                //    var password = formDom.password.value;
+                //    var pro = formDom.prov.value;
+                //    var sex = formDom.male.value;
+                //    var check = formDom.hobbys.value;
+                //    var dec = formDom.desc.value;
+                //    console.log(username + "==" +password+"==="+ pro +"===" + sex + "===" + check + "===" +dec)                                                                                                                                                                                 
+            //获取form表单中所有的控件元素
+
+            /*  
+            拿到form中所有的控件元素
+                var formdom = document.forms['form的name'].elements
+            循环拿单个控件元素
+                for(var i=0;i<formdom.length;i++){ console.log(fromdom[i].value)}
+
+                formdom[0].value
+                formdom['控件的id'].value
+
+                encodeURIComponent: 解决参数中有特殊字符的问题
+            */
+            var formElements = document.forms['loginForm'].elements;
+            console.log(formElements)
+            var json = {};
+            var len = formElements.length;
+            var params = [];
+            for(var i=0;i<len;i++){
+                console.log(formElements[i])
+                //转成小写 toLowerCase()
+                var type = formElements[i].type.toLowerCase();
+                //判断 进行筛选
+                if(type !="button" && type!="submit" && type!="reset"){   //筛选掉为按钮的控件 type为 button submit reset
+                    //如果控件为复选框或者为radio  '||' 或者  '&&'并且
+                    if((type=="radio" || type == "checkbox" ) && formElements[i].checked){
+                        params.push({
+                            "name": formElements[i].name,
+                            "value": encodeURIComponent(formElements[i].value)
+                        })
+                    }else {
+                        if(type!="radio" && type != "checkbox"){
+                            params.push({
+                                "name": formElements[i].name,
+                                "value": encodeURIComponent(formElements[i].value)
+                            })
+                        }
+                    }
+                }
+                //提防 参数里面混入美元符号等特殊字符  进行转义
+                // return encodeURIComponent(params);
+            }
+            // jquery   serializeArray()
+            alert(JSON.stringify(params) + "===" + JSON.stringify($("#loginForm").serializeArray()))
+        }
+    </script>           
+</body>
+</html>

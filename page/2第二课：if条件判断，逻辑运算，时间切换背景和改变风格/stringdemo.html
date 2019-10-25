@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串</title>
+</head>
+<body>
+    <div id="box"></div>
+    <textarea  id="tearea" cols="30" rows="10"></textarea>
+    <script tyep="text/javascript">
+
+//字符串
+        /*
+            字符串
+            为什么在JS语言中，会出现单引号和双引号？
+            单引号里面用双引号，双引号里面用单引号
+        */
+        var str = "I am a girl"
+        document.getElementById("box").innerHTML = str;
+
+//字符串里的特殊字符
+        /*
+            特殊字符
+            在字符串要专业语法的字符： \ " \ ' \\
+            转义字符 \
+            换行：\n
+            回车符：\r 
+            制表符：\t (相当于一个tab键)
+        */
+        var str1 = '\'';
+        console.log("结果"+str1);// 结果：'
+        /*
+            /n 和 /r 的区别：
+            1. /r是回车，使光标到行首；/n是换行，使光标下移一格；
+                通常用的Enter键是两个加起来的一起的效果
+        */
+        var str2 = '啦啦\r哈哈';
+        /*
+            啦啦
+            哈哈
+        */
+        var str3 = '啦啦\r\n哈哈';
+        /*
+            啦啦
+            哈哈
+        */
+        var str4 = '啦啦\n\r哈哈';
+        /*
+            啦啦
+            
+            哈哈
+        */
+        document.getElementById("tearea").value = str4;
+
+
+    </script>
+</body>
+</html>

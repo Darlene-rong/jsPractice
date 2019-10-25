@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    	*{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";}
+        a{text-decoration:none;color:#333}
+        li{list-style:none}
+        #box{background:red;width:100px;height:100px;}
+    </style>
+    <style>
+        p{font-size: 16px;color: brown;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <p>sdadasd</p>
+    <a href="javascript:;" id="clickme">click me</a>
+	<script>
+        window.onload = function(){
+            //var boxDom = document.getElementById("box");
+            //boxDom.style.background = "green";
+            document.getElementById("clickme").onclick = function(){
+                //document下方有一个子对象:styleSheets
+                //解说：styleSheets 
+                //获取页面中所有的样式列表对象，包含<style>和<link>
+                var sheets = document.styleSheets;
+                //alert(sheets.length)
+                //for(var key in sheets[1]){
+                //	console.log(key+"==="+sheets[1][key]);
+                //}
+                var sheet1 = sheets[1];
+                alert(sheet1.cssText);
+                
+                //获取样式
+                //var c1 = sheet1.cssRules[0].cssText;
+                //var c2 = sheet1.cssRules[1].cssText;
+                //操作样式
+
+                //sheet1.insertRule("p{font-size:24px}",1);
+                //alert(sheet1.cssText);
+                //sheet1.deleteRule(0);
+                //sheet1.deleteRule(0);
+                //alert(sheet1.cssText);
+                    
+                //禁止样式
+                sheet1.disabled =  "disabled";
+                sheets[0].disabled =  "disabled";
+                
+                /*
+                for(var j=0;j<sheets.length;j++){
+                    var sheet = sheets[j];
+                    var rules = sheet.cssRules;
+                    for(var i=0;i<rules.length;i++){
+                        rules[i].style.color = "green";
+                        rules[i].style.background = "red";
+                    }
+                    alert(sheet.cssText);
+                }*/
+                
+            
+            }
+
+            
+            /*
+            
+                styleSheets下面的下面的属性和方法：
+                cssRules===[object CSSRuleList]
+                insertRule===function insertRule() { [native code] }
+                deleteRule===function deleteRule() { [native code] }
+                addRule===function addRule() { [native code] }
+                removeRule===function removeRule() { [native code] }
+                rules===[object CSSRuleList]
+                disabled===false
+            
+            */
+            
+            //var sheets = document.styleSheets;//.length获取样式的规则
+            //alert(sheets[0].cssText);
+            //sheets[0].cssRules[4].style.background = "green";
+            //sheets[0].cssRules[4].style.border = "10px solid #ccc";
+            //sheets[0].insertRule("div{margin:100px}",1);
+
+        };
+    </script>
+</body>
+</html>

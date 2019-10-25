@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>元素排序</title>
+    <style>
+       *{padding: 0;margin: 0;}
+        a{text-decoration: none;color: #fff;}
+        ul li{list-style: none}
+        td{padding: 5px; border: 1px solid #ddd;background-color: #111;color: #fff;}
+        body{font-size: 14px;font-family: 'Courier New', Courier, monospace}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text" value="2" />
+        <input type="text" value="15" />
+        <input type="text" value="3" />
+        <input type="text" value="6" />
+        <input type="text" value="9" />
+        <input type="text" value="10" />
+    </div>
+
+    <input type="button" value="排序" onclick="tzSort()" />
+    <script>
+    
+    //跟排序有关的狗可以转换为数组进行排序
+    function tzSort() {
+        var arr = [];
+        var boxDom = document.getElementById("box")
+        var inputs = boxDom.children;//所有的box下的子元素
+        //找到一个元素下面所有的子元素
+        console.log(inputs.length) //6
+        var len = inputs.length;
+        for(var i=0;i<len;i++){
+            arr.push(inputs[i]);//对象
+        };
+        console.log(arr)
+        /*
+        (6) [input, input, input, input, input, input]
+            0:input
+            1:input
+            2:input
+            3:input
+            4:input
+            5:input     
+        */
+        arr.sort(function(a,b){
+            return a.value - b.value;
+        })
+        console.log(arr)
+        
+        //清空一次  清空 要不然会叠加
+        arr.innerHTML = ""
+        //循环排序好的数组
+        for(var i = 0;i<arr.length;i++){
+            boxDom.appendChild(arr[i]);
+            //parsent.appendChild(children对象)添加一个元素的对象
+        }
+    }
+    
+    </script>
+
+</body>
+</html>

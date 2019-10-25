@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    /*
+        对象  object ----
+            json就是对象
+            对象是由键值对组成的一种数据形态
+            格式：(键:值)
+                var obj = {
+                    key:value,
+                    key1:value1,
+                    key2:value2
+                };
+            注意：a.对象结尾的键值不要加逗号的，在ie6 7 8它会把它当做一种错误阻断代码的执行;
+                 b.检查对象的bug第一反应就是检查对象的最后一个键值对有没有加逗号(不要加逗号);
+            1.对象和数组
+                对象可以通过键去获取值  
+                数组只能装载同一类,数组是一个容器，可以装任何的东西，不能很好的去体现一个事物的完整的特征和信息，获取不方便维护，修改很麻烦；
+                对象可以体现一个事物的完整的特征和信息
+            定义对象：
+                1. var obj = {};
+                2. var obj = new Object();//浪费内存空间
+            
+            写法：
+                var person = {//推荐写法
+                    username : "kk"
+                }
+                var person = {
+                    'username' : "kk"
+                }
+                var person = {//最标准写法
+                    "username" : "kk"
+                }
+                //user.name  必须用 "user.name"  在加"."的时候加双引号 才是一个完整的key
+            能够被对象点击的属性，一定是包含在对象中
+    */
+    //r同学，今年20岁，家住广州，在吃饭
+        //obj表示
+        var rumo = {
+            username: "r",
+            age: 20,
+            address: "广州",
+            "user.name": "jack",
+            doing:function() {
+                console.log("在吃饭");
+            }
+            //末尾不能加逗号
+        }
+        //arr表示
+         var arr = [];
+         arr.push("r");
+         arr.push(20);
+         arr.push("广州")
+    
+    /*
+        对象的修改，删除，新增，查找，属性探测，获取，枚举（循环）
+            对象的排序需要依托数组
+
+            对象有内置属性
+            typeOf 只能判断数据类型
+            constructor  能判断具体的数据类型
+    */
+        //对象的赋值 两种方式
+        rumo.email = "z219564229@qq.com";
+        rumo["email"] = "z219564229@qq.com"
+        //为什么提供两种赋值的方式和获取的方式
+
+        //修改  key是字符串 加双引号
+        rumo["username"] = "spring";//使用[]去改变值得原因就是因为 会出现一个"."的情况下，无法去操作，因为key必须是字符串
+        rumo.username = "spring";
+
+        //获取
+        console.log(rumo.username);//修改之后获取值为spring
+        console.log(rumo["user.name"]);//jack
+
+        //对象删除属性和删除对象
+        // rumo = null;//删除对象
+        delete rumo.email;//删除属性 
+        //in  特征 不管是对象自定义属性还是父类(object中比如toString , constructor， valueOf)中继承的属性都可以识别
+
+        console.log("email" in rumo)//用in 检查元素是否存在对象中 在 返回true 否则返回 false
+        console.log("constructor" in rumo)//对象内置的属性（构造函数）  返回true;
+        console.log("valueOf" in rumo)//对象内置的属性
+
+        //hasOwnProperty: 检查属性是否存在对象中，但是不能检查父类中的属性
+        console.log(rumo.hasOwnProperty("email"))//false
+        console.log(rumo.hasOwnProperty("age"))//true
+        console.log(rumo.hasOwnProperty("toString")) //false       
+            //内置属性（数组跟对象是父子关系  继承obj内置属性）
+                console.log(arr)//默认的时候就去调用arr.toString方法
+                console.log(arr.constructor);//判断当前具体的数据类型是什么   obj  ƒ Array() { [native code] }
+                var num = 1;
+                console.log(num.constructor) //ƒ Number() { [native code] }
+
+                //判断是否为一个数组
+                function isArray(arr) {
+                    if(typeof arr == "object" && arr.constructor.indexOf("Array") != -1) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                //过程
+                var a = 10;
+                //保留小数点的有效位   没传参数四舍五入  相当于round()
+                a.toFixed();
+                    //
+                    var temp = new Number(a);//new 一个对象
+                    a = temp.toFixed();
+                    delete temp;
+        //删除数组  arr = null; 赋值为空;
+
+        //能够被对象点击的属性，一定是包含在对象中
+
+        //对象的循环 for in ,  是拿到对象中所有的keys 和 value值
+        for(var key in rumo) { //变量名key 随便取名   
+            console.log(key+"======>"+rumo[key])
+        };
+        
+        var jsontest ='{"name":"5222222333333333"}';
+        var datta = (new Function("", "return " + jsontest))();
+        console.log(datta)
+    </script>
+</body>
+</html>

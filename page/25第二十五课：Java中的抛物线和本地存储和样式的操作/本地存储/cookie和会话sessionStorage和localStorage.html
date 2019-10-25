@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #box{background:red;width:100px;height:100px;}
+    </style>
+</head>
+<body>
+    <input type="text" id="zr_username">
+    <input type="button" onclick="checkCookie()" value="checkCookie">
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            /*
+                Cookie  记录客户端用户信息 是一种客户端的数据存储
+                    缺点： 不安全 只能存储小于4KB的内容
+                存储格式：
+                    名/值对形式存储
+                当浏览器从服务器上请求Web页面时，属于该页面的Cookie会被添加到该请求中，服务端通过这种方式来获取用户的信息
+            */
+        }
+        /*
+            toGMTString() 方法可根据格林威治时间 (GMT) 把 Date 对象转换为字符串，并返回结果
+        
+        */
+        var fzCiikie = {
+            setCookie(name,value,day){
+                var d = new Date();
+                d.setTime(d.getTime() +( day*24*60*60*1000));
+                var newd = "expires=" + d.toGMTString(); 
+                document.cookie = name + "=" + value + ";" + newd;
+            },
+            getCookie: function(name){
+                var cname = name + "=";
+                var ca = document.cookie.split(";");
+                for(var i=0;i<ca.length;i++){
+                    var c = ca[i].trim();
+                    if(c.indexOf(name) == 0){
+                        return c.substring(cname.length,c.length)
+                    }
+                }
+            }
+        }
+        function checkCookie(){
+            var value = $("zr_username").value;
+           console.log(value);
+        }
+
+    </script>
+</body>
+</html>

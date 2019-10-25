@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <textarea name="" id="box2" cols="30" rows="10"></textarea>
+    <script type="text/javascript" src="js/wordControl.js"></script>
+    <script type="text/javascript">
+
+    
+        //定义数组
+        var arr = [];
+        arr.push("I love you");
+        arr.push("1掌握字符串中substring的用法");//arr[0]+arr[1].substring(0,1)
+        arr.push("2掌握字符串中substring的用法掌握字符串中substring的用法掌握字符串中substring的用法");
+        arr.push("3掌握字符串中substring的用法掌握字符串中substring的用法掌握字符串中substring的用法");
+        arr.push("4掌握字符串中substring的用法掌握字符串中substring的用法");
+
+        wordConsole.console("box",30,arr);
+
+        var arr2 = new Array(
+            "afwqeqweqweqeqweq",
+            "afwqeqweqweqeqweq", 
+            "afwqeqweqweqeqweq","afwqeqweqweqeqweq"
+            ,
+            "afwqeqweqweqeqweq","afwqeqweqweqeqweq"
+        );
+        wordConsole.console("box2",20,arr2)
+    </script>
+</body>
+</html>

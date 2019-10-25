@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    //对象里面的函数就是私有函数 不受外界的干扰
+        var json = {
+            age: 10,
+            username: "jack",
+            doing: {
+                eat: "aplle"
+            }
+        };
+        //获取对象
+        json.age = 30;
+        //删除属性
+        // delete json.age
+        //删除对象
+        // json = null
+        //枚举
+        for(var key in json) {
+            console.log(key+"===="+json[key]);
+        };
+        //
+        json.doing.eat = "king"
+        //反推  解析对象
+        //对象的key值永远都是字符串
+        
+        var json1 = {
+            user: {
+                "keke.age" : 20
+            }
+        };
+        json1.user["keke.age"] = 20;
+        
+        var json2 = {
+            user: {
+                keke: {
+                    age: 20
+                }
+            }
+        }
+        json2.user.keke.age = 20;
+        //es5中js对象的一些延伸
+        var keys = Object.keys(json);//返回key 的一个数组  把所有的key都拿出来
+        console.log(keys);// ["age", "username", "doing"]
+        console.log(Array.isArray(keys))//数组 判断是否为一个数组   true
+    
+    </script>
+</body>
+</html>

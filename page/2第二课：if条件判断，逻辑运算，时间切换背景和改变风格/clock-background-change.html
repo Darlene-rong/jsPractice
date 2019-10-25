@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>换肤</title>
+    <style>
+        html body{
+            height: 100%;
+            width: 100%;
+        }
+        #bgImg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            background-size: cover;
+            /* 等比例 */
+            z-index:-1;
+        }
+        #timer {
+            height: 20%;
+            background: transparent;
+            /* transparent就是rgba(0,0,0,0) */
+            /* opacity也是透明度,不过透明的范围包括文字所有覆盖的 */
+            color: #fff;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bgImg" style="background-image:url('../../img/01.jpg')"></div>
+    <div id="timer">23:23:00</div>
+    <script type="text/javascript">
+        /*
+            1.根据时间进行换肤操作，并且显示当前时间
+                a.6:00-9:00切换一种早晨的图片----01.jpg
+                b.10：00-12：00切换成中午的图片----01.jpg
+                c.13:00---18:00 切换成下午的图片----01.jpg
+                d.19:00--00:00 切换成晚上的图片 ----01.jpg          
+        */
+        //日期函数
+        // var dateToday  = new Date();
+        // console.log(dateToday)
+        // var h = dateToday.getHours();//0-23
+        // console.log(h);
+        // var m = dateToday.getMinutes();//
+        // console.log(m);
+        
+        
+        //background-image 要将 '-'去掉该成大写  js中不识别
+
+        //定时器
+        //放timer里面每次执行一次要获取一次，不方便
+        /*
+            去进行封装 实现 定时切换图片功能
+            bgDom.style.backgroundImage = "url('../../img/02.jpg')"
+            var bgDom = document.getElementById("bgImg");
+            var name = "01";
+            if(h>=6 && h<=9) {
+                name = "02"
+            } else if(h>=10 && h<=12) {
+                name = "03"
+            } else if(h>=13 && h<=18) {
+                name = "04"
+            } else if(h>=19 && h<=23) {
+                name = "01"
+            } else {
+                name = "01"
+            }
+            bgDom.style.backgroundImage = "url('../../img/'+name+'.jpg')";    
+        */
+        var tdom = document.getElementById("timer");
+        console.log(tdom)
+        var timer = setInterval (function() {
+            var d = new Date();
+            var h1 = d.getHours();//获取时间
+            var s1 = d.getSeconds();//获取秒钟
+            var m1 = d.getMinutes();//获取分钟
+            // console.log(tdom)
+            //给时钟分钟秒钟小于10的时候加上'0'
+            /*
+                if(h1<10) {
+                    h1 = "0" + h1;
+                }
+                if(m1<10) {
+                    m1 = "0" + m1;
+                }
+                if(s1<10) {
+                    s1 = "0" +s1;
+                }  
+                tdom.innerHTML =h1 +":"+ m1 +":" + s1          
+            */
+           //注意不能数字0 加上 h ;因为h的数据类型为number  所以需要字符串“0”
+            tdom.innerHTML = (h1<10?"0"+h1:h1) +":"+ (m1<10?"0"+m1:m1) +":" + (s1<10?"0"+s1:s1);
+            loadingData()
+        },1000);
+        //封装
+        function loadingData() {
+            //根据时间差进行图片切换
+            // /*
+                var bgDom = document.getElementById("bgImg");
+                var name = "";
+                // bgDom.style.backgroundImage = "url('../../img/02.jpg')"
+                var dateToday  = new Date();
+                
+                var h = dateToday.getSeconds();//0-23
+                // console.log(h)
+                if(h>=0 && h<=20) {
+                    name = "02"
+                    console.log(name+"====="+h)
+                } else if(h>=21 && h<=40) {
+                    name = "03"
+                    console.log(name+"====="+h)
+                } else if(h>=41 && h<=50) {
+                    name = "04"
+                    console.log(name+"====="+h)
+                } else if(h>=51 && h<=60) {
+                    name = "01"
+                    console.log(name+"====="+h)
+                } else {
+                    name = "01"
+                    console.log(name+"====="+h)
+                }
+                console.log(name);
+                // console.log
+                bgDom.style.backgroundImage = "url('./../../img/"+name+".jpg')";            
+            // */
+           //根据取余数进行图片切换---->除数小于被除数，等于除数
+           /*
+                0%60 0
+                1%60 1
+           */
+          /*
+                var dateToday  = new Date();
+                    console.log(dateToday)
+                var s = dateToday.getSeconds();//0-23
+                var snum = 60-s;
+                console.log(snum)          
+          */
+            
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    a{text-decoration: none;color: #fff;}
+    ul,li{list-style: none;}
+    body{font-size: 12px;font-family: "微软雅黑"}
+    #box{width: 100px;height: 100px;background: pink;position: absolute;left: 0;top: 0;}
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <script>
+    /*
+        位移动画：改变的事top left 所以要设置定位
+        动画跟时间有关
+        定时器执行
+
+        控制方向：
+            碰到边界的时候需要返弹回去（）
+            定义个速度 来控制方向
+            正为正方形  负为负方向
+            1.首先获取window浏览器的宽高度
+        动画里面的速度的正负是决定方向的
+    */
+
+    //闭包  （把所有的代码锁在闭包中，不会受到外界的干扰）
+        (function() {
+
+
+            //一个球的行为
+            var x = 0;
+            var y = 0;
+            var speed = 30;
+            var xtep = speed;
+            var ytep = speed;//统一控制
+           
+
+            //获取浏览器的宽度和高度
+            function draw(boxDom) {
+                var boxDom = document.getElementById("box");
+                var maxwidth = window.innerWidth - boxDom.offsetWidth;//boxDom.offsetWidth盒子的宽度
+                console.log(maxwidth)
+                var maxheight = window.innerHeight - boxDom.offsetHeight;//获取浏览器的高度减去盒子的高度
+                //每一帧会重新获取盒子的高度
+                x += xtep;
+                y += ytep;
+                //x
+                if(x >= maxwidth) {
+                    xtep = -speed;
+                    x = maxwidth;
+                }
+                if(x <=0) {
+                    xtep = speed;
+                    x = 0;
+                }
+                //如果大于浏览器高度的时候
+                if(y >= maxheight) {
+                    ytep = -speed;
+                    y = maxheight;
+                }
+                if(y <=0) {
+                    ytep = speed;
+                    y = 0;
+                }
+
+                //匀速移动的位置
+                boxDom.style.left = x + "px";
+                boxDom.style.top = y + "px";
+            }
+            setInterval(function(){
+                draw();//触发draw函数  改变top和left的值进行改变
+            },1000/30)  
+        }) ()
+    
+    //产生大量的dom对象 对于性能很不友好  所有
+    </script>
+</body>
+</html>

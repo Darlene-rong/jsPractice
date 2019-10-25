@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script> 
+        	
+		//在写面向对象的javascript的，function它已经不在数据类型，也不函数，把它当做"类"
+		//function 充当类，Person()充当构造函数,在类属性和方法
+		function Person(username){
+			this.username2 = username;
+			this.sayHello = function(){
+				alert(this.username+"和大家问候...");
+			}
+		};
+
+		
+
+		//构造函数，每个对象的自有属性，当每个对象创建的时候都复制过去，而我原型对象是每个对象扩展属性，
+		//而这种扩展属性不属于自有属性，它属于每个对象中的[prototype]对象中。[prototype]继
+
+		//在自有属性中查找，如果有直接返回，如果没有去原型对象中查找，如果还没有直接返回
+	
+
+		Person.prototype.username2 = "小学徒";	
+
+		var keke = new Person("柯柯");
+		var jiandan = new Person("简单");
+
+		
+			
+
+
+		//Person.prototype 原型对象---它还是一个对象--都继承Object
+		//Object对象默认提供了默认原型 Object.prototype 
+		//定义默认的属性和方法：valueOf constructor hasOwnProperty toString getPrototypeOf 
+
+
+		//alert("valueOf" in Object.prototype);
+		//alert("valueOf" in Person.prototype);
+
+		//alert(Object.prototype.constructor===Object)
+		//alert(Person.prototype.constructor===Person)
+
+		//Person.prototype继承Object.prototype
+
+		//注意，构造器是放在原型对象中prototype,我们虽然看不到定义一个类，没有看到所谓原型，但是并不代表不存在
+
+	
+
+		/*总结原型：
+			构造函数是用new操作符调用的普通函数，可以随时定义自己的构造函数有来创建多个具有同样的属性对象
+			，可以用instanceof操作符或直接访问constructor属性来鉴别对象是被哪个构造函数所创建
+
+			funtion Person(){
+			
+			}
+
+			var keke = new Person();
+			alert(keke instanceof Person) //true
+			alert(keke.constructor === Person)//true
+			
+
+			2：每一个函数都具有prototype的属性，它定义该构造函数创建的虽有对象共享的属性。通常共享的方法和
+			原始属性被定义原型对象中，而其他属性都定义在构造函数中，每个对象在创建的对象都保存一个[prototype]原型的引用。这个属性它不是原型的副本而是一个具体的引用。Javascript首先在自有属性中查询属性名称，如果自有属性中没有找到则查找原型属性。
+
+		
+		*/
+		
+
+		//内建原型，在javascript已经定义好了。
+		//Object.prototype//内建原型
+		var str = "kke";
+		//str.indexOf(0
+		//str.charAt()
+		//str.subString();
+
+		//var date = new Date();
+		//date.getFullYear();
+
+
+		//var num = 100;
+		//num.toFixed
+
+
+		//var arr = [];
+		//arr.push();
+		//arr.sort
+
+
+		var arr = [1,2,3,4,5,6,7,8,9,10];
+		arr.reduce(function(pv,nv){
+		
+		})
+		
+		
+		Array.prototype.sum = function(){
+			return this.reduce(function(value,nvalue){
+				return value + nvalue;
+			});
+		};
+
+		
+	
+		
+
+		function Person(){
+		
+		}
+
+		var obj = {};
+		obj.toString = function(){
+			alert("2222222222")
+		};
+		obj.constructor = Person;
+		obj.toString();
+		alert(obj.constructor);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{height: 150px;width:150px;background-color: #333;padding: 10px;}
+    #shopcar{height: 600px;width: 800px;background-color: aquamarine;margin: 10px;}
+    #box span{display: block;font-size: 16px;color:#fff;}
+    </style>
+</head>
+<body>
+    <div id="box" draggable="true">
+        <span class="name">CSS</span>
+        <span class="price">280</span>
+        <span class="pub">广东广州</span>
+    </div>
+    <div id="shopcar" draggable="true"></div>
+    <script>
+        /*
+            html5可触动拖放的功能 ---- draggable
+                draggable ===> true or false  
+            在页面中有两个元素的draggable是默认开启的
+                a标签和img标签  draggable = true
+
+
+            Draggable 和文件API 通过ajax实现文件上传
+
+            参照物： 拖放的元素 和目标点
+
+            API事件:  on-
+                dragstart-----开始拖放元素触发的事件   对象：拖放的元素
+                drag--------拖放过程中触发的事件       对象：拖放的元素
+
+                dragenter---有拖放的元素进入目标元素的时候触发的事件    对象：目标元素
+                dragover----有拖放的元素再目标元素内移动触发的事件      对象：目标元素
+                dragleave---有拖放的元素离开目标元素触发的事件          对象：目标元素
+                drop--------有拖放的元素再本元素中松开的时候触发的事件   对象：目标元素
+
+                dragend-----拖放元素结束触发的事件      对象：拖放的元素
+        */
+        function $(id) { return document.getElementById(id) }
+        window.onload = function(){
+            var boxDom = $("box"); //拖放元素
+            var shopDom = $("shopcar"); //目标元素
+            boxDom.ondragstart = function(){  //元素开始拖放的时候  （点击移动）相当于 onmousedown
+                console.log("start")
+            };
+            boxDom.ondrag = function(){    //拖放过程中触发的元素   相当于onmousemove
+                console.log("drag")
+            };
+            boxDom.ondragend = function(){  //拖放放下    相当于onmouseup 
+                this.style.background = "black"
+                console.log("dragend")
+            };
+
+            shopDom.ondragover = function(e){ //拖拽到目标元素移动的时候触发的时间。
+                this.style.background = "red"
+                e.preventDefault();    //阻止元素发生默认的行为
+                console.log("dragover")
+            };
+            shopDom.ondragenter = function(e){
+                console.log("进入目标元素dragenter")
+            }
+            shopDom.ondragleave = function(){   //离开目标元素触发
+                console.log("离开目标元素ondragleave")
+            }
+            shopDom.ondrop = function(e){ //鼠标松开在目标元素内触发
+                console.log("1")
+            }
+        }
+    </script>
+</body>
+</html>

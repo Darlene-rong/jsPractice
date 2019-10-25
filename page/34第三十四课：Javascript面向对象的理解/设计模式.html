@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    //构造函数传参
+    // 类 想当于本体， 对象相当于本体的分身或者复制
+    function test(name, age) { //类加构造函数的集成体   构造函数用来创建类的对象的
+      this.username = name;
+      this.age = age;                                             
+      this.go = function(callback) {
+        callbakc.call(this);   //回调函数：让调用者自己决定去做的行为  call继续保持this的延续
+      }
+    };
+    //扩展属性 不属于test的自有属性  共享的属性和方法
+    test.prototype = {
+      go: function(callback) {
+        //只有执行的时候才生效， 如果没有执行 只是占用地方  this指向调用者
+        console.log(this)
+      },
+      sayHello: function() {
+
+      }
+    }
+    //J中的继承都是通过原型去实现的 prototype
+    //具体的对象(prototype)  它的上级是obj  一般给类扩展原型
+
+    //分身： 会把构造函数中的属性和方法全部复制一遍
+    var student = new test(); //在创建对象的时候 对构造函数的属性和方法进行绑定， 同时利用对象有一个_proto_进行和类原型对象进行握手
+    student.go(function() {
+      console.log(this.username) 
+    })
+  </script>
+</body>
+</html>

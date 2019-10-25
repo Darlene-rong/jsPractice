@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_bmmlcx8a45c.css">
+    <style>
+        /* div{
+            display: inline-block;
+            width:0 ;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-color: red
+        } */
+        body,html{padding: 0;margin: 0;font-size: 12px;height: 100%; width: 100%;    background: #f1f1f1;}
+        a{text-decoration: none;}
+        /* div::before{
+            content: "";
+            display: inline-block;
+            width:0 ;
+            height: 0;
+            border: 5px solid transparent; 
+        } 
+        div.top::before{
+           border-bottom-color: red
+        }  */
+        /* 头部 */
+        .header_bar{height:100px;width: 100%;background-color: #fff;border-bottom: 3px solid #ff7300;margin-bottom: 30px;}
+        .header_bar_content{display: inline-block;line-height: 50px;padding-left: 147px;}
+        .header_bar_content h1 {color: #424242;font-weight: normal;}
+        a{color: #424242;}
+        a:hover{color: #ff7300;text-decoration: #ff7300;text-decoration: underline;}
+        /* 商品列表区 */
+        .sell_selection{position: relative;width: 1200px;margin: 0 auto;height: 100%;background-color: #fff;}
+        .sele_title{ height: 50px;width: 100%;display: inline-block;margin-left: 5px;}
+        .sele_title a{color: #ff7300;font-size: 16px;padding: 13px;display: inline-block;border-bottom: 3px solid #ff7300;text-align: center;}
+        ul{list-style: none;}
+        /* 商品 */
+        .list_title{height: 70px;line-height: 70px;padding: 0 10px;color: #424242;border-bottom: 1px solid #e7e7e7;}        
+        .list_title_header{float: left;padding-right:5px; font: 12px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;}
+        .list1{width: 110px;}
+        .list2{width: 500px;}
+        /* .list3{width: 380px;} */
+        .list4{width: 75px;}
+        .list5{width: 150px;}
+        .list6{width: 120px;}
+        .list7{width: 80px;}
+        .list_content_shop{min-height: 119px;border-bottom: 1px solid #e7e7e7;padding: 0 10px;color: #424242;}
+        .input_content{display: flex;}
+        .input_content input {width: 20px;}
+        /* footer */
+        .footer{width: 100%; height: 50px; background-color: #fff;position: fixed;bottom: 0;right: 0;}
+        .footer_content{position: absolute;display: block;width: 80%;left: 10%;}
+        .fo{display: inline-block;line-height: 50px;}
+        .footer_left a {color: #9D9C9C;font-size: 12px;padding-right: 5px;}
+        .footer_count{    margin-left: 16px;padding-left: 16px;border-left: 1px solid #eee;color: #757575;}
+        .footer_sum{margin-right: 30px; color: #ff7300;}
+        .footer_sum span {font-style: normal;font-size: 30px;padding: 0 4px;}
+        .footer_money,.footer_sum{float: right;}
+        .footer_money button{height: 50px;width: 160px;background-color: #ff7300;border: none;color: #fff;}
+        .bord_bo{display: inline-block;width: 100%;height: 40px;line-height: 40px;padding: 0 10px;}
+        .bo{float: left;font-size: 12px;overflow: hidden;text-overflow: ellipsis;}
+        .p_top{padding-left: 10px;}
+   </style>
+</head>
+<body>
+    <div class="header_bar">
+        <div class="header_bar_content">
+            <h1>购物车</h1>
+        </div>
+    </div>
+    <div class="sell_selection">
+        <div class="sele_title">
+            <a href="javascript:;">全部商品   <span>34</span></a>            
+        </div>
+        <div class="list_title">
+            <div class="list_title_header list1">
+                <label>
+                    <i class="iconfont icon-weigouxuanv2 " id="no_checked"></i>
+                    <i class="iconfont icon-tucenggouxuan " id="yes_checked"></i>
+                    <span>全部</span>
+                </label>
+            </div>
+            <div class="list_title_header list2">商品信息</div>
+            <!-- <div class="list_title_header list3"></div> -->
+            <div class="list_title_header list4">单价</div>
+            <div class="list_title_header list5">数量</div>
+            <div class="list_title_header list6">金额</div>
+            <div class="list_title_header list7">操作</div>
+        </div>
+        <div class="list_content">
+            <div class=" bord_bo">
+                <i class="iconfont icon-weigouxuanv2 " id="no_checked"></i>
+                <i class="iconfont icon-tucenggouxuan " id="yes_checked"></i>
+                <span>店铺：<a href="javascript:;">Sodu studios</a></span>
+            </div>
+            <ul class="list_content_shop">
+                <li class="list_title_header list1 list_1">
+                    <i class="iconfont icon-weigouxuanv2 " id="no_checked"></i>
+                    <i class="iconfont icon-tucenggouxuan " id="yes_checked"></i>
+                </li>
+                <li class="list_title_header list2 list_2">
+                    <div class="bo">
+                        <img src="https://img.alicdn.com/bao/uploaded/i2/250925789/O1CN011sdPHVNQqLaSsru_!!250925789.jpg_80x80.jpg" alt="">     
+                    </div>               
+                    <div class="bo p_top">
+                        <a href="javascript:;">sodu 卫衣女秋季长袖套头撞色潮学生宽松字母连帽衫外套女</a>
+                        <div>颜色分类：藏蓝色[现货]</div>
+                        <div>尺码：M</div>
+                    </div>
+
+                   
+                </li>
+                <!-- <div class="list_title_header list3 list_3"></div> -->
+                <li class="list_title_header list4 list_4">￥<span>108.00</span></li>
+                <li class="list_title_header list5 list_5">
+                    <div class="input_content">
+                        <a href="javascript:;">+</a>
+                        <input type="text" value="1" >
+                        <a href="javascript:;">-</a>                        
+                    </div>
+
+                </li>
+                <li class="list_title_header list6 list_6">￥<span>108.00</span></li> 
+                <li class="list_title_header list7 list_7"><i class="iconfont icon-guanbi"></i></li>                 
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_content">
+            <div class="footer_left fo"><a href="javascript:;">继续购物</a></div>
+            <div class="footer_count fo">
+                共<span>8</span> 件商品，已选择 <span>8</span> 件
+            </div>
+            <div class="footer_money fo">
+                <button>去结算</button>
+            </div> 
+            <div class="footer_sum fo">
+                    合计（不含运费):<span>￥</span><span>155</span>元
+            </div>
+           
+        </div>
+
+    </div>
+</body>
+</html>

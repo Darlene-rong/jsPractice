@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑"}
+	a{text-decoration:none;}
+	ul li{list-style:none}
+  </style>
+ </head>
+ <body>
+	
+		<div id="bannerbox"></div>
+		<div id="bannerbox2"></div>
+	  
+	  <script>
+			//继承的概念-----属性方法公用  
+      //闭包
+			(function(){
+				function Bannber(){
+					this.pindex = 0;
+					//图片数组
+					this.arr = [];
+				};
+
+				Bannber.prototype.template = function(){
+					document.getElementById(this.id).innerHTML = "<a href='#' id='next_"+this.id+"'>下一张</a><a href='#' id='prev_"+this.id+"'>上一张</a>";
+				};
+
+				Bannber.prototype.events = function(){
+					var $dom = this;
+					document.getElementById("next_"+$dom.id).onclick = function(){
+						$dom.pindex++;
+						$dom.next($dom.pindex);
+					};
+
+					document.getElementById("prev_"+$dom.id).onclick = function(){
+						$dom.pindex--;
+						$dom.prev($dom.pindex);
+					};
+				};
+
+				function Fade(id){
+					this.id  =id;
+					//模板初始化
+					this.template();
+					this.events();
+					this.next = function(index){
+						alert(index+"next淡出版本"); 
+					};
+					this.prev = function(index){
+						alert(index+"prev淡出版本"); 
+					};
+					
+					Bannber.call(this);//为了处理引用数据类型的问题
+				}
+
+		
+				function Silde(id,callback){
+					this.id = id;
+					//模板初始化
+					this.template();
+					this.events();
+					this.next = function(index){
+						alert(index+"next--Silde版本"); 
+						if(callback)callback(index);
+					};
+					this.prev = function(index){
+						alert(index+"prev--Silde版本"); 
+						if(callback)callback(index);
+					};
+					Bannber.call(this);
+					//this.timer = setInterval(function(){
+					//	
+					//},3000);
+				};
+
+
+				function D3(id,callback){
+					this.id = id;
+					//模板初始化
+					this.template();
+					this.events();
+					this.next = function(index){
+						alert(index+"next--Silde版本"); 
+						if(callback)callback(index);
+					};
+					this.prev = function(index){
+						alert(index+"prev--Silde版本"); 
+						if(callback)callback(index);
+					};
+					Bannber.call(this);
+					//this.timer = setInterval(function(){
+					//	
+					//},3000);
+				}
+
+
+				function Silde(id,callback){
+					this.id = id;
+					//模板初始化
+					this.template();
+					this.events();
+					this.next = function(index){
+						alert(index+"next--Silde版本"); 
+						if(callback)callback(index);
+					};
+					this.prev = function(index){
+						alert(index+"prev--Silde版本"); 
+						if(callback)callback(index);
+					};
+					Bannber.call(this);
+					//this.timer = setInterval(function(){
+					//	
+					//},3000);
+				}
+
+				function BannerFactory(id,type,callback){
+					if(type=="silde"){
+						Silde.prototype = new Bannber();
+						Silde.prototype.constructor = Silde;
+						return new Silde(id,callback);
+					}else if(type=="fade"){
+						Fade.prototype = new Bannber();
+						Fade.prototype.constructor = Fade;
+						return new Fade(id,callback);
+					}
+				}
+				new BannerFactory("bannerbox","silde",function(i){
+				});
+				new BannerFactory("bannerbox2","silde");
+			})();
+	  </script>
+ </body>
+</html>

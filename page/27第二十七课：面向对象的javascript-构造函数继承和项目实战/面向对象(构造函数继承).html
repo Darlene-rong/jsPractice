@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象(构造函数继承)</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            构造函数继承 + 类式继承
+        */
+        function Parent(name) { 
+            this.name = name;
+            this.books = []
+         };
+         Parent.prototype.sayHello = function () { 
+            alert(this.name)
+             return this.name;
+        };
+
+        function Children(name,age) { 
+            Parent.call(this,name);
+         } ;
+         Children.prototype = new Parent();//类式继承  覆盖对象
+         Children.prototype.constructor = Children;//构造函数
+         Children.prototype.showAge = function(){
+             return this.age;
+         }
+
+         var A = new Children("kk",32);
+         A.books.push("0ooo");
+         alert(A.books)//0ooo
+         A.sayHello();//kk
+
+    </script>
+</body>
+</html>

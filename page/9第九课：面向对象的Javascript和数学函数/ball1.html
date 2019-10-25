@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body{margin: 0;padding: 0;}
+
+    #box{
+        height: 300px;
+        width: 300px;
+        margin: 0 auto;
+        background-color: black;
+        position: relative;
+    }
+    #ball2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+    }
+    #ball1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="ball1"></div>
+        <div id="ball2"></div>
+    </div>
+    <script>
+        //π == 3.14159 == Math.PI
+        //Math.sin(弧度制)
+//             // 数学知识——>公式推导
+// 			// 	sin 0 90 180 270 360 deg  ——>  0  1  0  -1  0   
+// 			// 	cos 0 90 180 270 360 deg  ——>  1  0  -1  0  1
+//         },1000);
+//         //弧度制
+    window.onload = function(){
+        //获取小球的div
+        var ballDom1 = document.getElementById("ball1");
+        var ballDom2 = document.getElementById("ball2");
+        var angle = 0;//弧度
+        var speed = changeAngle(3);//每走一次的弧度
+        //进行多余的div的清除
+        var arr = [];
+        var arr1 = [];
+        function draw() {
+            angle += speed;//每次走30度  弧度
+            //150+ 是半径
+            var cleft = 150+Math.cos(angle)*150;// 0,150,-150的数字
+            //弧度怎么来
+            var ctop = 150 +Math.sin(angle)*150;
+            ballDom1.style.left = cleft + "px";
+            ballDom1.style.top = ctop + "px";
+
+        //ball2
+            var tleft = 150 + Math.sin(angle)*150;
+            var ttop = 150 + Math.cos(angle)*150;
+            ballDom2.style.left = tleft + "px";
+            ballDom2.style.top = ttop + "px";
+            ballDom2.style.background = getColor()
+            // console.log()
+
+        // //创建一个盒子将轨迹记录到里面
+            setDiv(ballDom2,arr1,20);
+            setDiv(ballDom1,arr,30);
+        }
+        setInterval(draw,30);
+        //度数转换为弧度
+        function changeAngle(val){
+            return val * 3.14 /180;
+        }
+        //随机颜色
+        function getColor() {
+            var r = Math.floor(Math.random()*255);
+            var g = Math.floor(Math.random()*255);
+            var b = Math.floor(Math.random()*255);
+            return "rgb("+r+","+g+","+b+")";
+        }
+        //封装创建一个盒子将轨迹记录到里面
+        function setDiv(b,array1,num) {
+            //创建一个盒子将轨迹记录到里面
+            var newDiv = document.createElement("div");
+            newDiv.style.width = "3px";
+            newDiv.style.height = "3px";
+            newDiv.style.background = getColor();
+            newDiv.style.position = "absolute";
+            newDiv.style.left = b.offsetLeft + "px";
+            newDiv.style.top = b.offsetTop + "px";
+            document.getElementById("box").appendChild(newDiv);        
+            array1.push(newDiv);
+            if(array1.length>num) {
+                var divd = array1.shift();//删除div
+                document.getElementById("box").removeChild(divd);
+            }
+        }
+    }
+    </script>
+</body>
+</html>

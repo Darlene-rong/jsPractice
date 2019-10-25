@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象的混入mix</title>
+</head>
+<body>
+    <h1 id="box"></h1>
+    <script type="text/javascript">
+    /*
+        混入-----把对象进行合并；相同属性进行覆盖；不同的属性进行追加
+        
+        封装插件经常遇到 给个默认值 ，用户给的值去覆盖默认值 比如弹窗之类的
+
+        混入至少要两个对象
+    */
+        var person = {"username":"jack"};
+        var person2 = {"age":10,"address":"hunanchangsha"};
+        //extends
+        
+    /*
+       两个对象的混入
+    
+    */
+        function mixin(obj,obj2) {
+            for(var k in obj2) {
+                //判断自有属性  
+                if(obj2.hasOwnProperty(k)){
+                     obj[k] = obj2[k];
+                }
+               
+            }
+            return obj;
+        };
+            
+    /*
+        多个对象的混入
+    
+    */
+        function mix(target,source){
+			var arr = [];
+			var args = arr.slice.call(arguments);
+            console.log("===="+args);
+            //====[object Object],[object Object],[object Object],[object Object]
+			var i = 1;
+			if(args.length==1){
+				return target;
+			};
+		
+			while((source = args[i++])){
+				for(var key in source){
+                    //判断自有属性 相同的覆盖 不同的合起来
+					if(source.hasOwnProperty(key)){
+						target[key] = source[key];
+					}
+				}
+			}
+			return target;
+        };
+        var person3 = {tel:"15000",sex:"男"};
+		var json2 = mix(person,person2,person3,{"male":1,age:50});
+		console.log(JSON.stringify(json2));//{"username":"jack","age":50,"address":"hunanchangsha","tel":"15000","sex":"男","male":1}
+
+        //将两个对象合并  相同的属性会覆盖
+        var json = mixin(person,person2);
+        console.log(JSON.stringify(json));//JSON.stringify()对象类型转换为字符串类型   JSON.parse(obj)将字符串类型转换为对象类型
+        //{"username":"jack","age":10,"address":"hunanchangsha","tel":"15000","sex":"男","male":1}
+
+        //直接打印json    是为[object,objec]  需要转换为字符串类型打印出来
+        //{"username":"jack","age":10,"address":"hunanchangsha"}
+
+        //例题
+            function test(obj) {
+                //用户传进来的参数的优先级高于函数本身内的优先级
+                var defaluts = {
+                    "title": "I love eating"
+                };
+                var json = mixin(defaluts,obj);
+                document.getElementById("box").innerHTML = json.title;//eeee
+            };
+            test({
+                "title": "eeeeee"
+            });
+
+    </script>
+</body>
+</html>

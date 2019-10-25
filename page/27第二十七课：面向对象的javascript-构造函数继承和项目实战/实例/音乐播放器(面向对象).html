@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music</title>
+    <style lang="">
+        *{padding: 0;margin: 0;}
+        a{text-decoration: none;color: #333;}
+        audio{display: inline !important;}
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <a href="javascript:;" id="playOne">播放</a>
+        <a href="javascript:;" id="stopOne">暂停</a>
+        <a href="javascript:;" id="volumOne">静音</a>
+        <span id="tot1">00:00</span>
+        <span id="cur1">00:00</span>
+        <span id="bur1">00:00</span>
+        <div id="percentOne"></div>
+    </div>
+    <div id="test">
+
+    </div>
+    <script>
+        /*
+            闭包--即时函数
+            回调函数 -- 闭包
+
+            currentTime:当前播放的时间
+			duration:总时长
+			paused：暂停
+			defaultPlaybackRate:
+			playbackRate:快进和后退
+			played:播放状态，当调用play()它是true,如果是pasue()那么就是false
+			ended:播放结束的状态,当调用onended()就是true了
+			autoplay:自动播放，默认是false,设置成 autoplay="autoplay" 
+			loop:控制是否循环播放 loop="loop";
+			controls:控制播放器是否显示，默认是"controls"
+			volume:设置声音 0-0.5-1
+			muted:设置静音
+			defaultMuted:默认音量 0.5
+        */
+        function $(id) { 
+            return document.getElementById(id)
+         }
+        var Bomusic = (function () { 
+            /*
+                id: 存放播放器的容器
+                src： 播放地址
+                title: 歌名
+                author: 演唱者
+            */
+            function _BoMusic(id,src,title,author) { 
+                this.id = id;
+                this.src = src;
+                this.title = title;
+                this.author = author;
+            };
+
+            _BoMusic.prototype = {
+                constructor: _BoMusic,
+                audioDom: null,
+                init: function (callback) { 
+                    this.audioDom = document.createElement("audio");
+                    this.audioDom.src = this.src;
+                    this.audioDom.controls = "controls";
+                    console.log($(this.id))
+                    $(this.id).appendChild(this.audioDom);
+                    this.event(callback)
+                },
+                //播放音乐
+                play: function () { 
+                    this.audioDom.play();
+                },
+                //停止音乐
+                stop: function () { 
+                    this.audioDom.pause();
+                },
+                //静音
+                stopVolome: function(callback){
+                    this.audioDom.muted = !this.audioDom.muted;
+                    if(callback) callback(this.audioDom.muted);
+                },
+                event: function(callback){
+                    /*
+                        duration:总时长
+                        oncanplaythrough: 总时常
+                    */
+                    var json = {};
+                    //总时长 oncanplaythrough
+                    this.audioDom.oncanplaythrough = function () { 
+                        //获取总时长
+                        json.totaltime = this.duration;
+                        //对总时长进行格式化
+                        json.ftime = _BoMusic.format(this.duration);
+                        if(callback) callback.call(json,"time");
+                     };
+                     //播放时间 ontimeupdate
+                     this.audioDom.ontimeupdate = function () { 
+                         //currentTime:当前播放的时间
+                        json.playtime = this.currentTime;
+                        //剩余时间
+                        json.backtime = this.duration - this.currentTime
+                        //格式化时间
+                        json.fplay = _BoMusic.format(json.playtime);
+                        json.fback = _BoMusic.format(json.backtime);
+                        //toFixed() 四舍五入
+                        json.percent = ((json.playtime / this.duration) *100).toFixed(0);
+                        if(callback) callback.call(json,"play")
+                    }
+                    //播放完毕执行的事件:onended
+                }
+
+            }
+            
+            //静态方法和属性
+            _BoMusic.time = "";
+            _BoMusic.format = function (time) { 
+                var m = Math.floor(time/60);
+                var s = Math.floor(time%60);
+                if(m<10) m="0"+m;
+                if(s<10) s="0"+s;
+                return  m + ":" +s
+             };
+             //格式化百分比
+             _BoMusic.formatPercent = function () {  };
+
+             //返回一个类 function
+             return _BoMusic;
+        })()   
+   
+        window.onload = function () { 
+            var music = new Bomusic("test","mp3/排骨教主 - 牵丝戏.mp3","牵丝戏","排骨教主");
+            music.init(function (mark) { 
+                console.log(mark)
+                if(mark == "time"){
+                    $("tot1").innerHTML = this.ftime;
+                }else if(mark == "play"){
+                    console.log(this)
+                    $("cur1").innerHTML = this.fplay;
+                    $("bur1").innerHTML = this.fback;
+                    $("percentOne").innerHTML = (this.percent) + "%"
+                }
+            });
+            $("playOne").onclick = function () { 
+                music.play();
+                this.style.display = "none";
+                $("stopOne").style.display = "inline-block"
+             };
+             $("stopOne").onclick = function () { 
+                 music.stop();
+                 this.style.display = "none";
+                 $("playOne").style.display = "inline-block"
+              }
+            $("volumOne").onclick = function () { 
+                var obj = this;
+                music.stopVolome(function (param) { 
+                    obj.innerHTML = param? "非静音": "静音"
+                 })
+             }
+         }
+   </script>
+</body>
+</html>

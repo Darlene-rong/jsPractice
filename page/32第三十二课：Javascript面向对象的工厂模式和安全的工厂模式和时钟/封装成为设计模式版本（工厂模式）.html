@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>工厂模式</title>
+</head>
+<body>
+  <div id="box"></div>
+  <script>
+  /*
+  设计模式： 规范代码 让代码变得优雅
+    组件的开发 业务方法具有共性；
+    工厂模式
+    
+    设计模式围绕对象(如何创建，管理的属性和方法)
+    js --> 对象 原型prototype
+  */
+
+  //工厂模式
+  var Clock = function(){};
+  Clock.prototype.init = function() {
+   alert("闹钟")
+  }
+  var Cale = function(){};
+  Cale.prototype.init = function() {
+    alert("万年历对象");
+  }
+  var Weather = function(){};
+  Weather.prototype.init = function() {
+    alert("天气对象");
+  }
+  var setFactory = function(type) {
+    if(type == "clock") {
+      //闹钟
+      return new Weather();
+    } else if(type == "cale") {
+      //万年历
+      return new Cale();
+    } else if(type == "weather") {
+      //天气
+      return new Weather();
+    }
+  }
+  setFactory("cale").init();
+  setFactory("weather").init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+  <form id="userForm">
+    <input type="text"/>
+    <input type="submit" class="keke_submit"/>
+  </form>
+
+  <form id="contentForm">
+    <input type="text"/>
+    <input type="submit"  class="keke_submit"/>
+  </form>
+  <script>
+    /*
+      插件的定义
+        在jQuery中使用自己定义的插件
+      jQuery定义插件：
+        1: $.插件名 = function(){};
+        2: $.fn.插件名 = function() {};
+    */ 
+    $(function() {
+      $("#userForm").zrValidator({
+        callback: function () { 
+          alert("我是外部的callback")
+         }
+      });
+      $("#contentForm").zrValidator();
+    });
+    (function($) {
+      $.fn.zrValidator = function(options) {
+        // this 指向 $("#userForm");
+        var opts = $.extend({}, $.fn.zrValidator.default, options)
+        this.each(function() {
+          $(this).find("input[type='submit']").click(function() {
+            if(opts.callback)opts.callback();
+          })
+        })
+      };
+      //定义一些默认参数
+      $.fn.zrValidator.default = {
+        callback: function () {  
+          alert("我是内部默认的回调函数")
+        }
+      }
+    })(jQuery)
+  </script>
+</body>
+</html>

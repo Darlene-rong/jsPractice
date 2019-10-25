@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";}
+        a{text-decoration:none;color:#3333}
+        #box{width:100px;height:400px;background:rgba(105, 198, 255, 0.64);position:absolute;top:100px;left:-100px;}
+        #box2{
+            width:20px;
+            height:60px;
+            background:rgb(13, 116, 233);
+            position:absolute;
+            text-align:center;
+            color:#fff;
+            right:-20px;
+            top:170px;
+            cursor:pointer;
+        }
+        #box3{width:200px;height:200px;background:rgb(117, 42, 119);position:absolute;top:0px;left:0px;}
+    </style>
+</head>
+<body>
+    <div id="box">
+		<div id="box2">Q客服</div>
+    </div>
+    <div id="box3"></div>
+    <script>
+        window.onload = function(){
+            var box3Dom = $("#box3")
+            // 鼠标移入事件 onmouseover
+            box3Dom.onmouseover = function(){
+                // move(this,400,"height",10)
+                  move(this,{width:500,height:300,left:100},10)  
+            };
+            box3Dom.onmouseout = function(){
+                // move(this,200,"width",-10)
+                move(this,{left:0,top:0,width:200,height:200},-10);
+            }
+
+            //移入发生的动画；
+            function move(dom,json,speed){
+                clearInterval(dom.timer);
+                dom.timer = setInterval(function(){
+                    var mark = true;
+                    for(var attr in json){
+                        var cur = parseInt(getStyle(dom,attr)) || 0;
+                        var target = json[attr];
+                        if(cur != target){
+                            mark = false;
+                            dom.style[attr] = cur + speed + "px";
+                        }  
+                    }
+                    if(mark)clearInterval(dom.timer);
+                },30)
+            }
+        }
+        function $(id){
+            return document.querySelector(id);
+        }
+        function getStyle(dom,attr){
+			return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr]:dom.currentStyle[attr];
+		};
+    
+    </script>
+</body>
+</html>

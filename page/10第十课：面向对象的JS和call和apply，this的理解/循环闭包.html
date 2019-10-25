@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    //循环闭包
+        /*
+        function Test() {
+            var arr = [];
+            for(var i=0;i<3;i++){
+                arr[i] = function() {
+                    return i
+                }
+            }
+            return arr;
+        }  
+        var t = Test();
+        for(var i = 0;i<t.length;i++) {
+            var value = t[i]();
+            console.log(value);//3
+        }       
+        */
+        //更新代码
+        function Test() {
+            var arr = [];
+            for(var i=0;i<3;i++){
+                // arr[i] = (function(num) {
+                //     return num;
+                // })(i);
+                arr[i] = result(i);
+                //即时函数  形成独立的作用域和立即执行函数  避免全局变量去影响插件
+            }
+            return arr;
+        }  
+        function result(num) {
+            return num;
+        }
+        var t = Test();
+        for(var i = 0;i<t.length;i++) {
+            var value = t[i];
+            console.log(value);//0 1 2
+        }  
+
+
+    </script>
+</body>
+</html>

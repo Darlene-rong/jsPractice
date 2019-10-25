@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    body,html{font-size: 12px;font-family: "微软雅黑";}
+    a{text-decoration:none;color:#333;}
+    #box{height:100px;width:100px;background-color: blueviolet;line-height: 100px;text-align:center;position:absolute;top:20px;left:100px;color: #fff;}
+    
+    </style>
+</head>
+<body>
+    <div id="box">(#^.^#)</div>
+    <script>
+    
+        window.onload = function(){
+            /*
+                动画 帧
+                setInterval(function(){
+
+                },30);//30是cpu执行的回调函数的往返时间
+                
+                位移动画left top
+                折叠动画width height
+                淡入淡出opacity-filter(alpha(opacity=10))
+                jquery中(fadeoOut,fadeIn,slideUp,slideDown,animate,fadeTo)
+
+                动画改变的都是width height left top right bottom opacity等和数字相关的样式
+
+                动画使用的格式：
+                    var timer = setInterval(function(){
+                        var cur = dom.offsetLeft;//js获取元素相关的位置 或者 宽度 ；获取元素的初始状态
+                        if(cur == 目标值){
+                            //clearInterval(timer)
+                            //清除动画
+                        }else{
+                            speed += 10;  //速度
+                            dom.style.left = cur + speed + "px"//运动的加速度
+                        }
+                    })
+            */
+           //初始速度
+           var speed = 0;
+           var boxDom = $("#box");
+           var end = 500;
+           var timer = null;
+           timer = setInterval(function(){
+               var cur = boxDom.offsetLeft;
+               console.log(end+"==="+cur)
+               if(cur >= end){
+                   console.log("ergerg")
+                   clearInterval(timer);
+                   speed = 0;
+               }else{
+                   speed +=5;
+                   boxDom.style.left = cur + speed + "px"
+               }
+
+           },30)
+        }
+        function $(id){
+            return document.querySelector(id);
+        }
+        function getStyle(dom,attr){
+            return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr] : dom.currentStyle[attr]
+        };
+    
+    </script>
+</body>
+</html>

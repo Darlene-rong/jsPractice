@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js框架</title>
+    <style>
+        ul li {padding: 10px; border: 1px solid #666;list-style: none;margin-top: 2px;}
+    </style>
+</head>
+<body>
+    
+    <ul id="list">
+        <li color="red">1</li> 
+        <!-- 自有属性 -->
+        <li color="blue">2</li>
+        <li color="green">3</li>
+        <li color="black">4</li>
+        <li color="red">5</li>
+        <li color="red">6</li>
+    </ul>
+
+    <script>
+    //封装: Element方式中的children
+
+        var dom = function dom(id){
+            //初始化对象
+            var dom = document.getElementById(id);
+            if(!dom)return;
+            //获取的所有子元素
+            var domChirdens = dom.children;
+            var jsonDom = {
+                length: domChirdens,//长度
+                index: 0,
+                //根据索引获取元素的值
+                eq: function(i){ 
+                    return domChirdens[i];
+                    //对象的继承
+                },
+                //元素的第一个
+                first: function(){
+                    return this.eq(0);
+                },
+                //元素的最后一个
+                last: function(){
+                    //this是一个对象 指向对象
+                    return this.eq(this.length-1);
+                },
+                //元素的前一个
+                prev: function(){
+                    var prevnum = this.index - 1;
+                    if(prevnum<0)return;
+                    return this.eq(prevnum)
+                }
+            }
+            return jsonDom;
+        };
+        dom("list").first().style.background  = "red";
+        dom("list").eq(3).style.background = "blue"
+    </script>
+</body>
+</html>

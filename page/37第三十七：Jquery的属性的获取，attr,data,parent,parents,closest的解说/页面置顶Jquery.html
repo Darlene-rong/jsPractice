@@ -1,0 +1,129 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../js/jquery-3.3.1.min.js"></script>
+  <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_gttwwfobccb.css">
+  <title>Document</title>
+  <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    .posts{position: fixed;bottom: 10px;right:10px;width: 40px;height: 40px;background: #111;color:#fff;text-align: center;line-height: 40px;display: none;}
+    .posts .iconfont {font-size: 20px;color: #fff;display: block;transition: transform .5s; font-weight: bold;}
+    .posts .iconfont:hover {color:rgb(155, 202, 255);transform: rotate(180deg);}
+  </style>
+</head>
+<body>
+  <div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div><div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+    <div>12321213123123</div>
+  </div>
+  <div class="posts" id="scroll_posts">
+    <a href="javascript:;" id="scroll_click"><i class="iconfont icon-xiangxia"></i></a>
+  </div>
+  <script src="../../js/zr_admin.js"></script>
+  <script>
+    /*
+      用到知识点：
+        scroll()   //当用户滚动到指定的元素的时候，会触发scroll事件，适用于所有可滚动的元素和window对象
+        $(window).scroll(function(){})
+    
+    */
+    $(function() {
+      zrUppage()
+      $("#scroll_click").on("click",function() {
+        $("body").animate({scrollTop: 0},1000)
+      })
+    })
+  </script>
+</body>
+</html>

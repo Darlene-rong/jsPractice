@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>限时抢购-时间倒计时</title>
+
+</head>
+<body>
+        <h1 stime="2018/09/12  16:25:30"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:49:10"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:49:20"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:47:30"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:34:20"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:35:10"><a href="javascript:;">开抢</a></h1>
+        <h1 stime="2018/12/23 01:16:50"><a href="javascript:;">开抢</a></h1>
+    <script>
+        window.onload = function() {
+            //离开抢的时间还有多久
+            function startDate(dom,endDate,callback){
+                var date = new Date();//当前时间
+				var end = endDate;
+				var time = end.getTime() - date.getTime();//毫秒数
+				var sec = time / 1000;//1秒 == 1000毫秒 1分 = 60秒;
+				//还剩下多少天
+				var dd = Math.floor(sec/60/60/24);
+				var hh = Math.floor(sec/60/60%24);
+				var mm = Math.floor(sec/60%60);
+				var ss = Math.floor(sec%60);
+
+                var mmM = mm<10?"0"+mm:mm;
+                var hhh = hh<10?"0"+hh:hh;
+                var ssS = ss<10?"0"+ss:ss;
+                var ddD = dd<10?"0"+dd:dd;
+
+            
+                dom.d = ddD; 
+				dom.h = hhh;
+				dom.m = mmM;
+				dom.s = ssS;
+                //到时间
+                if(dd==0 && hh==0 && mm==0 && ss==0){
+                    dom.removeAttribute("time");
+                    var index = hdomsArr.indexOf(dom);
+                    hdomsArr.splice(index,1);    
+                    if(callback)callback.call(dom,true);
+
+                }else{
+					if(callback)callback.call(dom,false);
+				}
+            };
+            var hdoms = document.getElementsByTagName("h1");
+            var hdomsArr = [].slice.call(hdoms)
+            var htimer = setInterval(function(){ 
+                console.log("-----"+hdomsArr.length)  
+                for(var i=0;i<hdomsArr.length;i++){
+                    var timer = hdomsArr[i].getAttribute("stime");
+                    if(timer){
+                        startDate(hdomsArr[i],new Date(timer),function(ok){
+                            if(ok) {
+                                this.style.background = "red";
+                                this.innerHTML = "抢购吧";
+                                // clearInterval(htimer)//无法清除
+                                                            
+                            }else{
+                                this.innerHTML ="距离开抢还有："+this.d+"天"+this.h+"时"+this.m+"分"+this.s+"秒";
+                            }
+
+                        });                        
+                    }
+                }
+                
+            },1000);
+
+        }
+    
+    </script>
+</body>
+</html>

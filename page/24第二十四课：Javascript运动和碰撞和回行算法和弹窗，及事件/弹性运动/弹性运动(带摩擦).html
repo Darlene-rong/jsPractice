@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";background-color: black}
+        a{text-decoration:none;color:#333}
+        li{list-style:none}
+        #box{background:rgb(255, 86, 86);width:100px;height:100px;position:absolute;border-radius: 50px;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+        window.onload = function(){
+            var boxDom = $("box");
+            boxDom.onclick = function(){
+                rubmove()
+            }
+            /*
+            带摩擦力的弹性运动
+                弹性运动+摩擦力 
+                弹性:
+                    速度 += (目标点 - 当前值)/系数;  //6 , 7 , 8
+                    速度 *= 摩擦系数;   // 0.7 0.75
+                    终止条件
+                    距离足够近 并且 速度足够小
+                    Math.abs() 取绝对值
+                速度： 速度 = (目标点 - 当前值)/系数;
+            */
+            var speed = 0;
+            var timer = null;
+            function rubmove(){
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    speed += (1000 -boxDom.offsetLeft) / 6;
+                    speed *=0.725;
+                    // 距离足够近 并且速度足够小
+                    if(Math.abs(speed) <= 1 && Math.abs(1000 -boxDom.offsetLeft <=1)){
+                        clearInterval(timer);
+                        boxDom.style.left = "1000px";
+                        speed = 0;
+                    }else{
+                        boxDom.style.left = boxDom.offsetLeft + speed + "px"
+                    }
+                   
+                },30)
+
+            }
+        }
+    </script>
+</body>
+</html>

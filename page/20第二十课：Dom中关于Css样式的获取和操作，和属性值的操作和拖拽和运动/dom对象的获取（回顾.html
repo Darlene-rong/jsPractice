@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{margin: 0;padding: 0;}
+    #box{text-align:center;height:100px;line-height:100px;width:100px;background-color: black;color:#fff;}
+    
+    </style>
+</head>
+<body>
+    <div id="box">312312</div>
+    <div id="box2" username="jack" title="呵呵">2314123</div>
+    <button type="button" onclick="change()">change</button>
+    <script>
+    /*
+        document.getElementById
+        document.getElementsByTagName
+
+        es5  ie678不支持
+        document.getElementsByClassName
+        document.querySelector
+        document.querySelectorAll
+    
+        职责：都是为了找到所需要的dom元素对象，去给元素绑定事件，添加样式
+        获取元素样式对象：style
+
+        获取标签名称 tagName
+
+        获取元素中的属性，属性----分为自定义属性和原始属性
+
+            原始属性可以直接对象.属性进行使用  dom.title
+
+        获取元素中的属性：
+            getAttribute(key) 获取属性值   可以获取自定义属性还可以获取原始属性
+            setAttribute(key,value) 设置属性值
+            removeAttribute(key) 删除属性值   自由属性无法删除
+            hasAttribute(key) 判断属性是否存在   判断属性是否是某个元素的属性，如果是ture 反之为 false (包括自定义属性和原始属性的判断)
+        
+    */
+        function $(id){
+            return document.querySelector(id)
+        }
+        window.onload = function(){
+            var box2Dom = $("#box2");//dom对象
+            for(var key in box2Dom){
+                // console.log(key+"==============="+box2Dom[key])
+            };
+            var num = 100;
+            // box2Dom.style.height = "100px";
+            // box2Dom.style.width = "100px";
+            // box2Dom.style.background = "green";
+            // box2Dom.style.lineHeight = "100px";
+            // box2Dom.style.textAlign = "center";
+            // box2Dom.style.marginTop = "10px";
+            // box2Dom.style.marginLeft = 10+"px";
+            
+            var styleDom = box2Dom.style;
+            with(styleDom){
+                height = "100px";
+                width = "100px";
+                background = "green";
+                lineHeight = "100px";
+                textAlign = "center";
+                marginTop = "10px";
+                marginLeft = 10+"px"; 
+            };
+            console.log(box2Dom.tagName + "====="+box2Dom.localName)//DIV ===== div
+            var username = box2Dom.getAttribute("username"); //获取自定义属性username  
+            console.log(username)// jack
+        }
+        function change(){
+            var box2Dom = $("#box2");//dom对象
+            box2Dom.setAttribute("style","background:red;color:#ccc");
+            alert(box2Dom.hasAttribute("username"))//true
+        }
+    </script>
+</body>
+</html>

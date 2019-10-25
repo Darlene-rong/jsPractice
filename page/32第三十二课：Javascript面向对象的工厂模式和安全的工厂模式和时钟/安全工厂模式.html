@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>安全工厂模式</title>
+  <style lang="">
+      *{padding:0;margin:0}
+      body{font-size:14px;font-family:"微软雅黑";}
+      a{text-decoration:none;color:#333}
+      li{list-style:none}
+      #box{
+        width: 400px;
+        height: 400px;
+        margin: 100px auto;
+        text-align: center;
+        overflow: hidden;
+      }
+      #box .clockbox {
+        width: 200px;
+        height: 200px;
+        margin: 100px auto;
+        text-align: center;
+        position: relative;
+      }
+      #box span{
+        position: absolute;
+        top: 49px;
+        left: 49px;
+      }
+    </style>
+</head>
+<body>
+    <div id="box">
+      <h2 id="time"></h2>
+      <div class="clockbox">
+        <span><img class="hour" src="images/clock_hour.png" alt=""></span>
+        <span><img class="min" src="images/clock_min.png" alt=""></span>
+        <span><img class="sec" src="images/clock_sec.png" alt=""></span>
+        <img src="images/clock.png" alt="">
+      </div>
+    </div>
+  <script>
+    function $(id) {  
+      return document.getElementById(id)
+    }
+    // 封装 获取页面中的class jquery $(".class")原理
+    function domClass(pid, sClass) {
+      var boxdom = typeof pid==="string" ? document.getElementById(pid) : pid;
+      var pidDom = boxdom.getElementsByTagName("*");
+      var domArr = [];
+      var len = pidDom.length;
+      for(let i=0;i<len;i++) {
+        if(pidDom[i].className.indexOf(sClass)!=-1) {
+          domArr.push(pidDom[i])
+        }
+      }
+      return domArr;
+    }
+    window.onload = function() {
+      var Factory = function(type,callback) {
+        //instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性
+        if(this instanceof Factory) {
+          return new this[type](callback);
+        } else {
+          return new Factory(type,callback);
+        }
+      };
+      Factory.prototype = {
+        Clock: function (callback){
+          var hourDom = domClass("box", "hour")[0];
+          var minDom = domClass("box", "min")[0];
+          var secDom = domClass("box", "sec")[0];
+          function initClock() {
+            var date = new Date();
+            var sec = date.getSeconds();
+            var min = date.getMinutes();
+            var hou = date.getHours();
+            var mk = "am";
+            secDom.style.transform = "rotate("+(sec*6) + "deg)";
+            minDom.style.transform = "rotate("+(min*6) + "deg)";
+            hourDom.style.transform = "rotate("+(hou*30) + "deg)";
+            if(hou >12 && hou<18) mk = "pm";
+            if(hou >= 18)mk = "night";
+            if(callback)callback.call(date,hou,min,sec,mk);
+          }
+          setInterval(function() {
+            initClock();
+          },1000);
+        },
+        Calc:function () {
+          this.age = 12;
+        },
+        Weather: function() {
+          this.sex = "famel"
+        }
+      }
+      Factory("Clock",function(h,m,s,mk){
+        var hou = h<10 ? "0"+h : h;
+        var min = m<10 ? "0"+m : m;
+        var sec = s<10 ? "0"+s : s;
+        $("time").innerHTML = `${hou}:${min}:${sec}${mk}`;
+      });
+ 
+    }
+
+  </script>
+</body>
+</html>

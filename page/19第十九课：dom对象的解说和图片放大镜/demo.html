@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .list{height:50px;background-color: teal;color:#fff;line-height: 50px;}
+    </style>
+    <script src="../../js//jquery.js"></script>
+</head>
+<body>
+    <div class="js_content content" id="js_content1">
+        <div class="list js_list">
+            <div class="js_l">
+                <p class="js_songer">hhhhh</p>
+            </div>
+        </div>
+        <div class="list js_list">
+            <div class="js_l">
+                <p class="js_songer">rrrrr</p>
+            </div>
+        </div>
+        <div class="list js_list">
+            <div class="js_l">
+                <p class="js_songer">gggggg</p>
+            </div>
+        </div>
+        <div class="list js_list">
+            <div class="js_l">
+                <p class="js_songer">eeeeee</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var liArr = [].slice.call($(".js_content").children());
+        liArr.forEach(function(dom){
+            console.log($(dom).find(".js_songer").html())
+        });
+    </script>
+</body>
+</html>

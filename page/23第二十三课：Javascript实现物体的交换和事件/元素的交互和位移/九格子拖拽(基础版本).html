@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{
+        font-size: 14px;
+        font-family: "微软雅黑";
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        background-color: black;
+    }
+    ul li{list-style-type: none;}
+    #box{width: 640px;margin: 100px auto;position: relative;}
+    ul li{
+        height: 100px;
+        width: 100px;
+        background-color: rgba(239, 84, 84, 0.29);
+        color: #fff;
+        line-height: 100px;
+        text-align: center;
+        float: left;
+        margin:10px;
+        padding-left: 5px;
+        cursor: move;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="ullist">
+            <li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+
+			<li>11</li>
+			<li>12</li>
+			<li>13</li>
+			<li>14</li>
+			<li>15</li>
+
+			<li>16</li>
+			<li>17</li>
+			<li>18</li>
+			<li>19</li>
+			<li>20</li> 
+        </ul>
+    </div>
+    <script src="./dom.js"></script>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        }
+        window.onload = function(){
+            //获取ul 的所有子元素
+            var lidom = $("ullist").children;
+            //子元素的长度
+            var len = lidom.length;
+            //记录位置的数组
+            var arr = [];
+            //边界的获取  盒子的最宽和最高
+            var maxH = lidom[0].offsetHeight*4;
+            var maxW = lidom[0].offsetWidth*5;
+            //层级样式定义
+            var zindex = 1;
+            // 给元素添加定位
+            for(var i=0;i<len;i++){
+                //对象缓存索引 为了找到相应的数组位置
+                lidom[i].index = i;
+                //将li的初始top left位置 进行赋值
+                lidom[i].style.top = lidom[i].offsetTop + "px";
+                lidom[i].style.left = lidom[i].offsetLeft + "px";
+                //把位置添加到数组当中
+                arr.push([lidom[i].offsetLeft,lidom[i].offsetTop]);
+            };
+            for(var i=0;i<len;i++){
+                //给每个li元素添加绝对定位，方便操作top left运动动画
+                lidom[i].style.position = "absolute";
+                //拖拽元素 每个元素对的拖拽运动
+                drag(lidom[i])
+            }
+            function drag(dom){
+                //拖拽三部曲： 鼠标按下  鼠标按下之后进行鼠标移动  移动到目标位置鼠标放下
+                dom.onmousedown= function(e){
+                    //获取鼠标按下的位置
+                    var pos = getXY(e);
+                    //获取元素的坐标位置
+                    var domLeft = this.offsetLeft;
+                    var domTop = this.offsetTop;
+                    //层级
+                    dom.style.zIndex = zindex++;
+                    //鼠标在Body元素中进行移动
+                    document.onmousemove = function(e){
+                        //移动的时候获取鼠标的位置
+                        var pos2 = getXY(e);
+                        //将鼠标移动的位置进行计算 赋值给dom元素的 top left值
+                        var nl = pos2.x - pos.x + domLeft;
+                        var nt = pos2.y - pos.y + domTop;
+                        dom.style.top = nt + "px";
+                        dom.style.left = nl + "px";
+                        //边界的判断 上下左右边界
+                        if(nt < 0 ) dom.style.top = 0 + "px";
+                        if(nl < 0 ) dom.style.left = 0 + "px"
+                        if(nt>maxH) dom.style.top = maxH + "px";
+                        if(nl>maxW) dom.style.left = maxW + "px";
+                        //给元素初始的的颜色
+                        for(var i=0,len=lidom.length;i<len;i++){
+                            lidom[i].style.background = "rgba(239, 84, 84, 0.29)"
+                        }
+                        //调用getNearby(dom) 进行邻近元素中最近元素的判断，然后将最近的元素的背景色进行改变
+                        var near = getNearby(dom);
+                        if(near){
+                            near.style.background = "#ee3838"
+                        }
+                    };
+                    //鼠标松开
+                    document.onmouseup = function(e){
+                        //鼠标松开要对鼠标移动和松开的事件进行格式化
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                        //获取最近元素
+                        var nearli = getNearby(dom);
+                        if(nearli){
+                            //获取到最近元素之后将两个位置进行动画交换
+                            move(dom,{left:arr[nearli.index][0],top:arr[nearli.index][1]});
+                            move(nearli,{left:arr[dom.index][0],top:arr[dom.index][1]});
+                            //数组交换  将元素之间的数组进行交换
+                            var cindex = dom.index;
+                            dom.index = nearli.index;
+                            nearli.index = cindex;
+                            //交换完毕之后将背景色还原
+                            nearli.style.background = "rgba(239, 84, 84, 0.29)"
+                        }else{
+                            //如果没有找到最近的元素  回到初始位置
+                            move(dom,{left:arr[dom.index][0],top:arr[dom.index][1]});
+                        }
+                    }
+                }
+            }
+            //封装 获取最近元素的插件
+            function getNearby(dom){
+                /*
+                    MAX_VALUE属性是JS中可表示的最大的值
+                */
+                var value = Number.MAX_VALUE;//对比的数字
+                var index = -1;
+                for(var i=0,len = lidom.length;i<len;i++){
+                    if(!compare(dom,lidom[i]) && dom != lidom[i]){
+                        var a = dom.offsetLeft -lidom[i].offsetLeft;
+                        var b = dom.offsetTop - lidom[i].offsetTop;
+                        var c = Math.sqrt(a*a + b*b);
+                        if(c<value){
+                            value = c;
+                            index = i;
+                        }
+                    }
+                }
+                if(index != -1){
+                    return lidom[index];
+                }else{
+                    return false;
+                }
+            };
+            //比较两个元素是否发生碰撞
+            function compare(dom1,dom2){
+                var dom1left = dom1.offsetLeft;
+                var dom1Top = dom1.offsetTop;
+                var togel1left = dom1.offsetLeft + dom1.offsetWidth;
+                var togel1top = dom1.offsetTop  + dom1.offsetHeight;
+
+                var dom2left = dom2.offsetLeft;
+                var dom2Top = dom2.offsetTop;
+                var togel2left = dom2.offsetLeft + dom2.offsetWidth;
+                var togel2top = dom2.offsetTop  + dom2.offsetHeight;
+
+                if(dom1left > togel2left || dom1Top > togel2top || togel1left < dom2left || togel1top < dom2Top){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+
+
+
+        //获取鼠标的位置
+        function getXY(e){
+            var ev = e || window.event;
+            var x = 0, y = 0;
+            if(ev.pageX){
+                x = ev.pageX;
+                y = ev.pageY;
+            }else{
+                var sleft = 0;
+                var stop  = 0;
+                if(document.documentElement){
+                    stop = document.documentElement.scrollTop ;
+                    sleft = document.documentElement.scrollLeft;
+                }else{
+                    stop = document.body.scrollTop;
+                    sleft = document,body.scrollLeft;
+                }
+                x = ev.clientX + sleft;
+                y = ev.clientY + stop;
+            }
+            return{
+                x: x,
+                y: y
+            }
+        }
+
+    </script>
+</body>
+</html>

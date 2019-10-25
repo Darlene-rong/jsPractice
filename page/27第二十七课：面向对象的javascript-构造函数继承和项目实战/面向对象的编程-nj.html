@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象的编程-nj</title>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        /*
+            继承 ： 属性共享  方法共用
+            类式继承 + 构造函数
+            寄生继承 + 构造函数
+        */
+        //类式继承 + 构造函数
+        function copyObj(value){
+            function test() {  };//构造函数
+            test.prototype = value;//对象的覆盖
+            return new test()
+        }
+        function creatObj(type) { 
+            var obj = new copyObj(type);
+            //可以动态的扩展属性和方法
+            obj.sayName = function () {  };
+            return obj;
+         }
+        
+        //寄生继承
+         var obj = {
+             username: "jj",
+             books: []
+         }
+         var obj2 = creatObj(obj)//宿主
+         alert(obj2.username);//jj
+         alert(obj2.hasOwnProperty("username"))//false
+         var tst1 = {
+             username: "wew",
+             books: []
+         }
+         var tst2 = creatObj(tst1);//宿主
+         obj2.books.push("qe");
+         console.log(obj2.books +"====="+ tst2.books);//不相等
+    </script>
+</body>
+</html>

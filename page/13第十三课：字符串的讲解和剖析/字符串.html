@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串</title>
+</head>
+<body>
+    <script>
+    /*
+        javascript数据类型   内置方法----给所有的对象直接调用的方法
+            number(内置方法：isNaN tofixed isfinite) 
+            string
+                length属性字符串长度
+
+                //截取 含头不含尾  
+                substring 截取   负数都当做0  返回空  如果后面的数字比前面的大将0往前面更换
+                slice 截取  后面一定要比前面大
+
+                charAt(index): 拿到字符串中某个index下标的值
+
+                concat：将字符拼接起来
+
+                split：分割
+
+                //查找 找不到返回-1
+                indexOf(值)：返回下标      查找元素从左往右，找到就立马返回下标，后面都会忽略，没有找到返回-1
+                lastIndexOf(值)：返回下标   查找元素从右往左，找到就立马返回下标，前面都会忽略，没有找到返回-1
+
+                MATCH
+                REPLACE
+
+                toLowerCase：字符串转小写
+                toUpperCase：字符串转大写
+
+                charCodeAt(index)：获取字符串每个一个字符的ascii编码对应的编码值，如果是中文拿到十六进制
+                fromCharCode：把对应的ascii和十六进制得中文还原程序对应的值和中文
+                    调用格式：String.fromCharCode(48)==0
+                    多个：String.fromCharCode()
+                replace
+            undefined 
+            boolean 
+            function 
+            object(toString hasOwnproperty constuctor valueOf getPropertyOf)
+
+            能够调用方法的绝对是对象  内存需要释放
+    */ 
+        var num = 100.212;
+        num.toFixed(2);
+
+        //执行过程  js内部处理
+        var temp = new Number(num);//定义临时变量
+        temp.toFixed(2);
+        delete temp;//模拟内存处理的过程；
+
+    /*
+        如果字符串中包括ASCii码的编码值，就是因为字符串要编译成二进制代码
+        如果是数字，标点符号，特殊符号都在找到对应的ASCii编码，然后转换成二进制储存在内容中
+        如果是中文，一定找到编码库（编码库在浏览器的内部） <meta charset="UTF-8">   每个都对应的十六进制的编码---二进制
+        中文占两个字节，数字和字母占用一个字节
+    
+    */
+        //字符串就是一个一个连续的单个字符的总和
+        var n = "我爱你biubiubiu"
+        //ascii编码
+        var code = n.charCodeAt(2)//十六进制
+        console.log(code)
+        var s = String.fromCharCode(code);//中文
+        console.log(s)
+
+        //通过ascii码进行转换成相应的字符
+        //字符长度
+        var n = "hello word";
+        var len = n.length;
+        for(var i=0;i<len;i++){
+            console.log(n.charAt(i)+"=====ascii的值"+n.charCodeAt(i)+"====转换回字符"+String.fromCharCode(n.charCodeAt(i)))
+        }
+
+
+        //大写小写
+            //改变一个值 一定要赋值
+        var a = "I";
+        var b = "love";
+        a = a.concat(" "+b);
+        console.log(a.toLowerCase());
+        console.log(a.toUpperCase())
+        console.log(a)
+
+        //分割
+            var str = "i love you so much";
+            var str2 = "javk@jkk@kkk@rrrr";
+            //字符串的分割----分割--至少是多个   返回值是数组
+            var strs = str.split(" ");
+            //判断是否为数组
+            console.log(Array.isArray(strs));
+            console.log(strs)//["i", "love", "you", "so", "much"]
+        
+        //查询
+            var j = "21L312312";
+            console.log(j.indexOf("L"))//3
+            console.log(j.lastIndexOf("L"))//2
+        
+        //截取
+            //substring(startIndex,endIndex)
+            //slice(startIndex,endIndex)
+
+            //1:slice 是返回字符串中从start到end的部分，如果start的值是一个负数的，那么开始位置等于：
+            //lenght+start，同理end如果是负数的话就是:length+end
+            var n1 =  str.slice(-6,-5);
+            alert(n1);//2345
+
+            //2:substring和slice基础相同，
+            //a:但是如果为start或者end为负数的时候，他们都会当做0,
+            //b:如果它们的值大于length, 则会当被视为length
+            //c:如果end小于start，他们会自动交互彼此值
+            
+            var n2 = str.substring(6,9);//等价于str.substring(0,6)
+            n2 = str.substring(1119,-5);
+            alert(n2);
+
+            //3：两者substring和slice如果都是为正整数的情况下是等价的
+            var n1 =  str.slice(1,5);
+            var n2 = str.substring(1,5);
+            alert(n1+="==="+n2);//2345
+    </script>
+</body>
+</html> 

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:red;width:100px;height:100px;}
+  </style>
+ </head>
+ <body>
+
+
+	<a href="http://www.baidu.com" id="clickme">点我</a>
+	<img src="http://uc-vs.bdimg.com/timg/http%3A%2F%2Fc.hiphotos.baidu.com%2Fvideo%2Fpic%2Fitem%2F1b4c510fd9f9d72a1c94e38ad92a2834359bbbb1.jpg_130x150.jpg" id="img"/>
+	<script>
+        function $(id){
+            return document.getElementById(id)
+        }
+			//阻止冒泡行为 e.stopPropagation()
+			//阻止浏览器的默认行为：e.preventDefault();
+			$("clickme").addEventListener("click",function(e){
+				alert("点了我!!!");
+				e.preventDefault();
+			});
+
+			//图片预览的课程。滚动加载图片
+			$("img").onload = function(){
+				//alert("加载图片完毕了...");
+				this.style.border = "10px solid #111";
+			}
+
+			$("img").onerror = function(){
+				this.src = "error.png";
+			};
+			//html5中文件拖拽的时候也可以用，
+		/*
+			事件类型：
+			界面事件：
+				onload     element window document xmlhttpservlet 
+				onunload
+				onresize   window body
+				onabort    xmlhttpservlet
+				onerror    xmlhttpservlet  element(img) 
+				onscroll   window element document
+				oncontextmenu element
+
+			聚焦事件	
+				onblur
+				onselect
+				onfocus
+				onfocusin
+				onfocusout
+
+			表单事件
+				onchange
+				onreset
+				onsubmit
+				onselect
+
+			鼠标事件：
+				onmousedown
+				onmouseover
+				onmousemove
+				onmouseout
+				onmouseenter
+				onmouseleave
+				onmouseup
+				onclick
+				ondblclick
+
+			键盘事件:
+				onkeydown
+				onkeypress
+				onkeyup
+
+			触屏事件：
+				ontouchstart
+				ontouchend
+				ontouchmove
+				ontouchleave
+				ontouchenter
+				ontouchcancle
+
+			滚轮事件：
+				onwheel
+			拖拽事件:
+				ondrag
+				ondragstart
+				ondragend
+				ondragenter
+				ondragleave
+				ondragover
+				ondrop
+			ajax事件：
+				onreadystatechange
+			窗口事件:
+				online
+				onpage
+		*/
+	</script>
+ </body>
+</html>

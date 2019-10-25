@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    /*
+        return
+            return可以返回任何的数据类型 
+            把函数体内执行的结果暴露给外界，去进行进一步的处理
+            根据业务需求来决定
+            返回多个，可以用数组进行装来返回；
+                     也可以用对象来返回
+            return 返回的一定是数据类型；
+    */
+        function test() {
+            var a = 10;
+            var b = 21;
+            //封装函数体,进行任何的js的业务逻辑的编写。
+            //只有函数具有封装的能力
+            var c1 = a + b;
+            var c2 = a * b;
+            var c3 = a / b;
+            var c4 = a - b;
+            //把上面的四个值全部return出去 延长生命周期
+            /* 方法一 数组*/
+            var arr = [];
+            arr.push(c1);
+            arr.push(c2);
+            arr.push(c3);
+            arr.push(c4);
+            // console.log(arr)
+            return arr;
+            /* 方法二 对象*/
+
+        }
+        
+        var arr = test();
+        console.log(arr);
+        console.log(typeof arr);//obj
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    /*
+        1.变量的作用域的问题
+            变量作用域：分为全局变量和局部变量
+                在函数中定义的变量都是局部变量，除非没有通过var去定义（没有Var定义的就成了全局变量）
+                全局变量，是共享所有，在任意地方都可以进行更改
+                var 就相当于一个申请空间的东西
+        2.setTimeout 和 setInterval的用法
+    */    
+    var a = 100;
+    function test() {
+        //外界无法访问函数内部东西
+        var a = 200;//var number--申请空间
+        console.log(a);//200
+        //数据类型---申请空间大小的 var 
+        var b = 3400;
+        //私有函数可以共用函数里面的
+        function test1() {
+            console.log(b)//3400
+        }
+        //return 一个对象json(一种数据格式) 就可以 进行 对象.属性
+        return {
+            a:a
+        }
+    }
+    test().a;
+    console.log(test().a)//200
+    console.log(a);//100
+    </script>
+</body>
+</html>

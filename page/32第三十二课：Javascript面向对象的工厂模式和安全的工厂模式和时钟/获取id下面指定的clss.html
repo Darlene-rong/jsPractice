@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">
+    <span class="name">例子1</span>
+    <p class="name">例子1</p>
+    <div class="name">例子1</div>
+    <a href="">1</a>
+  </div>
+  <script>
+    function $(id) {  
+      return document.getElementById(id)
+    }
+    function domClass(pid, sClass) {
+      var pidDom = $(pid).getElementsByTagName("*");
+      var domArr = [];
+      var len = pidDom.length;
+      for(let i=0;i<len;i++) {
+        if(pidDom[i].className.indexOf(sClass)!=-1) {
+          domArr.push(pidDom[i])
+        }
+      }
+      return domArr;
+    }
+    window.onload = function() {
+      console.log(domClass("box","name")[0])
+    }
+  </script>
+</body>
+</html>

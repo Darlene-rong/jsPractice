@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html{height: 100%;width: 100%;background-color: #eee;font-size: 12px;overflow-x: hidden; }
+        .contain{position: relative;height: auto;width: 50%;margin: 30px auto;}  
+        a{padding: 15px; background-color: #fff;text-decoration: none;float: right;margin-bottom: 10px;width: 50px;text-align: center;margin-right: 10px;}
+        table{width: 100%;border-collapse: collapse;background-color: #fff;margin-top: 20px;}
+        table tr {height: 50px;}
+        table th,td{width: 50px;padding:0 10px;text-align: center;border:1px solid #333;}
+    </style>
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="contain">
+        <a href="javascript:;" onclick="toSave(this)">保存数据</a>
+        <a href="javascript:;" onclick="toAdd(this)">追加行</a>
+        <table >
+            <tr>
+                <th>ID</th>
+                <th>年龄</th>
+                <th>现居地</th>
+                <th>年龄</th>
+                <th>现居地</th>
+            </tr>
+            <tbody id="tbody">
+                <tr>
+                    <td>1</td>
+                    <td>12</td>
+                    <td>广州</td>
+                    <td>12</td>
+                    <td>广州</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>32</td>
+                    <td>上海</td>
+                    <td>12</td>
+                    <td>广州</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>22</td>
+                    <td>北京</td>
+                    <td>12</td>
+                    <td>广州</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        //js添加行
+        function dom(id){
+            return document.getElementById(id)
+        }
+        function toAdd() { 
+            var tbodyDom = dom("tbody");
+            //添加行
+            var trDom = document.createElement("tr");
+            var len = tbodyDom.children.length;
+            trDom.className = "classitems"
+            trDom.innerHTML = ` <td>${len+2}</td>
+                <td><input name="username"/></td>
+                <td><input name="password"/></td>
+                <td><input name="email"/></td>
+                <td><input name="address"/></td>`
+            /*或者
+            var trDom.innerHTML = 
+                "<td>4</td>"+
+                "<td>22</td>"+
+                "<td>北京</td>"+
+                "<td>12</td>"+
+               " <td>广州</td>"
+            */
+            tbodyDom.appendChild(trDom)
+        }
+        function toSave() {  
+            var tDom = document.getElementsByClassName("classitems");
+            var len = tDom.length;
+            var json = {};
+            for(var i=0;i<len;i++){
+                var username = tDom[i].children[1].children[0].value;
+                var password = tDom[i].children[2].children[0].value;
+                var email = tDom[i].children[3].children[0].value;
+                var address = tDom[i].children[4].children[0].value;
+                var json = {
+                    username:username,
+                    password:password,
+                    email:email,
+                    address:address
+                }
+            }
+            alert(JSON.stringify(json))
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style lang="">
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #box{
+      width: 400px;
+      height: 400px;
+      margin: 100px auto;
+      text-align: center;
+      overflow: hidden;
+    }
+    #box .clockbox {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      text-align: center;
+      position: relative;
+    }
+    #box span{
+      position: absolute;
+      top: 49px;
+      left: 49px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="clockbox">
+      <span><img class="hour" src="images/clock_hour.png" alt=""></span>
+      <span><img class="min" src="images/clock_min.png" alt=""></span>
+      <span><img class="sec" src="images/clock_sec.png" alt=""></span>
+      <img src="images/clock.png" alt="">
+    </div>
+  </div>
+  <script>
+    function $(id) {  
+      return document.getElementById(id)
+    }
+    // 封装 获取页面中的class jquery $(".class")原理
+    function domClass(pid, sClass) {
+      var boxdom = typeof pid==="string" ? document.getElementById(pid) : pid;
+      var pidDom = boxdom.getElementsByTagName("*");
+      var domArr = [];
+      var len = pidDom.length;
+      for(let i=0;i<len;i++) {
+        if(pidDom[i].className.indexOf(sClass)!=-1) {
+          domArr.push(pidDom[i])
+        }
+      }
+      return domArr;
+    }
+    window.onload = function() {
+      /*
+        知识点：
+          javascript对象的获取，动画transform-rotate旋转，定时器，日期函数日期对象；
+        时钟的原理：
+          时针分针进行旋转
+          一个圆360度 1刻度等于6度
+          1s = 6deg
+          1min = 6deg
+          1s = 30deg
+
+        动画旋转transform-rotate
+
+      */ 
+      var hourDom = domClass("box", "hour")[0];
+      var minDom = domClass("box", "min")[0];
+      var secDom = domClass("box", "sec")[0];
+      function initClock() {
+        var date = new Date();
+        var sec = date.getSeconds();
+        var min = date.getMinutes();
+        var hou = date.getHours();
+        secDom.style.transform = "rotate("+(sec*6) + "deg)";
+        minDom.style.transform = "rotate("+(min*6) + "deg)";
+        hourDom.style.transform = "rotate("+(hou*30) + "deg)";
+      }
+      setInterval(function() {
+        initClock();
+      },1000);
+
+
+    }
+  </script>
+</body>
+</html>   

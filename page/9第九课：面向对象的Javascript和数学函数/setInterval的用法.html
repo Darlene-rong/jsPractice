@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: black;
+        /* top: 10px;
+        left: 10px; */
+    }
+    </style>
+</head>
+<body>
+    <input type="button" value="开始动画" onclick="cplay()" name="" id="">
+    <input type="button" value="暂停动画" onclick="cclose()" name="" id="">
+    <h2 id="numberOne"></h2>
+    <h2 id="numberTwo"></h2>
+    <div id="box"></div>
+    <script type="text/javascript">
+    /*
+        setInterval 
+            作用：用于动画，banner效果，运动，游戏等都用setInterval
+                 和setTimeout的用法一样，值名称改变了
+
+            
+            轮询：根据你指定的时间会周期性执行回调函数
+            区别
+                setTimeout/clearTimeout------只执行一次
+                setInterval/clearInterval------轮询的方式
+
+                
+    
+    */
+        
+        //第二种写法  setInterval(chang2,1000)  帧速率----网速 显卡 cpu硬件  一秒30帧  jquery里面 一秒钟45帧
+        var num = 0;
+        var top1 = 0;
+        var left1 = 0;
+        function chang2() {
+            num++;
+            top1++;
+            left1++;
+            document.getElementById("box").style.left = left1+"px";
+            document.getElementById("box").style.top = top1 + "px";
+        };
+        var timmm = null
+        function cplay() {
+            if(timmm) {clearInterval(timmm);}
+            timmm = setInterval(function(){
+                chang2();
+            },100)
+        }
+        function cclose(){
+           
+            clearInterval(timmm);
+          
+        }
+        //用函数调用自己去实现setTimeout进行轮询
+        var index = 0;
+        var timer = null;
+        function change(){
+            index++;
+            // console.log("===="+index);
+            document.getElementById("numberTwo").innerHTML = index;
+            setTimeout(change,1000);
+            if(index==100)clearTimeout(timer)//清除动画
+        }
+        change();
+    </script>
+</body>
+</html>

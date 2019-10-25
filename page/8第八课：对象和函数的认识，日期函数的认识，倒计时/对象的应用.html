@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象的应用</title>
+    <style>
+    *{padding: 0; margin: 0;}
+    body{font-size: 14px;font-family: "微软雅黑"}
+    table{width: 100%;border-collapse:collapse;}
+    table td{border:1px solid #ccc;padding:10px;}
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>地址</td>
+                <td>描述</td>
+
+            </tr>
+        </thead>
+        <thead id="tbody">
+            <tr>
+                <td>lala</td>
+                <td>20</td>
+                <td>地guang</td>
+                <td>描述</td>
+            </tr>
+        </thead>
+    </table>
+    <script type="text/javascript">
+/*
+    object === json ---一种数据格式就是var obj = {}
+    1.对象转字符串，字符串转对象 （json-string   string-json）
+        
+    2.怎么理解对象数组
+
+    3.对象应用于插件的参数中，减少参数的定义变得更加的灵活
+
+    能够被.的就是对象
+*/
+//1.对象转字符串，字符串转对象 （json-string   string-json）
+    var json = {
+        width: "100px",
+        height: "200px",
+        border: "1px solid blue",
+        background: "green"
+    };
+
+    var order = {
+        orderNum: "r121231231",
+        price: 112,
+        num: 100,
+        total: 1222
+    };
+
+    //将对象转换为字符串 JSON.stringify(obj)
+    console.log(JSON.stringify(json))//{"width":"100px","height":"200px","border":"1px solid blue","background":"green"}
+    //从后台返回的就是json字符串
+    //将json字符串转换为对象  JSON.parse(obj)
+    var jsonString = '{"username":"kk","age":20}';
+    var json1 = JSON.parse(jsonString);
+    console.log(json1)//{username: "kk", age: 20}
+
+//2.怎么理解对象数组
+    /*
+        实例：将json里的数据渲染到table中
+    */
+    var stu1 = {
+        username: "lal",
+        age: 20,
+        address: "shanghai",
+        listen: function() {
+            console.log(this.username+"==="+this.age+"===="+this.address+"学生");
+        }
+    };
+    var stu2 = {
+        username: "hah",
+        age: 22,
+        address: "shanghai",
+        listen: function() {
+            console.log(this.username+"==="+this.age+"===="+this.address+"学生");
+        }
+    };
+    var stu3 = {
+        username: "pip",
+        age: 23,
+        address: "shanghai",
+        listen: function() {
+            console.log(this.username+"==="+this.age+"===="+this.address+"学生");
+        }
+    };
+    var tbody = document.getElementById("tbody");
+    var arr = [];
+    arr.push(stu1);
+    arr.push(stu2);
+    arr.push(stu3);
+    console.log(arr);
+    arr.sort(function(a,b){
+        var a1 = a.age;
+        var b1 = b.age;
+        return a-b;
+    })
+    for(var i=0;i<arr.length;i++){
+        var data = arr[i];
+        /*tbody.innerHTML += "<tr>"+
+        "<td>"+data.username+"</td>"+
+        "<td>"+data.age+"</td>"+
+        "<td>"+data.address+"</td>"+
+        "<td>"+data.listen+"</td>"+
+        "</tr>"*/
+        tbody.innerHTML += `<tr><td>${data.username}</td>
+        <td>${data.age}</td>
+        <td>${data.address}</td>
+        <td>${data.listen}</td>
+        </tr>`
+    }
+
+
+    //
+
+    </script>
+</body>
+</html>

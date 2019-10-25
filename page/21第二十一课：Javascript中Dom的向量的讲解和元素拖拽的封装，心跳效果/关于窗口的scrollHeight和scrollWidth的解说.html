@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于窗口的scrollHeight和scrollWidth的解说</title>
+    <style>
+    *{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";padding:25px;}
+	a{text-decoration:none;color:#3333}
+    #linex,#liney{position: absolute;top: 0;left: 0;color: turquoise;}
+    #linex{border-top: 2px dashed #777;width: 100%;}
+    #liney{border-right: 2px slateblue dashed;height: 100%;}
+    #text{position:absolute;top:0;left:0;height: 30px;display: inline-block;background-color:rgba(4, 4, 4, 0.54);line-height: 30px;color: #fff;font-size: 14px;font-weight: bold;padding: 0 10px;}
+    </style>
+</head>
+<body>
+    <div id="linex"></div>
+    <div id="liney"></div>
+    <div id="text">222</div>
+    <div style="opacity:0;">
+            //鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))//鼠标位置---通过鼠标事件才能获取
+            //onmousedown(鼠标按下) onmousemove(鼠标移动) onmouseup (鼠标松开)  onmouseover(鼠标进入) onmouseout(鼠标离开) 
+            //(onmouseenter(鼠标进入) onmouseleave(鼠标离开))
+    </div>
+    <script>
+        function $(id){
+            return document.querySelector(id)
+        }
+        /*
+            document 事件
+            window 事件
+
+        */
+        window.onload = function(){
+            // alert(document.body.scrollHeight)
+        }
+        //事件都绑定再Dom上面 不能绑在window窗口上面
+        //每一个事件都有一个event对象 记录对象的状态，值；
+        document.onmousemove = function(e){
+            //this = e.currenttarget
+            //e 在 ie678 window.event 代替 e  兼容性写法
+            /*
+                ie678 pageX pageY(包含滚动条的scrollLeft 和 scrollTop )   鼠标的位置
+                ie9+ clientX clientY(不包含滚动条的scrollLeft 和 scrollTop)
+            */
+            var pos = getXY(e);
+            var ev = e || window.event;
+            $("#linex").style.left = pos.x  + "px";
+            $("#linex").style.top =  pos.y + "px";
+            $("#linex").style.marginLeft = -pos.x + "px";
+            
+            $("#liney").style.height = document.body.clientHeight + "px"
+            $("#liney").style.top = pos.y + "px";
+            $("#liney").style.left = pos.x + "px";
+            $("#liney").style.marginTop  = -pos.y + "px";
+
+            $("#text").style.top = (pos.y+5 )+ "px";
+            $("#text").style.left = (pos.x+5) + "px";
+            $("#text").innerHTML = "pageX："+ pos.x + ";pageY:"+pos.y + ";clientX:"+ev.clientX + ";clientY:"+ev.clientY; 
+        }
+        //兼容性写法 获取鼠标的高度
+        function getXY(e){
+            //e 在 ie678 window.event 代替 e  兼容性写法
+            /*
+                ie678 pageX pageY(包含滚动条的scrollLeft 和 scrollTop )   鼠标的位置
+                ie9+ clientX clientY(不包含滚动条的scrollLeft 和 scrollTop)
+            */
+            var ev = e || window.event;
+            var x = 0;
+            var y = 0;
+            if(ev.pageX){
+                x = ev.pageX;
+                y = ev.pageY;
+            }else{
+                //ie678
+                //获取body的滚动区域  scrollLeft scrollTop
+                var sleft = 0,stop = 0;
+                if(document.documengtElement){
+                    sleft = document.documentElement.scrollLeft;
+                    stop = document.documentElement.scrollTop;
+                }else{
+                    //ie9 谷歌
+                    stop = document.body.scrollTop;
+                    sleft = document.body.scrollLeft;
+                };
+                x = ev.clientX + sleft;
+                y = ev.clientY + stop;
+            }
+            return {
+                x:x,
+                y:y
+            };
+        }
+    </script>
+</body>
+</html>

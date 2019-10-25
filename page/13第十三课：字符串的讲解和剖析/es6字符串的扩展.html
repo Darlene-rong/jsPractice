@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#3333}
+  </style>
+ </head>
+ <body>
+
+	<script>
+		var str = "中a";
+		//alert(str.codePointAt(0));
+		//java中有对字符串的处理 
+		//repeat
+		//contains
+		//startsWidth
+		//endsWidth
+		//var s = "keke";
+		//s.repeat(3);//kekekekekekekeke
+
+		//var name = "小武";
+		//var username = "柯柯";
+		//var age = 30;
+		//var str ="你好${name},我的名字叫:${username},年龄${age}";
+		//alert(str);
+//
+		//var a = 1;
+		//var b = 2;
+		//var str = "a + b = ${a}+${b}=${a+b}";
+
+		String.prototype.replaceAll = function(key,rcontent){
+			var reg = new RegExp(key,"igm");
+			return this.replace(reg,rcontent);
+		};
+
+		String.prototype.repeat = function(index){
+			//if(index<0)index=1;
+			var str = this;
+			while(index--){
+				str+=this;
+			}
+			return str;
+		};
+		/*
+		//indexOf 和lastIndexOf 的原理
+		String.prototype.keIndexOf = function(key){
+			var len = this.length;
+			var index = -1;
+			for(var i=0;i<len;i++){
+				if(this[i]==key){
+					index =  i;
+					break;
+				}
+			}
+			return index;
+		};
+
+		String.prototype.keLastIndexOf = function(key){
+			var len = this.length;
+			var index = -1;
+			for(var i=len;i>0;i--){
+				if(this[i]==key){
+					index =  len-1;
+					break;
+				}
+			}
+			return index;
+		};
+		
+			
+		String.prototype.keSlice = function(start,end){
+			var len = this.length;
+			var str = "";
+			if(start<0)start = len + start;
+			if(end<0)end = len + end;
+			for(var i=start;i<end;i++){
+				str = str.concat(this.charAt(i));
+			}
+			return str;
+		};
+
+
+		String.prototype.keSubstring = function(start,end){
+			var len = this.length;
+			var str = "";
+			if(start<0)start =0;
+			if(end<0)end = 0;
+			if(start==0 && end==0){
+				return "";
+			}
+
+			if(start>len)start = len;
+			if(end>len)end= len;
+
+			//交换
+			var s= Math.min(start,end);
+			var e = Math.max(start,end);
+
+			for(var i=s;i<e;i++){
+				str = str.concat(this.charAt(i));
+			}
+			return str;
+		};
+		*/
+		
+		//计算器--number api
+		var str = "123456789";
+		//charAt(index) 在ie6789都支持
+		console.log(str.charAt(0)+"==="+str[0])//
+	</script>
+
+ </body>
+</html>

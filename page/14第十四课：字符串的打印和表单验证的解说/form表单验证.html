@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form表单验证</title>
+    <style>
+    body,html{padding: 0;margin: 0; font-size: 14px;height: 100%;width: 100%;}
+    .box{position: absolute;left: 50%;height: 200px;width: 400px;margin-left: -150px;margin-top: 50px;}
+    .form_content{margin-bottom: 10px;}
+    .erro{color:deeppink;}
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+            <span id="erro1" class="erro"></span>
+        <form id="userForm" method="post" onsubmit="return saveUser()">
+            <div class="form_content">
+                <label for="username">用户：</label>
+                <input type="text" name="username" autofocus="autofocus">
+                
+            </div>
+            <div class="form_content">
+                <label for="password">密码：</label>
+                <input type="password" name="password">
+            </div>
+            <div class="form_content">
+                <label>性别：</label>
+                <label><input type="radio" name="sex" id="boy" value="男" title="男">男</label>
+                <label><input type="radio" name="sex" id="girl" value="女" title="女">女</label>
+                
+                
+            </div>
+            <div class="form_content">
+                <label>兴趣爱好：</label>
+                <label><input type="checkbox" name="hobbys" value="1">篮球</label>
+                <label><input type="checkbox" name="hobbys" value="2">羽毛球</label>
+                <label><input type="checkbox" name="hobbys" value="3">看书</label>
+                <label><input type="checkbox" name="hobbys" value="4">唱歌</label>
+                
+            </div>
+            <div class="form_content">
+                <label for="produce">自我介绍：</label>
+                <textarea rows="3" cols="40" id="produce"></textarea>
+            </div>
+            <div class="form_content">
+                <label for="provice">地区：</label>
+                <select id="provice">
+                    <option value="">请选择省份</option>
+                    <option value="s001">湖南</option>
+                    <option value="s002">上海</option>
+                    <option value="s003">湖北</option>
+                    <option value="s004">北京</option>
+                    <option value="s005">广州</option>
+                    <option value="s006">山西</option>
+                </select>
+            </div>
+            <input type="submit" value="提交" name="" id="">
+
+
+        </form>        
+    </div> 
+
+    <script type="text/javascript">
+    
+    /*
+        submit格式： onsubmit="return saveUser()"
+            return true  才会进行表单提交
+
+            return null; falsy 0 false undefined null NaN   都为false
+
+        获取form元素的值  name:  formDom.name.value
+                         id： formDom.id.value
+        
+        button: 直接调用 onclick = saveUser()
+    */
+    // function saveUser() {
+    //     if(!isValidator()) {
+    //         return false;
+    //     }
+    // };
+
+    function saveUser() {
+        var fromDom = $("userForm");//获取form表单
+        //获取表单中各个的name值
+        var username = fromDom.username.value;
+        var password = fromDom.password.value;
+        //选择框
+        var sevalue = $("provice").value;//拿到select对象：
+        var seIndex = $("provice").selectedIndex;// selectedIndex代表的是你所选中项的index
+        var opvalue = $("provice").options[seIndex];//获取索引对应的option
+        var val = opvalue.value;//拿到选中项options的value：
+        var tex = opvalue.text;//拿到选中项options的text：
+
+        //复选框按钮
+        var checkDom =  fromDom.hobbys;
+        var clen = false;
+        var carr = [];
+
+        
+        //单选按钮
+        var radioDoms = fromDom.sex;
+        var rlen = false;//判断是否选择
+        var rvalue = "";
+
+        //textarea
+        var content = $("produce").value;
+        console.log(content)
+        
+        //创建对象存储数据
+        var parms ={};
+        parms.username = username;
+        parms.password = password;
+        parms.rvalue = rvalue;
+        parms.checkDom = carr.toString();
+        parms.optionval = val;
+        parms.content = content;
+        
+        //单选框
+        for(var i = 0;i<radioDoms.length;i++) {
+            if(radioDoms[i].checked) {
+                rvalue = radioDoms[i].value;
+                rlen = true;
+                break;
+            }
+        }
+        //复选框
+        for(var i=0;i<checkDom.length;i++){
+            if(checkDom[i].checked){
+                carr.push(checkDom[i].value);
+                
+                clen = true;
+            }
+        };
+        //验证
+        if(username == ""){
+            fromDom.username.focus();
+            showError("用户名不能为空")
+            return false;
+        };
+        if(password == ""){
+            //焦点
+            fromDom.password.focus();
+            showError("密码不能为空")
+            return false;
+        };
+
+        if(rlen == false) {
+            showError("请选择性别")
+            return false;
+        }
+        console.log(val)
+        if(sevalue == "") {
+            showError("请选择地区(＾Ｕ＾)ノ~ＹＯ")
+            return false;
+        };
+        if(clen == false) {
+            showError("请选择兴趣爱好嗷")
+            return false;
+        }
+        /*$.ajax({
+				type:"post",
+				url:"index.jsp",
+				data:params,
+				success:function(){
+				}
+			})*/
+			//执行ajax
+            alert(JSON.stringify(parms))
+        return false;
+    }
+
+    //封装
+    function $(id){
+        return document.getElementById(id);
+    };
+    //将验证进行封装    当一个代码出现两三次以上  考虑进行封装
+    function showError(msg){
+        $("erro1").innerHTML = msg;
+        setTimeout(function(){
+            $("erro1").innerHTML = ""
+        },10000)
+    }
+    
+    </script>
+</body>
+</html>

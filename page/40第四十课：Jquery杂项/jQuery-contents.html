@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div>我是父页面</div>
+  <iframe src="./iframe.html" frameborder="0"></iframe>
+  <script>
+    /*
+        contens: 用来处理jQuery中的iframe
+    */
+   		
+		window.onload = function(){
+			/*contents处理iframe*/
+
+			//js版本
+			var iframeDom = document.getElementById("iframe");
+
+			var awindow = iframeDom.contentWindow;
+
+			//var html = awindow.document.getElementById("box").innerHTML;
+			//awindow.document.body.style.background = "red";
+			//调用子窗口事件
+			//awindow.test(function(html){
+			//	alert("父=====>"+html);
+			//});
+
+
+
+
+			//jquery版本
+
+			//$("#iframe").contents().find("h1").css("background","red").click(function(){
+			//	alert($(this).html())
+			//});
+
+
+			//但是它不能调用函数
+			awindow.test();
+		}
+
+		
+  </script>
+</body>
+</html>

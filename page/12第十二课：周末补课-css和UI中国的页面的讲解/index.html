@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_553588_hzzp0ivg3606n7b9.css">
+    <style>
+        *{padding: 0;margin: 0;}
+        a{text-decoration: none;}
+        ul,li{list-style: none;}
+        body{font-size: 14px;font-family: "微软雅黑";}
+        h2,h3,h4{font-size: 100%;}
+        .w1180{width: 1180px;olor: yellow;}
+        .bannerbox{height: 350px;margin: 50px auto 0;}
+        .mar-top10{margin-top:10px;}
+        /* .iconfont{font-size: 18px;} */
+        /* 皮肤 */
+        .bg{background-color: #eff3f5;}
+        img{vertical-align: middle;margin-left: 24px;}
+        /* 推荐 */
+        .tjbox {height: 700px;margin: 20px auto;}
+        .tjbox ul {display: inline;}
+        .tjbox .items{height: 340px;width: 280px;float: left;margin-right:20px;position: relative;margin-bottom: 10px;}
+        .tjbox .items:nth-child(4n){margin-right: 0;}
+        .tjbox .items h3{font-size:10px 10px;padding:20px;word-wrap: break-all;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+        .tjbox .items a{color:#333;}
+        .tjbox .items a:hover{color: #999;}
+        .items_list a{padding: 0 5px;}
+        .items_user,.items_lis{padding: 10px;padding-left: 11px;}
+        .items_user span{padding: 0 10px;}
+        .yuanchuang{border-radius: 5px;color: #fff;background-color: red;padding: 0 5px;margin-left: 10px;}
+        /* 悬浮层 */
+        .tjbox .items:before{content: "";position: absolute;top: -10px;left: 0;right: -15px;bottom: 0;background-color: #fff;opacity: 0;z-index: 1;box-shadow: 0 0 1px #ccc;}
+        .tjbox .items:hover::before{opacity: 2;transition: opcity 0.5s ease; }
+        .tjbox .items .test {z-index: 2; position: relative;overflow: hidden;}
+        .tjbox .items:hover img{transform: scale(1.1);transition: transform 0.6s ease;}
+    </style>
+</head>
+<body class="bg">
+
+    <div class="w1180 bannerbox">
+        <img src="http://img.ui.cn/data/upload/201809/1536315332_953.png" width="1180px" height="350px" alt="">
+    </div>
+
+    <div class="w1180 tjbox">
+
+        <ul>
+            <li class="items">
+                <!-- 悬浮 -->
+                <!-- <div class="shade"></div> -->
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/9/4/2/418249.png" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">谈谈(web)UI设计如何零配色,创建安全配色方案2016版</a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">2255</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">1314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>                    
+                </div>
+
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/0/9/8/2011890.png" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">C4D-Newah's Ark 新诺亚方舟     </a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">5255</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/4/7/6/2011674.gif" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">设计师该如何写简历？</a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">455</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">1314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/6/5/5/2010556.gif" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">【我们的设计周刊】对比撞色设计趋势；光影在插画中的运用  </a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">255</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">1314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 列表2 -->
+        <ul>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/9/1/4/2006419.gif" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">那些你可能还没发现的Sketch冷知识【第二期】         </a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">5555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">5655</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/2/2/1/2004122.gif" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">字体设计第二站—字缘奇说 </a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">555</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">21314</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/0/6/7/1976760.png" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">王者荣耀 | 剑侠情缘 | JIANGHU 3D DESIG      </a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">4225</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">455</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">1534</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">Jack</span></i></a>
+                    </div>
+                </div>
+            </li>
+            <li class="items">
+                <div class="test">
+                    <a href="javscript:;"><img src="http://img.ui.cn/data/file/0/9/9/1996990.png" alt="图片" width="280" height="210"></a>
+                    <h3 class="title"><a href="javascript:;">几何世界物语&黑白</a></h3>
+                    <div class="items_list">
+                        <span class="yuanchuang">原创</span>
+                        <a href="javascript:;"><i class="iconfont icon-kanguo">9999</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-pinglun">2554</i></a>
+                        <a href="javascript:;"><i class="iconfont icon-xihuan3">122</i></a>
+                    </div>
+                    <div class="items_user">
+                        <a href="javascript:;"><i class="iconfont icon-zhanghaoguanli"><span class="tescher">戚了个戚</span></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+    /*
+        网站如何换皮肤 主题
+    
+    */
+    
+    </script>
+</body>
+</html>

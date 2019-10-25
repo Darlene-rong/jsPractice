@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>弹窗组件</title>
+  <link rel="stylesheet" href="http://at.alicdn.com/t/font_848332_ux6lxe7r8r.css">
+  <style lang="">
+    .zr_overlay {
+      z-index: 999;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      opacity: 0.5;
+      background: #000;
+      height: 100%;
+      width: 100%;
+    }
+    .zr_dialog {
+      display: inline-block;width: 420px;vertical-align: middle;height: 140px;background: #fff;position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      border-radius: 4px;
+      border: 1px solid #ebeef5;
+      font-size: 18px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+      overflow: hidden;
+    }
+    .zr_dialog-top {
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .zr_dialog-top .iconfont {cursor: pointer;color: #909399;}
+    .zr_dialog-top .iconfont:hover {color:rgb(1, 154, 255)}
+    .zr_dialog-content {padding: 5px 15px;position: relative;}
+    .zr_dialog-content .zr_dialog-content-icon{display: inline-block  }
+    .zr_dialog-content .zr_dialog-content-icon .iconfont {color: #e6a23c;font-size: 30px;}
+    .zr_dialog-content-text {vertical-align: middle;font-size: 16px;top: 10px;display: inline-block;position: absolute;left: 53px;color: #5a5a5a;font-size: 14px;}
+    .zr_dialog-content-btn {text-align: right;padding: 5px 15px;}
+    .zr_dialog-content-btn button {display: inline-block; padding: 7px 15px;border: 1px solid #dcdfe6;border-radius: 4px;cursor: pointer;outline: none;box-sizing: border-box; }
+    .zr_cbtn {background: #fff;color:#606266}
+    .zr_sbtn {background: #409eff; color: #fff;}
+  </style>
+</head>
+<body>
+  <a href="javascript:;" id="dialog">弹出
+    <p class="name"></p>
+    <p class="age"></p>
+  </a>
+
+  <script>
+    function $(id) {  
+      return document.getElementById(id)
+    }
+    //根据父dom获取父dom下面的class
+    function getClass(pdom,gclass) {
+      var ele = (typeof pdom === "string" ? document.getElementById(pdom) : pdom).getElementsByTagName("*");
+      var arr = [];
+      for(let i=0;i<ele.length;i++) {
+        if(ele[i].className.indexOf(gclass) != -1) {
+          arr.push(ele[i])
+        }
+      }
+      return arr;
+    }
+    //多对象的混入
+    function mix(target, source) {  
+      var arr = [];
+      var argArr = arr.slice.call(arguments);
+      var i=1;
+      if(argArr.length == 1) {
+        return target;
+      };
+      while((source = argArr[i++])){
+      for(var key in source){
+          if(source.hasOwnProperty(key)){
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    (function(win) {
+      var zrDailog = {
+        alert: function(opts) {
+          var options = mix({},zrDailog.methods,zrDailog.defaults,opts);
+          
+          var dailogDome = zrDailog.methods.template(opts);
+          zrDailog.methods._event(dailogDome,opts.callback)
+        } 
+      };
+      //扩展事件
+      zrDailog.methods = {
+        template: function(opts) {
+          var dialogDom = $("zr_dialogbox");
+          if(dialogDom) {
+            document.body.removeChild(dialogDom);
+          } else {
+            dialogDom = document.createElement("div");
+          }
+          var html = `
+            <div class="zr_dialog-top">
+              <span>${opts.title}</span>
+              <span class="zr_jsclose"><i class="iconfont icon-guanbi1"></i></span>
+            </div>
+            <div class="zr_dialog-content">
+              <div class="zr_dialog-content-icon"><i class="iconfont ${opts.icon}"></i></div>
+              <span class="zr_dialog-content-text">${opts.content}</span>
+            </div>
+            <div class="zr_dialog-content-btn">
+              <button class="zr_cbtn zr_jscancle">${opts.cancle}</button>
+              <button class="zr_sbtn zr_jssure">${opts.success}</button>
+            </div>
+            `
+          dialogDom.className = "zr_dialog";
+          dialogDom.id = "zr_dialogbox";
+          dialogDom.innerHTML = html;
+
+          //创建阴影层
+          var overDom = document.createElement("div");
+          overDom.className = "zr_overlay";
+          document.body.appendChild(dialogDom);
+          document.body.appendChild(overDom);
+          return dialogDom;
+        },
+        _event(dom,callback) {
+          var closeDom = getClass(dom, 'zr_jsclose')[0];//关闭按钮
+          var cancleDom = getClass(dom, 'zr_jscancle')[0];//取消按钮
+          var sureDome = getClass(dom, 'zr_jssure')[0];
+          closeDom.onclick = function() {
+            document.body.removeChild(dom.nextElementSibling)
+            document.body.removeChild(dom);
+            if(callback)callback(false);
+          };
+          cancleDom.onclick = function() {
+            document.body.removeChild(dom.nextElementSibling)
+            document.body.removeChild(dom);
+            if(callback)callback(false)
+          };
+          sureDome.onclick = function () {  
+            document.body.removeChild(dom.nextElementSibling);
+            document.body.removeChild(dom);
+            if(callback)callback(true)
+          }
+        }
+      };
+      //默认参数
+      zrDailog.defaults = {
+        width: 480,
+        height: 248,   
+        title: '提示',
+        content: '内容',
+        icon: 'icon-jurassic_warn',
+        success: '确定',
+        cancle: '取消',
+        callback: function() {}
+      };
+      win.zralert = zrDailog.alert;
+    })(window);
+    window.onload = function() {
+      var a = getClass("dialog","name")[0];
+      $("dialog").onclick = function() {
+        zralert({
+          title: '我是提示title',
+          content: '我是提示内容',
+          icon: 'icon-jurassic_warn',
+          success: '保存',
+          cancle: '取消',
+          callback: (function(state) {
+            if(state == true) {
+              alert("我按了确定啦")
+            }
+          })
+        })
+      }
+    }
+  </script>
+</body>
+</html>

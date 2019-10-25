@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    body{font-size:14px;font-family:"微软雅黑";}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #box{background:red;width:100px;height:100px;}
+    </style>
+
+    <style id="s1">
+    p{color:red}
+    div{color:green;font-size:12px;}
+    </style>
+</head>
+<body>
+    
+	<div id="box"></div>
+	
+		
+	<p>我士大夫士大夫士大夫士大夫</p>
+	<p>我士大夫士大夫士大夫士大夫</p>
+	<p>我士大夫士大夫士大夫士大夫</p>
+	<p>我士大夫士大夫士大夫士大夫</p>
+    <p>我士大夫士大夫士大夫士大夫</p>
+
+    <a href="javascript:void(0);" id="clickme">点我</a>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var boxDom = $("box");
+            boxDom.style.background = "pink";
+             
+            var clickDom = $("clickme");
+            clickDom.onclick = function(){
+                document.getElementById("s1").innerHTML +="p{font-size:24px;}";
+            }
+        }
+    </script>
+</body>
+</html>

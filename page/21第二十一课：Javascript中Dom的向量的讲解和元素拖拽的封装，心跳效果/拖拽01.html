@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+	    body{font-size:14px;font-family:"微软雅黑";}
+	    a{text-decoration:none;color:#3333}
+	    #box{position:absolute;top:0;left:0;width:100px;height:100px;background:rgba(61, 47, 47, 0.521);}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+    function $(id){
+        return document.querySelector(id);
+    }
+    window.onload = function(){
+        /*
+            拖拽：
+                1.加定位
+                2.绑定鼠标 document事件
+                3.清空鼠标事件 onmousemove = null; onmouseup = null;
+        */ 
+        var boxDom = $("#box");
+        var mark = false;
+        boxDom.onmousedown = function(e){
+            /*
+                1.获取鼠标的位置  e.pageX;e.pagey|| e.clientX;e.clientY
+                2.
+            
+            */
+            //拿到元素的位置
+            var sleft = this.offsetLeft;
+            var stop = this.offsetTop;
+            //获取边界值 获取最大的距离
+            var maxLeft = window.innerWidth - boxDom.offsetWidth;
+            var maxTop = window.innerHeight - boxDom.offsetHeight;
+            //拿到鼠标点击下来的位置
+            var pos = getXY(e);
+            mark = true;
+            document.onmousemove = function(e){
+                if(mark){
+                    var pos2 = getXY(e);
+                    var nleft = pos2.x - pos.x + sleft;
+                    var ntop = pos2.y - pos.y + stop;
+                    if(nleft<=0) nleft = 0;
+                    if(ntop<=0) ntop = 0;
+                    if(nleft>maxLeft) nleft = maxLeft;
+                    if(ntop>maxTop) ntop = maxTop;
+                    boxDom.style.left = nleft+"px";
+                    boxDom.style.top = ntop+"px";
+                }
+           };
+           //鼠标松开的时候，释放拖动
+           document.onmouseup = function(e){
+                this.onmousemove = null;
+                this.onmouseup = null;
+                mark = false;
+           }
+        }
+    }
+		//获取鼠标的位置。兼容ie678
+		function getXY(e){
+			var ev = e || window.event;
+			var x=0,y=0;
+			if(ev.pageX){
+				x = ev.pageX;
+				y = ev.pageY;
+			}else{
+				//拿到scrollTop 和scrollLeft
+				var sleft = 0,stop = 0;
+				//ie678---
+				if(document.documentElement){
+					stop =document.documentElement.scrollTop;
+					sleft = document.documentElement.scrollLeft;
+				}else{
+				//ie9+ 谷歌 
+					stop = document.body.scrollTop;
+					sleft = document.body.scrollLeft;
+				}	
+				x = ev.clientX + sleft;
+				y = ev.clientY + stop;
+			}
+			return {x:x,y:y};
+		};
+    </script>
+</body>
+</html>

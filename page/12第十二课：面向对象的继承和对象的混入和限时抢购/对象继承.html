@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象继承</title>
+</head>
+<body>
+    
+    <script>
+        var person = {"username":"jack"};
+
+    /*
+        继承 Object.create(obj)
+
+        混入(mix)    ----->extend var opts = $.extend({},options);
+    
+    */
+        //继承
+        var obj = Object.create(person);
+        obj.age = 10;
+        console.log(obj.username+"====="+obj.age)//jack=====10
+        
+        //构造函数继承
+            //矩形
+            function Rect(length,width){//构造函数
+                //自有属性
+                this.length = length;
+                this.width = width;
+            };
+            //计算矩形的面积
+            //扩展属性
+            Rect.prototype.getArea = function() {
+                return this.length * this.width;
+            };
+            Rect.prototype.toString = function() {
+                console.log("这个矩形的面积是"+this.getArea()+"===高度："+this.width+"宽度："+this.length)
+            };
+            var rect = new Rect(200,100);
+            rect.toString();//这个矩形的面积是20000===高度：100宽度：200
+
+            //正方形
+            function Square(size) {
+                this.width = size;
+                this.height = size;
+            };
+
+            //构造函数继承
+            Square.prototype.constructor = Rect;
+			Square.prototype = new Rect();
+			
+
+			var sq = new Square(10);
+			alert(sq.address+"==="+sq.length+"==="+sq.tel)
+			//===>混入(mix)=extends var opts = $.extend({},options);
+    </script>
+</body>
+</html>

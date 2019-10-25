@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+    /*
+        1.面向对象：
+            构造函数
+            object.create  
+        2.dom知识点：
+            appendChild 
+            insertBefore
+
+            createElement
+            createTextNode
+        
+    */
+    var obj = {username: "king"};
+    //javascript是一个对象是动态，可以动态追加，修改，删除；
+    //面向对象去添加更多的对象   两种方式去创建面向对象 （构造函数，object.create）
+        
+        //object.create  面向对象 使用原型去扩展   原型继承
+        object.prototype.create = function(o) {
+            function f() {}; //构造函数
+            f.prototype = o; //原型对象继承  对象赋值给对象
+            return new F();  //返回新对象
+        }
+        //构造函数的面向对象
+        function Person() {
+           
+        };
+        Person.prototype.age = 30;//prototype解决this指向的问题
+        var p = new Person();
+        console.log(p.age);
+
+        //前拷贝  只能拷贝属性和函数 不能拷贝对象  对象里面有对象不能进行拷贝 （只能使用混入）
+
+        //原型链
+            //person 继承 构造函数  > 原型对象 > object
+            var json = {age:30,address:"广州"};
+            function Person1() {
+
+            };
+            Person1.prototype = json;
+            Person1.prototype.constructor = Person;
+            console.log(Person1.prototype.constructor);
+            var person = new Person1();
+            console.log("==="+person.constructor)
+    </script>
+</body>
+</html>

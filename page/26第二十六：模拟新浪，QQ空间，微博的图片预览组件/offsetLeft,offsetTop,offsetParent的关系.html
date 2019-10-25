@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+        a{text-decoration:none;color:#333}
+        li{list-style:none}
+        #box{background:red;width:400px;height:400px;margin:100px;overflow:hidden;position:absolute}
+        #box div{width:200px;height:200px;background:green;margin-top:100px;margin-left:100px}
+      </style>
+     </head>
+     <body>
+        <div id="box"> 
+            <div id="box2"></div> offsetParent == boxDom
+        </div>
+        <script>
+            function $(id){
+                return document.getElementById(id)
+            }
+            window.onload = function(){
+                var boxDom = $("box");
+                var boxDom2 = $("box2");
+                //alert(boxDom.offsetLeft+"===="+boxDom.offsetTop);
+                //alert(boxDom2.offsetLeft+"===="+boxDom2.offsetTop);
+                //offsetParent	
+                //boxDom.offsetParent.style.background ="#111";
+    
+                //offset().left
+                //position().left  box2.position().top ===box
+            };
+    
+            //offsetLeft offsetTop offsetParent
+            //元素在dom树中的位置坐标，默认情况：元素的左顶点距离浏览器的左顶点和右边的距离
+            
+            //浮动布局，offsetLeft和offsetTop都是相对于body,而定位布局都相对于加了position的父元素
+            function getTop(obj){
+                var top = 0;
+                while(obj){
+                    top+=obj.offsetTop;//0 dom
+                    obj = obj.offsetParent;//undefined
+                }
+                return top;
+            };
+        </script>
+</html>

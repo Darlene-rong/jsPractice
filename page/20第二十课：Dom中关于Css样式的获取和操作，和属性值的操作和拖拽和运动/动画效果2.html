@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=k, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";}
+        a{text-decoration:none;color:#3333}
+        #box{width:100px;height:400px;background:rgba(105, 198, 255, 0.64);position:absolute;top:100px;left:-100px;}
+        #box2{
+            width:20px;
+            height:60px;
+            background:rgb(13, 116, 233);
+            position:absolute;
+            text-align:center;
+            color:#fff;
+            right:-20px;
+            top:170px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+		<div id="box2">Q客服</div>
+    </div>
+    <script>
+        window.onload = function(){
+            var boxDom = $("#box");
+            // 鼠标移入事件 onmouseover
+            boxDom.onmouseover = function(){
+                mousestar();
+            };
+            boxDom.onmouseout = function(){
+                mouseend();
+            }
+            //移入发生的动画；
+            var timer = null;
+            var speed = 10;
+            function mousestar(){
+                clearInterval(timer)
+                timer = setInterval(function(){
+                    var cur = boxDom.offsetLeft;//获取起始位置
+                    if(cur == 0){
+                        console.log("eee")
+                        clearInterval(timer)
+                    }else{
+                        boxDom.style.left = cur + speed + "px"
+                    }
+                    console.log(cur)
+                },30)
+            }
+            function mouseend(){
+                var speed = -10;
+                clearInterval(timer)
+                timer = setInterval(function(){
+                    var cur = parseInt(getStyle(boxDom,"left"));
+                    if(cur == -100){
+                        clearInterval(timer)
+                    }else{
+                        boxDom.style.left = cur + speed +"px"
+                    }
+                },30)
+            }
+        }
+        function $(id){
+            return document.querySelector(id);
+        }
+        function getStyle(dom,attr){
+			return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr]:dom.currentStyle[attr];
+		};
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html{
+height: 100%;
+width: 100%;
+        }
+        .text{
+            width: 60px;
+            display: inline-block;
+            border: 1px solid red;
+            margin:2px;
+            padding: 5px;
+            text-align: center;
+        }
+        .container{     
+            background-color: pink;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 90%;
+        }
+        .content {
+            display: inline-block;
+            /* width: 50%; */
+            position: relative;
+            top: 0;
+            left: 3%;
+        }
+        .content1 {
+            display: inline-block;
+            position: relative;
+            top: 0;
+            left: 3%;
+        }
+        #text1 {
+            border:1px solid rgba(0,0,0,0);
+        }
+        .con {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <script type="text/javascript">
+    /*
+        
+        
+    */
+    var a = 9;
+    document.writeln("<div class='container'>")
+        //top-left
+        document.writeln("<div class='content'>")
+        for(var i=1; i<=a; i++){
+            for(var k=9;k>=i;k--) {
+                document.writeln("<p id='text1' class='text '>"+ " " +"&nbsp" + "</p>");
+            }
+            for(var j=1;j<=a;j++){
+                document.writeln("<p class='text'>"+ i + "*" + j + "=" + i*j +"&nbsp" + "</p>");
+                if(i == j) {
+                    break;               
+                }
+            }
+            document.write("<br>")        
+        }    
+        document.writeln("</div>")
+        //top-right
+        document.writeln("<div class='content'>")
+        for(var i=1; i<=a; i++){
+            for(var j=1;j<=a;j++){
+                document.writeln("<p class='text'>"+ i + "*" + j + "=" + i*j +"&nbsp" + "</p>");
+                if(i == j) {
+                    break;
+                }
+            }
+            document.write("<br>")
+            
+        }
+        document.writeln("</div>")
+        //bottom-left
+        document.writeln("<div class='con'>")
+        document.writeln("<div class='content1'>")
+        for(var i=9; i>=1; i--){
+            for(var k=9;k>=i;k--) {
+                document.writeln("<p id='text1' class='text '>"+ " " +"&nbsp" + "</p>");
+            }
+            for(var j=i;j>=1;j--){
+                document.writeln("<p class='text'>"+ i + "*" + j + "=" + i*j +"&nbsp" + "</p>");
+            }
+            document.write("<br>")
+            
+        }
+        document.writeln("</div>")
+        //bottom-right
+
+        document.writeln("<div class='content1'>")
+        for(var i=9; i>=1; i--){
+            for(var k=1;k<10-i;k++){
+                break;
+            }
+            for(var j=i;j>=1;j--){
+                document.writeln("<p class='text'>"+ i + "*" + j + "=" + i*j +"&nbsp" + "</p>");
+            }
+            document.write("<br>")
+            
+        }
+        document.writeln("</div>")
+        document.writeln("</div>")
+    document.writeln("</div>")
+    </script>
+</body>
+</html>

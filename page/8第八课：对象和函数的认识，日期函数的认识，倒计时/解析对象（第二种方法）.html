@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解析对象</title>
+</head>
+<body>
+    <div >
+        <h1 id="title"></h1>
+        <h3 id="content1"></h3>
+        <div id="subtitle">
+        </div>
+        <div id="time">
+        </div>
+        <div id="author">
+        </div>
+        <div id="editors">
+        </div>
+        <div id="attchments"></div>
+        <div id="comemnts"></div>
+    </div>
+    <script type="text/javascript">
+
+    var content = {
+        title:"习近平访美查看IT行情",
+        content1:"2014年习近平访美查看IT行情，做飞机前面.....",
+        subtitle:"坐飞机",
+        time:"2015-11-1 12:15:22",
+        author:"keke",
+        hits:10,
+        isDelete:0,
+        img:"http://images.huxiu.com/article/cover/201512/11/173106241500.png?",
+        attchments:["aaa.txt","bbb.gif","ccc.jpg"],
+        mark:true,
+        price:121.5,
+        comemnts:[ //数组里面的对象
+            {title:"太刁了",username:"keke",img:"1aaa.gif",content:"1士大夫士大夫是的",time:"2015-12-12 12:12"},
+            {title:"1太刁了",username:"keke1",img:"2aaa.gif",content:"2士大夫士大夫是的",time:"2015-12-12 12:12"},
+            {title:"2太刁了",username:"keke2",img:"3aaa.gif",content:"3士大夫士23423大夫是的",time:"2015-12-12 12:12"},
+            {title:"3太刁了",username:"keke3",img:"4aaa.gif",content:"4士大夫士大夫是的",time:"2015-12-12 12:12"},
+            {title:"4太刁了",username:"keke4",img:"5aaa.gif",content:"5士大夫4234士大夫是的",time:"2015-12-12 12:12"},
+            {title:"5太刁了",username:"keke5",img:"6aaa.gif",content:"6士大夫士大夫是的",time:"2015-12-12 12:12"},
+            {title:"6太刁了",username:"keke6",img:"7aaa.gif",content:"7士大夫士大夫是的",time:"2015-12-12 12:12"},
+            {title:"7太刁了",username:"keke7",img:"8aaa.gif",content:"8士大夫士大夫是的",time:"2015-12-12 12:12"}
+        ],
+        editors:{username:"稀烂",age:16,address:"上海"}
+    };
+    /*
+        做开发面对解析对象(json),三部曲
+            1.看数据类型是什么
+                console.log(typeOf content);
+                是对象  直接对象.属性进行使用
+            2.如果不是对象，就用JSON.parse转换成对象
+                var str = '{"username":"kk","age":20}';
+                var json = JSON.parse(str) //字符串转换为对象 第一种写法  ie 678不支持
+                var json = eval("("+str+")")//字符串转换为对象 第二种写法 兼容性写法
+                //将两种方法进行封装
+                function parse(jsonString){
+                    if(JSON.parse){ //如果支持JSON.parse
+                        return JSON.parse(jsonstring)
+                    }else {
+                        return eval("("+str+")")
+                    }
+                }
+            3.进行解析
+    */
+    function $(id) {
+        return document.getElementById(id);
+    };
+    for(var key in content) {
+        
+        var val = content[key];
+        if(typeof val != "object") {
+            if($(key)){//如果key存在
+                $(key).innerHTML = content[key];
+            }      
+        } else {
+            //判断数组
+            if(Array.isArray(val)){
+                console.log(1+key);
+                //判断数组里面是否有对象
+                var len = val.length;
+                var html1 = "";
+                for(var i=0;i<len;i++) {
+                    var arr1 = val[i];
+                    if(typeof arr1 == "object"){
+                        for(var key1 in arr1) {
+                            html1 += arr1[key1]+"<br>"
+                        }
+                    } else {
+                        html1 += arr1;
+                    }
+                }
+                $(key).innerHTML = html1;
+            } else {
+                console.log(2+key);
+                var html = "";
+                for(var k in val){
+                    html += val[k]
+                }
+                $(key).innerHTML = html;
+            }
+        }
+    }
+
+    
+    </script>
+</body>
+</html>

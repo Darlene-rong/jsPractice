@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    	*{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";background-color: black}
+        a{text-decoration:none;color:#333}
+        #box{background:rgb(0, 168, 90);width:100px;height:100px;position:absolute;border-radius: 50px;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            var boxDom = $("box");
+            boxDom.onclick = function(){
+                move();
+            }
+
+            var speed = -30;
+			var speedx = 10;//匀速
+            var timer = null;
+            function move(){
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    speed +=3;
+                    var y = boxDom.offsetTop +speed;
+                    var x = boxDom.offsetLeft + speedx;
+                    var mah = window.innerHeight -boxDom.offsetHeight;
+                    if(y>mah){
+                        y = mah;
+                        speed *= -1;
+                        speed *= 0.825;
+                        speedx *= 0.625;
+                    }
+                    if(speedx<=0.01){
+                        clearInterval(timer);
+                        boxDom.style.top = mah +"px"
+                    }else{
+                        boxDom.style.top = y+ "px";
+                        boxDom.style.left = x + "px"
+                    }
+                },30)
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡</title>
+    <style>
+
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";padding:100px;}
+	a{text-decoration:none;color:#3333}
+	ul li{list-style:none;padding:10px;border:1px solid #ccc;cursor: pointer;}
+	#tab{width:670px;height:480px;border:1px solid #ccc;margin:0 auto;}
+	#tab ul{width:100%;height:42px;background:#ccc}
+    #tab li{float:left;}
+    #tab li.on{background-color: #fff;}
+	#tab li.on{background:#fff;}
+	#tab .content{height:438px;}
+	#content span{display:none}
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <ul id="card">
+            <li class="on">选项卡1</li>
+            <li>选项卡2</li>
+            <li>选项卡3</li>
+        </ul>
+        <div id="content">
+            <span id="ctn1" style="display:block">内容1</span>
+            <span id="ctn2">内容2</span>
+            <span id="ctn3">内容3</span>
+        </div>
+    </div>
+
+    <script>
+    /*
+        1.给每个选项卡绑定点击事件
+        2.获取点击元素的索引
+        3.通过索引控制下面内容的隐藏和显示
+
+        两种方法
+            1.定位版本
+            2.索引版本
+    */
+
+    //找到ul下面所有的子元素
+    var ulDom = document.getElementById("card");
+    var ulChild = ulDom.children;
+    var len = ulChild.length;
+    for(var i=0;i<len;i++){
+        //给每个标签添加自有属性
+        ulChild[i].index = i;
+        console.log(ulChild[i])
+        ulChild[i].onclick = function() {
+            //添加class
+            this.className = 'on'
+            //选项卡的id
+            //对应的选项卡的内容显示出来
+            var conDom = document.getElementById("content").children[this.index];
+            conDom.style.display = "block"
+            //拿选项卡对应的内容的父元素
+            siblings(conDom,function(){
+                this.style.display = "none"
+            });
+            siblings(this,function(){
+                this.className = ""
+            })
+            
+        }
+    }
+    function siblings(dom,callback){
+        var parentDom = dom.parentElement;
+        // var childDom = parentDom.children;
+        // 方式一
+        // for(var i=0;i<childDom.length;i++){
+        //     //判断内容和点击的内容不相同时 隐藏
+        //     if(dom != childDom[i]){
+        //         callback.call(childDom[i]);
+        //     }
+        // };
+        
+        //方法二 使用过滤
+        var tabArr = [].slice.call(parentDom.children);
+        console.log(tabArr)
+        tabArr.filter(function(obj){
+            if(obj != dom)callback.call(obj)
+        })
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding:0;margin:0}
+    html{margin:100px;background:#fff}
+    body{font-size:14px;font-family:"微软雅黑";padding:100px;background:rgb(46, 1, 1)}
+    a{text-decoration:none;color:#333}
+    li{list-style:none}
+    #ul{background:red;width:400px;height:400px;overflow:hidden}
+    #li{margin:20px;background:rgb(87, 23, 23);height:360px;text-align:center;line-height:360px;}
+    #a{background:rgb(247, 68, 98);padding:20px;}
+    </style>
+</head>
+<body>
+    <ul id="ul">
+        <li id="li">
+            <a href="javascript:void(0);" id="a">点我</a>
+        </li>
+    <ul> 
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            //阻止冒泡行为 e.stopPropagation()
+            //阻止浏览器的默认行为 e.preventDefault()
+            document.addEventListener("click",function(e){
+                alert("document~ 1")
+            },false);
+            document.body.addEventListener("click",function(){
+                alert("document body 2")
+            },false);
+            $("ul").addEventListener("click",function(){
+                alert("ul 3")
+            },false);
+            $("li").addEventListener("click",function(){
+                alert("li 4")
+            },false);
+            $("a").addEventListener("click",function(){
+                alert("a 5")
+            },false);
+        }
+    </script>
+</body>
+</html>

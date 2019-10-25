@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	#box{background:red;width:100px;height:100px;}
+  </style>
+ </head>
+ <body>
+
+	<div id="box" lang="en" class="items" data-name="我是keke老师"  style="width:500px;height:200px;"></div>
+	<input type="button" onclick="setAttr()" value="设置自定义的属性值"/>
+	<input type="button" onclick="getAttr()" value="获取自定义的属性值"/>
+	<input type="button" onclick="removeAttr()" value="删除自定义的属性值"/>
+	
+	<script src="jquery-1.11.1.min.js"></script>
+	<script>
+
+		/*jquery中data是属性缓存的作用，解决什么样子的问题呢？--获取属性和属性值 
+			attr(key,value)//兼顾了setAttribute和getAttribute
+			removeAttr(key,value) 
+		*/
+		
+			
+		//jquery中的获取属性和属性值的方式
+		var $boxDom = $("#box");
+		
+		function setAttr(){
+			//$boxDom.attr("username","keke");
+			//$boxDom.attr("age","30");
+
+			//多属性可以用对象的方式去设置
+			$boxDom.attr({
+				username:"keke",
+				age:30,
+				address:'湖南'
+			});
+		}
+
+		function getAttr(){
+			var uname = $boxDom.attr("username");
+			var age = $boxDom.attr("age");
+			var tname = $boxDom.attr("data-name");
+			$boxDom.html(uname+"==="+age+"=="+tname);
+		}
+
+		function removeAttr(){
+			//先删除
+			$boxDom.removeAttr("username");
+			$boxDom.removeAttr("age");
+			$boxDom.removeAttr("style");
+			$boxDom.removeAttr("id");
+			$boxDom.removeAttr("class");
+			$boxDom.removeAttr("lang");
+
+			//在获取
+			var uname = $boxDom.attr("username");
+			var age = $boxDom.attr("age");
+			$boxDom.html(uname+"==="+age);
+		}
+		
+	</script>
+ </body>
+</html>

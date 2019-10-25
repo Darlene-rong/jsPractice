@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0}
+        body{font-size:14px;font-family:"微软雅黑";background-color: black}
+        a{text-decoration:none;color:#333}
+        li{list-style:none}
+        #box{background:rgb(255, 86, 86);width:100px;height:100px;position:absolute;border-radius: 50px;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        function $(id){
+            return document.getElementById(id);
+        };
+        window.onload = function(){
+          var boxDom = $("box");
+          var speedX = 20;
+          var speedY = 20;
+          startMove();
+          var timer = null;
+          function startMove(){
+            timer = setInterval(function(){
+                var L = boxDom.offsetLeft + speedX;
+                var T = boxDom.offsetTop + speedY;
+                
+                if(T > window.innerHeight - boxDom.offsetHeight){
+                    T = window.innerHeight -boxDom.offsetHeight;
+                    speedY *= -1;
+                }else if(T<0){
+                    T = 0;
+                    speedY *= -1;
+                }
+
+                if(L > window.innerWidth -boxDom.offsetWidth){
+                    L = window.innerWidth - boxDom.offsetWidth;
+                    speedX *= -1;
+                }else if(L < 0){
+                    L = 0;
+                    speedX *= -1;
+                }
+                boxDom.style.left = L + "px";
+                boxDom.style.top = T + "px"
+            },30)
+          }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于元素居中问题</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{font-size: 14px;}
+    ul li{list-style: none;}
+    #box1{width: 400px;height: 400px;background-color: crimson;position: relative;
+        /* overflow: hidden; */
+        /* border: 1px solid red; */
+        /* 子元素用margin-top margin-left进行居中的时候 margin-top要找到一个折射点  如果没有加折射点 相对于元素外层进行margin-top*/
+    }
+    /* #box2{width: 200px;height: 200px; background-color: cornflowerblue; */
+          /* position: absolute;
+          top: 100px; */
+          /* (外层盒子的高度 - 内层盒子的高度) / 2 */
+          /* left: 100px;       */
+          /* (外层盒子的宽度 - 内层盒子的宽度) / 2 */  
+    /* } */
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <!-- <div id="box2">
+
+        </div> -->
+    </div>
+    <script>
+        function $(id){
+            return document.getElementById(id)
+        }
+        window.onload = function(){
+            /*
+                元素居中-----基于浏览器
+                1.js居中方式： dw/dh代表窗口的宽度/高度    sw/sh代表目标盒子元素的宽度/高度
+                    var left = (dw - sw)/2
+                    var top = ( dh - sh)/2
+            
+            */
+            centerDom("box1")
+             //让盒子跟随浏览器的伸缩进行伸缩
+             window.onresize = function(){
+                centerDom("box1")
+             }
+        }
+        // 基于浏览器的元素居中封装
+        function centerDom(id){
+            var boxDom = $(id);
+            var sw = boxDom.offsetWidth;
+            var sh = boxDom.offsetHeight;
+            var dw = window.innerWidth;
+            var dh = window.innerHeight;
+            var cleft = (dw - sw)/2;
+            var ctop = (dh - sh)/2
+            boxDom.style.top = ctop + "px";
+            boxDom.style.left = cleft + "px";
+        }
+    
+    </script>
+</body>
+</html>

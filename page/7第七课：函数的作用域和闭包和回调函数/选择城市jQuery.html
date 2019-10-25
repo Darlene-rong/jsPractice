@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择城市</title>
+    <style>
+        *{padding: 0; margin: 0;}
+        a{text-decoration: none;color: #333;}
+        body{font-size: 14px;font-family: "微软雅黑"}
+        .wrap{position: absolute;left: 0;top: 0;width: 100%;height: 100%;}
+        .wrap .left{width: 350px;height: 100%; background-color: #fff;padding: 20px; float: left;position: fixed; top: 0;left: 0;}
+        .wrap .left a {padding-left: 10px;}
+        .wrap .left a:hover {color: rgb(252, 101, 0);}
+        .wrap .right{width: 100%;background-color: rgb(199, 195, 195);height: 100%;position: fixed;left: 350px;top: 0;}
+
+        .tagsbox {margin-bottom: 15px;font-size: 16px;color: #959899;width: 300px;margin-left: 10px;position: absolute;top: 67px;}
+        .tags {padding: 6px;border: 1px solid rgb(199, 195, 195);float: left;margin-bottom: 10px;margin-right: 10px;}
+        .tags a{color: #7b7e7e}
+        .left-city {float: left;}
+        .test {margin-top: 30px; margin-left: 20px;}
+        .tags {background-color: #fff;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="left">
+            <div class="left-city">
+                <p id="city"></p>
+                <span>热门城市:</span>
+                <!-- 父子关系 -->
+                <div id="tagwrap">
+                    <a href="javascript:;">三亚</a>
+                    <a href="javascript:;">广州</a>
+                    <a href="javascript:;">重庆</a>
+                    <a href="javascript:;">北京</a>
+                    <a href="javascript:;">海南</a>                           
+                </div>
+            
+            </div>
+            <div class="tagsbox" id="leftarget">
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="tagsbox test" id="rightarget">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./../../js/jquery.js"></script>
+    <script>
+    /*
+        1.给所有的a绑定点击事件，并且拿到点击文本值
+        2.拿到值，添加到两个Div中
+        3.如果选择了就不能点击
+        4.删除元素,联动右侧一起删除
+
+    */
+    // $(function(){
+    //     $("#tagwrap").find("a").on("click",function(){
+    //         var text = $(this).text();
+    //         $("#leftarget").append(" <span class='tags'>"+text+"<a href='javascript:;' onclick='removeItems(this)'>X</a></span>")
+    //         $("#rightarget").append(" <span class='tags'>"+text+"</span>");
+    //     })
+    // })
+    // function removeItems(obj){
+    //     var text = $(obj).parent().text();
+    //     text = text.replace('X',"");
+    //     $("#rightarget").find("span:contains('"+text+"')").remove();
+    //     $(obj).parent().remove();
+    // }
+    $(function(){
+			$("#tagwrap").find("a").on("click",function(){
+				//点击获取文本
+				var text = $(this).text();
+				//获取所有的子元素
+				var citems = $("#leftarget").children();
+				//状态标识
+				var mark = false;
+				citems.each(function(){
+					//替换x
+					var t = $(this).text().replace('X','');
+					//判断元素是否存在，列表中
+					if(t==text){
+						mark = true;
+						return false;
+					}
+				});
+				
+				// 如果不存在就追加元素 
+				if(!mark){
+					$("#leftarget").append("<span class='tags'><i>"+text+"</i><a href='javascript:void(0);' onclick='removeItems(this)'>X</a></span>");
+					$("#rightarget").append("<span class='tags'><i>"+text+"</i></span>");
+				}
+			});
+		});		
+		//删除元素
+		function removeItems(obj){
+			//获取父元素进行删除 $(obj).parent()--span
+			var $span = $(obj).parent();
+			var text = $span.text();
+			text = text.replace('X',"");
+			//左侧元素删除
+            //删除父亲元素
+			$span.remove();
+			//右侧删除
+			//contains判断一个元素的文本是否包含text，如果包含删除
+			$("#rightarget").find("span:contains('"+text+"')").remove();
+		};
+    </script>
+</body>
+</html>

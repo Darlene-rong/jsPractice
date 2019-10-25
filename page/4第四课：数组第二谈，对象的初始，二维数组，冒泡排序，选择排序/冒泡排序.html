@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>冒泡排序</title>
+</head>
+<body>
+    
+    <script>
+    /*
+        冒泡排序----交换次数太多
+        排序 进行两两交换
+    
+    */
+//冒泡排序
+    var arr = [5,2,3,1,6];
+    for(var i =0;i<arr.length;i++){//控制次数   外面循环
+        //冒泡排序 外面只是控制次数  控制比较的次数
+        for(var j=0;j<arr.length-i-1;j++) {//元素交换  为了防止数组越界，数组的长度减一
+            //减i为了减少性能   减少后面多余的交换
+            if( arr[j] < arr[j+1]) {
+                var temp = arr[j];//临时空间
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+           
+        }
+    }
+    console.log(arr);
+
+//选择排序----找到数组中最小的值，然后用最小的值去交互位置
+    var arr1 = [5,2,3,1,6];
+    var len = arr1.length;
+    //找到最小的---arr[0]
+    //然后将索引保存
+    var min = 0;
+    for(var i=0;i<len;i++) {
+        min = i;
+        for(var j=i;j<len;j++){
+            //找最小的
+            if(arr1[min] > arr1[j]){
+                min = j;
+                //一直要取到最小的
+            }
+        }
+        if(i!=min){
+            var temp = arr1[i];
+            arr1[i] = arr1[min];
+            arr1[min] = temp;
+        }
+    }
+    console.log(arr1)
+    </script>
+</body>
+</html>

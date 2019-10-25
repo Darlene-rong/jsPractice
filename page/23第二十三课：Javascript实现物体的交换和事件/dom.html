@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{padding: 0;margin: 0;}
+    body,html{width: 100%;height: 100%;}
+    #box{height: 300px;width: 300px;background-color: teal;text-align: center;line-height: 300px;margin: 50px auto;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="button" id="btn" value="click me~">
+        盒子本身的Dom对象
+    </div>
+    <script>
+        /*
+        阻止事件冒泡：
+            event.stopPropagation
+            事件：
+                dom事件：  初始事件 元素的拖拽 坐标的定位
+                鼠标事件：
+                    onmousedown 鼠标点下
+                    onmouseup 鼠标松开
+                    onmousemove 鼠标移动
+                    onmouseover 鼠标悬浮
+                    onmouseout  鼠标移出
+                    onmouseenter 鼠标进入
+                    onmousrleave 鼠标离开
+
+                键盘事件：
+                    onkeydown 键盘按下
+                    keyup 按键抬起
+                    keypress按键按下抬起
+
+                点击事件：
+                    click 点击事件
+                    ondblclick 双击事件
+        
+                表单事件：
+                    onfocus 表单元素获取焦点时触发事件
+                    onblur 当元素失去焦点时触发事件
+                    onchange 当元素改变时促发事件
+                    oninput 当元素获得用户输入时触发事件
+                    onselect 当选择原属时触发事件
+                    onsubmit 当提交表单时触发事件
+
+                窗口事件：
+                   onresize 当窗口大小发生改变的时候发生
+                   onscroll 当滚动条滚动的时候触发
+                   onload 页面结束加载之后触发
+                   oncontextmenu 禁止右键菜单
+
+                滚轮事件
+                    document.onwheel = window.onwheel 滚轮时触发
+
+                html5拖拽事件
+                    drag drop
+                触屏事件
+                    touch
+                
+            event 事件源
+                 定义：鼠标事件，键盘事件都是用户执行某操作通知cpu执行的回调函数    
+                      回调函数中将cpu执行的事件一些参数信息封装到事件源Event对象中
+        */
+        /*
+            事件绑定的两种方法：
+                直接绑定：被动的过程，需要执行以及事件
+                动态绑定：要Dom元素存在或者动态创建createElement才能进行事件和元素的绑定
+
+                注意：直接绑定会被dom元素动态绑定所覆盖
+                动态绑定就相当于事件的叠加
+                事件监听：addEventListener(事件类型，fn,false)    默认为false
+                移除事件：removeEventListener  ie9以上
+        */
+       function $(id){
+           return document.getElementById(id)
+       }
+       window.onload = function(){
+           $("box").onclick = function(e){
+                // console.log(e);
+                var ev = e || window.event;//兼容性写法
+                //currentTarget 当前目标
+                var currentTarget = ev.currentTarget;//元素触发的前对象   object HTMLDivElement 当前元素 
+                var target = ev.target || ev.srcElement;//object HTMLDivElement
+                console.log(currentTarget);
+                console.log(target)
+                console.log(currentTarget==target)//true;
+                //curretTarget 和 target 相当于this
+           };
+           //添加点击事件
+           $("btn").addEventListener("click",function(e){
+               console.log(e)
+           })
+       }
+    </script>
+</body>
+</html>

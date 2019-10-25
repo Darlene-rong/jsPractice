@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <select name="" id="sel_L">
+    <option value="">---请选择---</option>
+    <option value="0">测试</option>
+    <option value="1">大哥是发送到</option>
+    <option value="2">委屈翁群</option>
+  </select>
+  <input type="button" value="去右边" onclick="goRight()" />
+  <input type="button" value="去左边" onclick="goLeft()" />
+  <select name="" id="sel_R">
+
+  </select>
+  <script>
+    function $(id) {
+      return document.getElementById(id);
+    }
+    function goRight() {  
+      //selectedIndex 返回选中的索引
+      var rightDom = $("sel_R");
+      var leftDom = $("sel_L");
+      //获取左边选中的option对象  选中的索引selectedIndex 
+      var leftOption = leftDom.options[leftDom.selectedIndex];
+      console.log(leftDom.selectedIndex)
+      // rightDom.appendChild(leftOption) 方法一
+      //拿到选中的option的值和value
+      var text = leftOption.text;
+      var val = leftOption.value;
+      //创建一个option 把值和val放进新的option里面
+      var rigtOption = new Option(text,val);   
+      rightDom.appendChild(rigtOption);
+      leftDom.removeChild(leftOption)
+    }
+    function goLeft() {  
+      var rightDom = $("sel_R");
+      var leftDom = $("sel_L");
+      //获取左边选中的option对象  选中的索引selectedIndex 
+      var rightOption = rightDom.options[rightDom.selectedIndex];
+      console.log(rightOption.selectedIndex)
+      //拿到选中的option的值和value
+      var text = rightOption.text;
+      var val = rightOption.value;
+      //创建一个option 把值和val放进新的option里面
+        var leftOption = document.createElement("option");
+        leftOption.text = text;
+        leftOption.value = val;
+        leftDom.appendChild(leftOption);
+        rightDom.removeChild(rightOption)
+    }
+  </script>
+</body>
+</html>
